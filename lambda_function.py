@@ -5,6 +5,7 @@ from requests_oauthlib import OAuth1Session
 
 JST = timezone(timedelta(hours=9), "JST")
 AINOUTA_DAY = date(2021, 10, 29)
+STREAMING_LAST_DAY = date(2022, 6, 10)
 
 consumer_key = os.getenv("TWITTER_API_KEY")
 client_secret = os.getenv("TWITTER_API_KEY_SECRET")
@@ -24,10 +25,16 @@ def calculate_passed_timedelta(today: date) -> timedelta:
     return today - AINOUTA_DAY
 
 
+def between_days(the_day: date) -> int:
+    between_timedelta = STREAMING_LAST_DAY - the_day
+    return between_timedelta.days + 1
+
+
 def generate_text():
     today = datetime.now(JST).date()
     passed_td = calculate_passed_timedelta(today)
     text = f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開から{passed_days(passed_td)}日目です。\n"
+    text += f"期間限定配信は今日を含めてあと{between_days(today)}日です(6/10まで)。\n"
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
 
