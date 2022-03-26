@@ -33,8 +33,8 @@ def between_days(the_day: date) -> int:
 def generate_text():
     today = datetime.now(JST).date()
     passed_td = calculate_passed_timedelta(today)
-    text = f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開から{passed_days(passed_td)}日目です。\n"
-    text += f"期間限定配信は今日を含めてあと{between_days(today)}日です(6/10まで)。\n"
+    text = f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{passed_days(passed_td)}日目です。\n"
+    text += f"期間限定配信🎥は今日を含めてあと{between_days(today)}日です(6/10まで)。\n"
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
 
