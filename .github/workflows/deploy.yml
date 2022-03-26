@@ -1,0 +1,30 @@
+name: Deploy Lambda function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - name: Update Lambda function code
+        run: |
+          mkdir twitter-ainouta-bot
+          cd twitter-ainouta-bot
+          python -m pip install -t ./ -r ../requirements.lock
+          cp ../lambda_function.py .
+          zip -r twitter-ainouta-bot.zip ./
+
+          AWS_PAGER='' AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          aws lambda update-function-code \
+            --function-name twitter-ainouta-bot \
+            --zip-file fileb://twitter-ainouta-bot.zip \
+            --region ap-northeast-1
