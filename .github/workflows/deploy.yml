@@ -25,6 +25,7 @@ jobs:
 
           AWS_PAGER='' AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
           aws lambda update-function-code \
-            --function-name twitter-ainouta-bot \
-            --zip-file fileb://twitter-ainouta-bot.zip \
-            --region ap-northeast-1
+              --function-name twitter-ainouta-bot \
+              --zip-file fileb://twitter-ainouta-bot.zip \
+              --region ap-northeast-1 | \
+            jq 'del(.Environment, .FunctionArn, .Role)'
