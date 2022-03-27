@@ -25,17 +25,32 @@ def calculate_passed_timedelta(today: date) -> timedelta:
     return today - AINOUTA_DAY
 
 
-def between_days(the_day: date) -> int:
+def streaming_rest_days(the_day: date) -> int:
+    # 6/10であと1日（その日が最後）になってほしい
     between_timedelta = STREAMING_LAST_DAY - the_day
     return between_timedelta.days + 1
+
+
+def disk_rest_days(the_day: date) -> int:
+    # 7/26であと1日になってほしい（翌日にはリリース）
+    between_timedelta = date(2022, 7, 27) - the_day
+    return between_timedelta.days
 
 
 def generate_text():
     today = datetime.now(JST).date()
     passed_td = calculate_passed_timedelta(today)
     text = f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{passed_days(passed_td)}日目です。\n"
-    text += f"期間限定配信🎥は今日を含めてあと{between_days(today)}日です(6/10まで)。\n"
+    text += f"Blu-ray&DVDリリース📀まで今日を含めてあと{disk_rest_days(today)}日です(7/27発売。現在予約期間)。\n\n"
     return text + "今日も、元気で、頑張るぞっ、おーっ"
+
+
+def generate_information_text():
+    today = datetime.now(JST).date()
+    text = "#アイの歌声を聴かせて 劇場で上映中！🎬 https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
+    text += f"期間限定配信🎥は今日を含めてあと{streaming_rest_days(today)}日です(6/10まで)。\n\n"
+    text += "今夜はきれいなお月さまでしょうか？"
+    return text
 
 
 def tweet(text):
@@ -46,6 +61,12 @@ def tweet(text):
 
 
 def lambda_handler(event, context):
+    print(event)
+    mode = event.get("bot-mode")
+    if mode == "information":
+        text = generate_information_text()
+        tweet(text)
+        return
     text = generate_text()
     tweet(text)
 
