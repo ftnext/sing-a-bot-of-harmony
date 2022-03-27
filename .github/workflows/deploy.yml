@@ -15,6 +15,12 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.9"
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
       - name: Update Lambda function code
         run: |
           mkdir twitter-ainouta-bot
@@ -23,9 +29,8 @@ jobs:
           cp ../lambda_function.py .
           zip -r twitter-ainouta-bot.zip ./
 
-          AWS_PAGER='' AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          AWS_PAGER='' \
           aws lambda update-function-code \
               --function-name twitter-ainouta-bot \
-              --zip-file fileb://twitter-ainouta-bot.zip \
-              --region ap-northeast-1 | \
+              --zip-file fileb://twitter-ainouta-bot.zip | \
             jq 'del(.Environment, .FunctionArn, .Role)'
