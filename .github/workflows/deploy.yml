@@ -29,7 +29,6 @@ jobs:
           cp ../lambda_function.py .
           zip -r twitter-ainouta-bot.zip ./
 
-          AWS_PAGER='' \
           aws lambda update-function-code \
               --function-name twitter-ainouta-bot \
               --zip-file fileb://twitter-ainouta-bot.zip | \
