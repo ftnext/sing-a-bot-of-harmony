@@ -1,7 +1,13 @@
+from __future__ import annotations
+
 import os
 from datetime import date, datetime, timedelta, timezone
+from typing import TYPE_CHECKING
 
 from requests_oauthlib import OAuth1Session
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 JST = timezone(timedelta(hours=9), "JST")
 AINOUTA_DAY = date(2021, 10, 29)
@@ -62,14 +68,14 @@ def generate_time_signal_text(today: date) -> str:
     )
 
 
-def tweet(text):
+def tweet(text: str) -> None:
     payload = {"text": text}
     response = oauth.post("https://api.twitter.com/2/tweets", json=payload)
     if response.status_code != 201:
         raise Exception(f"[Error] {response.status_code} {response.text}")
 
 
-def lambda_handler(event, context):
+def lambda_handler(event: Mapping, context: Mapping) -> None:
     print(event)
     mode = event.get("bot-mode")
     today = datetime.now(JST).date()
@@ -86,4 +92,4 @@ def lambda_handler(event, context):
 
 
 if __name__ == "__main__":
-    lambda_handler(None, None)
+    lambda_handler({}, {})
