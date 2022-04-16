@@ -53,6 +53,17 @@ def generate_information_text():
     return text
 
 
+def generate_time_signal_text(today: date) -> str:
+    return "\n".join(
+        [
+            "👧🏻「えっ、いま何時？」",
+            "👩🏻‍🔬「にぃじ」",
+            "",
+            f"アイの歌声を聴かせて 非公式Botが{today:%-m/%-d}の午後2時をお伝えします🌈",
+        ]
+    )
+
+
 def tweet(text):
     payload = {"text": text}
     response = oauth.post("https://api.twitter.com/2/tweets", json=payload)
@@ -63,8 +74,13 @@ def tweet(text):
 def lambda_handler(event, context):
     print(event)
     mode = event.get("bot-mode")
+    today = datetime.now(JST).date()
     if mode == "information":
         text = generate_information_text()
+        tweet(text)
+        return
+    elif mode == "time-signal":
+        text = generate_time_signal_text(today)
         tweet(text)
         return
     text = generate_text()
