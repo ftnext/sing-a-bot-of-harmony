@@ -37,16 +37,14 @@ def disk_rest_days(the_day: date) -> int:
     return between_timedelta.days
 
 
-def generate_text():
-    today = datetime.now(JST).date()
+def generate_text(today: date) -> str:
     passed_td = calculate_passed_timedelta(today)
     text = f"{today:%-m/%-d}は アイの歌声を聴かせて 公開🎬から{passed_days(passed_td)}日目です。\n"
     text += f"Blu-ray&DVDリリース📀まで今日を含めてあと{disk_rest_days(today)}日です(7/27発売。現在予約期間)。\n\n"
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
 
-def generate_information_text():
-    today = datetime.now(JST).date()
+def generate_information_text(today: date) -> str:
     text = "アイの歌声を聴かせて 劇場で上映中！🎬 https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
     text += f"期間限定配信🎥は今日を含めてあと{streaming_rest_days(today)}日です(6/10まで)。\n\n"
     text += "今夜はきれいなお月さまでしょうか？"
@@ -76,14 +74,14 @@ def lambda_handler(event, context):
     mode = event.get("bot-mode")
     today = datetime.now(JST).date()
     if mode == "information":
-        text = generate_information_text()
+        text = generate_information_text(today)
         tweet(text)
         return
     elif mode == "time-signal":
         text = generate_time_signal_text(today)
         tweet(text)
         return
-    text = generate_text()
+    text = generate_text(today)
     tweet(text)
 
 
