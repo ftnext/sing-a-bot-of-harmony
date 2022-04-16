@@ -45,7 +45,7 @@ def disk_rest_days(the_day: date) -> int:
 
 def generate_text(today: date) -> str:
     passed_td = calculate_passed_timedelta(today)
-    text = f"{today:%-m/%-d}は アイの歌声を聴かせて 公開🎬から{passed_days(passed_td)}日目です。\n"
+    text = f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{passed_days(passed_td)}日目です。\n"
     text += f"Blu-ray&DVDリリース📀まで今日を含めてあと{disk_rest_days(today)}日です(7/27発売。現在予約期間)。\n\n"
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
