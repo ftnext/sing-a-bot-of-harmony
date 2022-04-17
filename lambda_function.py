@@ -1,15 +1,16 @@
 from __future__ import annotations
 
 import os
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta
 from typing import TYPE_CHECKING
+from zoneinfo import ZoneInfo
 
 from requests_oauthlib import OAuth1Session
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
-JST = timezone(timedelta(hours=9), "JST")
+ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
 AINOUTA_DAY = date(2021, 10, 29)
 STREAMING_LAST_DAY = date(2022, 6, 10)
 
@@ -78,7 +79,7 @@ def tweet(text: str) -> None:
 def lambda_handler(event: Mapping, context: Mapping) -> None:
     print(event)
     mode = event.get("bot-mode")
-    today = datetime.now(JST).date()
+    today = datetime.now(ASIA_TOKYO).date()
     if mode == "information":
         text = generate_information_text(today)
         tweet(text)
