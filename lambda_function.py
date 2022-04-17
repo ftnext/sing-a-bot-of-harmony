@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 from typing import TYPE_CHECKING
 from zoneinfo import ZoneInfo
 
@@ -9,6 +9,7 @@ from requests_oauthlib import OAuth1Session
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
+    from datetime import timedelta
 
 ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
 AINOUTA_DAY = date(2021, 10, 29)
