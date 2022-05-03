@@ -6,14 +6,16 @@ from typing import TYPE_CHECKING
 from zoneinfo import ZoneInfo
 
 from requests_oauthlib import OAuth1Session
+from sparkling_counter import DayCountDown, XthDayCount
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
-    from datetime import timedelta
 
 ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
-AINOUTA_DAY = date(2021, 10, 29)
 STREAMING_LAST_DAY = date(2022, 6, 10)
+AINOUTA_XDAY_COUNT = XthDayCount(date(2021, 10, 29))
+# 7/26であと1日になってほしい（翌日にはリリース）
+DISK_RELEASE_COUNT = DayCountDown(date(2022, 7, 27), include=False)
 
 consumer_key = os.getenv("TWITTER_API_KEY")
 client_secret = os.getenv("TWITTER_API_KEY_SECRET")
@@ -25,30 +27,17 @@ oauth = OAuth1Session(
 )
 
 
-def passed_days(td: timedelta) -> int:
-    return td.days + 1
-
-
-def calculate_passed_timedelta(today: date) -> timedelta:
-    return today - AINOUTA_DAY
-
-
 def streaming_rest_days(the_day: date) -> int:
     # 6/10であと1日（その日が最後）になってほしい
     between_timedelta = STREAMING_LAST_DAY - the_day
     return between_timedelta.days + 1
 
 
-def disk_rest_days(the_day: date) -> int:
-    # 7/26であと1日になってほしい（翌日にはリリース）
-    between_timedelta = date(2022, 7, 27) - the_day
-    return between_timedelta.days
-
-
 def generate_text(today: date) -> str:
-    passed_td = calculate_passed_timedelta(today)
-    text = f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{passed_days(passed_td)}日目です。\n"
-    text += f"Blu-ray&DVDリリース📀まで今日を含めてあと{disk_rest_days(today)}日です(7/27発売。現在予約期間)。\n\n"
+    text = (
+        f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{AINOUTA_XDAY_COUNT(today)}日目です。\n"
+    )
+    text += f"Blu-ray&DVDリリース📀まで今日を含めてあと{DISK_RELEASE_COUNT(today)}日です(7/27発売。現在予約期間)。\n\n"
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
 
