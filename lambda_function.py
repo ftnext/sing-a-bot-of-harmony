@@ -12,12 +12,16 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
 
 ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
+
 AINOUTA_XDAY_COUNT = XthDayCount(date(2021, 10, 29))
+
 STREAMING_LAST_DAY = date(2022, 6, 10)
 # 6/10であと1日（その日が最後）になってほしい
 STREAMING_PERIOD_COUNT = DayCountDown(STREAMING_LAST_DAY, include=True)
+
+DISK_RELEASE_DAY = date(2022, 7, 27)
 # 7/26であと1日になってほしい（翌日にはリリース）
-DISK_RELEASE_COUNT = DayCountDown(date(2022, 7, 27), include=False)
+DISK_RELEASE_COUNT = DayCountDown(DISK_RELEASE_DAY, include=False)
 
 consumer_key = os.getenv("TWITTER_API_KEY")
 client_secret = os.getenv("TWITTER_API_KEY_SECRET")
@@ -33,7 +37,10 @@ def generate_text(today: date) -> str:
     text = (
         f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{AINOUTA_XDAY_COUNT(today)}日目です。\n"
     )
-    text += f"Blu-ray&DVDリリース📀まで今日を含めてあと{DISK_RELEASE_COUNT(today)}日です(7/27発売。現在予約期間)。\n\n"
+    text += (
+        f"Blu-ray&DVDリリース📀まで今日を含めてあと{DISK_RELEASE_COUNT(today)}日です"
+        f"({DISK_RELEASE_DAY:%-m/%-d}発売。現在予約期間)。\n\n"
+    )
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
 
