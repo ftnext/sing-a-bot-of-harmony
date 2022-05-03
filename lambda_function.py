@@ -12,8 +12,10 @@ if TYPE_CHECKING:
     from collections.abc import Mapping
 
 ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
-STREAMING_LAST_DAY = date(2022, 6, 10)
 AINOUTA_XDAY_COUNT = XthDayCount(date(2021, 10, 29))
+STREAMING_LAST_DAY = date(2022, 6, 10)
+# 6/10であと1日（その日が最後）になってほしい
+STREAMING_PERIOD_COUNT = DayCountDown(STREAMING_LAST_DAY, include=True)
 # 7/26であと1日になってほしい（翌日にはリリース）
 DISK_RELEASE_COUNT = DayCountDown(date(2022, 7, 27), include=False)
 
@@ -27,12 +29,6 @@ oauth = OAuth1Session(
 )
 
 
-def streaming_rest_days(the_day: date) -> int:
-    # 6/10であと1日（その日が最後）になってほしい
-    between_timedelta = STREAMING_LAST_DAY - the_day
-    return between_timedelta.days + 1
-
-
 def generate_text(today: date) -> str:
     text = (
         f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{AINOUTA_XDAY_COUNT(today)}日目です。\n"
@@ -42,8 +38,14 @@ def generate_text(today: date) -> str:
 
 
 def generate_information_text(today: date) -> str:
-    text = "アイの歌声を聴かせて 劇場で上映中！🎬 https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
-    text += f"期間限定配信🎥は今日を含めてあと{streaming_rest_days(today)}日です(6/10まで)。\n\n"
+    text = (
+        "アイの歌声を聴かせて 劇場で上映中！🎬 "
+        "https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
+    )
+    text += (
+        f"期間限定配信🎥は今日を含めてあと{STREAMING_PERIOD_COUNT(today)}日です"
+        f"({STREAMING_LAST_DAY:%-m/%-d}まで)。\n\n"
+    )
     text += "今夜はきれいなお月さまでしょうか？"
     return text
 
