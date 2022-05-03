@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from datetime import date, datetime
+from random import randint
 from typing import TYPE_CHECKING
 from zoneinfo import ZoneInfo
 
@@ -57,11 +58,21 @@ def generate_information_text(today: date) -> str:
     return text
 
 
+SIGNAL_SCENE_PHRASES = [
+    "👧🏻「😴」",  # index: -len(SIGNAL_SCENE_PHRASES)
+    "👩🏻‍🔬「悟美」",
+    "👩🏻‍🔬「さーとーみ」",
+    "👧🏻「... 😳」",
+    "👧🏻「えっ、いま何時？」",
+    "👩🏻‍🔬「にぃじ」",  # index: -1
+]
+
+
 def generate_time_signal_text(today: date) -> str:
+    index = randint(-len(SIGNAL_SCENE_PHRASES), -1)
     return "\n".join(
-        [
-            "👧🏻「えっ、いま何時？」",
-            "👩🏻‍🔬「にぃじ」",
+        SIGNAL_SCENE_PHRASES[index:]
+        + [
             "",
             f"アイの歌声を聴かせて 非公式Botが{today:%-m/%-d}の午後2時をお伝えします🌈",
         ]
