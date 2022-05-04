@@ -3,7 +3,12 @@ from textwrap import dedent
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from lambda_function import CinemaNekoContent, Content, WasedaShochikuContent
+from lambda_function import (
+    CinemaNekoContent,
+    Content,
+    SumotoOrionContent,
+    WasedaShochikuContent,
+)
 
 
 class WasedaShochikuContentTestCase(TestCase):
@@ -60,3 +65,13 @@ class CinemaNekoContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+
+class SumotoOrionContentTestCase(TestCase):
+    def test_init(self):
+        date_ = MagicMock(spec=date)
+
+        actual = SumotoOrionContent(date_)
+
+        self.assertIsInstance(actual, Content)
+        self.assertEqual(actual._date, date_)
