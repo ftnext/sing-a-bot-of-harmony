@@ -164,6 +164,7 @@ class SumotoOrionContent(Content):
 THEATER_CONTENT_CLASSES = {
     "waseda-shochiku": WasedaShochikuContent,
     "cinema-neko": CinemaNekoContent,
+    "sumoto-orion": SumotoOrionContent,
 }
 
 
