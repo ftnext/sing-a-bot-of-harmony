@@ -2,7 +2,7 @@ from datetime import date
 from textwrap import dedent
 from unittest import TestCase
 
-from lambda_function import generate_waseda_shochiku_text
+from lambda_function import WasedaShochikuContent
 
 
 class WasedaShochikuContentTestCase(TestCase):
@@ -20,6 +20,7 @@ class WasedaShochikuContentTestCase(TestCase):
             """
         ).rstrip()
 
-        actual = generate_waseda_shochiku_text(date(2022, 5, 3))
+        content = WasedaShochikuContent(date(2022, 5, 3))
+        actual = content.generate()
 
         self.assertEqual(actual, expected)
