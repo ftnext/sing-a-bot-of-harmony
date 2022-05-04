@@ -135,7 +135,10 @@ class CinemaNekoContent(Content):
         return text
 
 
-THEATER_CONTENT_CLASSES = {"waseda-shochiku": WasedaShochikuContent}
+THEATER_CONTENT_CLASSES = {
+    "waseda-shochiku": WasedaShochikuContent,
+    "cinema-neko": CinemaNekoContent,
+}
 
 
 def tweet(text: str) -> None:
