@@ -8,12 +8,12 @@ from lambda_function import Content, WasedaShochikuContent
 
 class WasedaShochikuContentTestCase(TestCase):
     def test_init(self):
-        today = MagicMock(spec=date)
+        date_ = MagicMock(spec=date)
 
-        actual = WasedaShochikuContent(today)
+        actual = WasedaShochikuContent(date_)
 
         self.assertIsInstance(actual, Content)
-        self.assertEqual(actual.today, today)
+        self.assertEqual(actual._date, date_)
 
     def test_generate(self):
         expected = dedent(

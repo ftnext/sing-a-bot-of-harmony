@@ -91,13 +91,13 @@ class WasedaShochikuContent(Content):
     # 各劇場の上映開始の前日であと1日になってほしい
     COUNT_DOWN = DayCountDown(START_DAY, include=False)
 
-    def __init__(self, today: date) -> None:
-        self.today = today
+    def __init__(self, date_: date) -> None:
+        self._date = date_
 
     def generate(self) -> str:
         text = (
             f"#アイの歌声を聴かせて 早稲田松竹さんで{self.START_DAY:%-m/%-d}から上映開始！"
-            f"（今日を含めてあと{self.COUNT_DOWN(self.today)}日）\n\n"
+            f"（今日を含めてあと{self.COUNT_DOWN(self._date)}日）\n\n"
         )
         text += (
             "たたーん🎵 開映時間は\n"
