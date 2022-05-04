@@ -151,7 +151,14 @@ class SumotoOrionContent(Content):
         )
         text += "たたーん🎵 上映時間は、毎日 15:30〜\n"
         text += "詳しくは https://www.sumoto-orion.com/?p=895 をどうぞ！"
+        if self._add_yelling():
+            text += "\n\n"
+            text += "さらに水曜日・日曜日は 18:00〜 無発声応援上映追加！🤗"
         return text
+
+    def _add_yelling(self):
+        # 水曜(2)・日曜(6)と前日は無発生応援上映を追加する
+        return self._date.weekday() in (1, 2, 5, 6)
 
 
 THEATER_CONTENT_CLASSES = {
