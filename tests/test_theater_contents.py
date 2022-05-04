@@ -43,3 +43,20 @@ class CinemaNekoContentTestCase(TestCase):
 
         self.assertIsInstance(actual, Content)
         self.assertEqual(actual._date, date_)
+
+    def test_generate(self):
+        expected = dedent(
+            """\
+            #アイの歌声を聴かせて 青梅のシネマネコさんで4/22(金)から5/15(日)まで上映中！（今日を含めて残り12日）
+
+            たたーん🎵 上映時間は、毎日 15:40〜 （5/10(火)は定休日）
+            詳しくは https://cinema-neko.com/movie_detail.php?id=94c58c03-e4b1-484d-8a0f-bc9bb885493c をどうぞ！
+
+            シネマネコさんのラッキープレイスはー、カフェ！☕️
+            """
+        ).rstrip()
+
+        content = CinemaNekoContent(date(2022, 5, 4))
+        actual = content.generate()
+
+        self.assertEqual(actual, expected)
