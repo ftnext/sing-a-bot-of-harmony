@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import locale
 import os
 from abc import ABC, abstractmethod
 from datetime import date, datetime
@@ -12,6 +13,8 @@ from sparkling_counter import DayCountDown, XthDayCount
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
+
+locale.setlocale(locale.LC_TIME, "ja_JP.UTF-8")
 
 ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
 
@@ -113,11 +116,23 @@ class WasedaShochikuContent(Content):
 
 
 class CinemaNekoContent(Content):
+    START_DAY = date(2022, 4, 22)
+    LAST_DAY = date(2022, 5, 15)
+    END_COUNT = DayCountDown(LAST_DAY, include=True)
+
     def __init__(self, date_: date) -> None:
         self._date = date_
 
-    def generate(self):
-        raise NotImplementedError
+    def generate(self) -> str:
+        text = (
+            "#アイの歌声を聴かせて 青梅のシネマネコさんで"
+            f"{self.START_DAY:%-m/%-d(%a)}から{self.LAST_DAY:%-m/%-d(%a)}まで上映中！"
+            f"（今日を含めて残り{self.END_COUNT(self._date)}日）\n\n"
+        )
+        text += "たたーん🎵 上映時間は、毎日 15:40〜 （5/10(火)は定休日）\n"
+        text += "詳しくは https://cinema-neko.com/movie_detail.php?id=94c58c03-e4b1-484d-8a0f-bc9bb885493c をどうぞ！\n\n"  # NOQA: E501
+        text += "シネマネコさんのラッキープレイスはー、カフェ！☕️"
+        return text
 
 
 THEATER_CONTENT_CLASSES = {"waseda-shochiku": WasedaShochikuContent}
