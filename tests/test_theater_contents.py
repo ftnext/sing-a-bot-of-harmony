@@ -18,7 +18,7 @@ class WasedaShochikuContentTestCase(TestCase):
     def test_generate(self):
         expected = dedent(
             """\
-            #アイの歌声を聴かせて 早稲田松竹さんで5/7から上映開始！（今日を含めてあと4日）
+            #アイの歌声を聴かせて 早稲田松竹さんで5/7(土)から上映開始！（今日を含めて4日後）
 
             たたーん🎵 開映時間は
             - 5/7(土)・10(火)・13(金)が 13:00 / 17:45
