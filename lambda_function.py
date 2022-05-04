@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from abc import ABC, abstractmethod
 from datetime import date, datetime
 from random import randint
 from typing import TYPE_CHECKING
@@ -23,10 +24,6 @@ STREAMING_PERIOD_COUNT = DayCountDown(STREAMING_LAST_DAY, include=True)
 DISK_RELEASE_DAY = date(2022, 7, 27)
 # 7/26であと1日になってほしい（翌日にはリリース）
 DISK_RELEASE_COUNT = DayCountDown(DISK_RELEASE_DAY, include=False)
-
-# 各劇場の上映開始の前日であと1日になってほしい
-WASEDA_SHOCHIKU_START_DAY = date(2022, 5, 7)
-WASEDA_SHOCHIKU_COUNT = DayCountDown(WASEDA_SHOCHIKU_START_DAY, include=False)
 
 consumer_key = os.getenv("TWITTER_API_KEY")
 client_secret = os.getenv("TWITTER_API_KEY_SECRET")
@@ -83,21 +80,41 @@ def generate_time_signal_text(today: date) -> str:
     )
 
 
+class Content(ABC):
+    @abstractmethod
+    def generate(self) -> str:
+        raise NotImplementedError
+
+
+class WasedaShochikuContent(Content):
+    START_DAY = date(2022, 5, 7)
+    # 各劇場の上映開始の前日であと1日になってほしい
+    COUNT_DOWN = DayCountDown(START_DAY, include=False)
+
+    def __init__(self, today: date) -> None:
+        self.today = today
+
+    def generate(self) -> str:
+        text = (
+            f"#アイの歌声を聴かせて 早稲田松竹さんで{self.START_DAY:%-m/%-d}から上映開始！"
+            f"（今日を含めてあと{self.COUNT_DOWN(self.today)}日）\n\n"
+        )
+        text += (
+            "たたーん🎵 開映時間は\n"
+            "- 5/7(土)・10(火)・13(金)が 13:00 / 17:45\n"
+            "- 5/9(月)・12(木)が 12:25 / 16:35 / 20:45\n"
+            "- 5/8(日)・11(水)は上映なし\n\n"
+        )
+        text += (
+            "詳しくは "
+            "http://wasedashochiku.co.jp/archives/schedule/19087#film2 をどうぞ！"
+        )
+        return text
+
+
 def generate_waseda_shochiku_text(today: date) -> str:
-    text = (
-        f"#アイの歌声を聴かせて 早稲田松竹さんで{WASEDA_SHOCHIKU_START_DAY:%-m/%-d}から上映開始！"
-        f"（今日を含めてあと{WASEDA_SHOCHIKU_COUNT(today)}日）\n\n"
-    )
-    text += (
-        "たたーん🎵 開映時間は\n"
-        "- 5/7(土)・10(火)・13(金)が 13:00 / 17:45\n"
-        "- 5/9(月)・12(木)が 12:25 / 16:35 / 20:45\n"
-        "- 5/8(日)・11(水)は上映なし\n\n"
-    )
-    text += (
-        "詳しくは http://wasedashochiku.co.jp/archives/schedule/19087#film2 をどうぞ！"
-    )
-    return text
+    content = WasedaShochikuContent(today)
+    return content.generate()
 
 
 def tweet(text: str) -> None:
