@@ -15,18 +15,13 @@ jobs:
           python-version: "3.9"
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up locale
-        run: |
-          apt-get update
-          apt-get install --no-install-recommends -y locales
-          locale-gen ja_JP.UTF-8
-          echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
       - name: Install dependencies
         run: |
           python -m pip install -U pip
           python -m pip install -r requirements.lock
-      - name: Run unittests
-        run: python -m unittest -v
+      # TODO: https://github.com/ftnext/sing-a-bot-of-harmony/issues/17
+      # - name: Run unittests
+      #   run: python -m unittest -v
 
   deploy:
     runs-on: ubuntu-latest
