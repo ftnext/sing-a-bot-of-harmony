@@ -79,14 +79,14 @@ class SumotoOrionContentTestCase(TestCase):
     def test_generate_no_yelling(self):
         expected = dedent(
             """\
-            #アイの歌声を聴かせて 淡路島の洲本オリオンさんで4/29(金)から5/12(木)まで上映中！（今日を含めて残り9日）
+            #アイの歌声を聴かせて 淡路島の洲本オリオンさんで4/29(金)から5/12(木)まで上映中！（今日を含めて残り8日）
 
             たたーん🎵 上映時間は、毎日 15:30〜
             詳しくは https://www.sumoto-orion.com/?p=895 をどうぞ！
             """
         ).rstrip()
 
-        content = SumotoOrionContent(date(2022, 5, 4))
+        content = SumotoOrionContent(date(2022, 5, 5))
         actual = content.generate()
 
         self.assertEqual(actual, expected)
