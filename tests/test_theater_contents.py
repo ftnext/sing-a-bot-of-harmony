@@ -1,11 +1,20 @@
 from datetime import date
 from textwrap import dedent
 from unittest import TestCase
+from unittest.mock import MagicMock
 
-from lambda_function import WasedaShochikuContent
+from lambda_function import Content, WasedaShochikuContent
 
 
 class WasedaShochikuContentTestCase(TestCase):
+    def test_init(self):
+        today = MagicMock(spec=date)
+
+        actual = WasedaShochikuContent(today)
+
+        self.assertIsInstance(actual, Content)
+        self.assertEqual(actual.today, today)
+
     def test_generate(self):
         expected = dedent(
             """\
