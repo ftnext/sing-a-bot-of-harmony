@@ -112,9 +112,7 @@ class WasedaShochikuContent(Content):
         return text
 
 
-def generate_waseda_shochiku_text(today: date) -> str:
-    content = WasedaShochikuContent(today)
-    return content.generate()
+THEATER_CONTENT_CLASSES = {"waseda-shochiku": WasedaShochikuContent}
 
 
 def tweet(text: str) -> None:
@@ -136,8 +134,11 @@ def lambda_handler(event: Mapping, context: Mapping) -> None:
         text = generate_time_signal_text(today)
         tweet(text)
         return
-    elif mode == "waseda-chochiku":
-        text = generate_waseda_shochiku_text(today)
+    elif mode == "theater":
+        theater = event.get("theater")
+        content_class = THEATER_CONTENT_CLASSES.get(theater)
+        content = content_class(today)
+        text = content.generate()
         tweet(text)
         return
     text = generate_text(today)
