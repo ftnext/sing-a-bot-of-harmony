@@ -136,11 +136,22 @@ class CinemaNekoContent(Content):
 
 
 class SumotoOrionContent(Content):
+    START_DAY = date(2022, 4, 29)
+    LAST_DAY = date(2022, 5, 12)
+    END_COUNT = DayCountDown(LAST_DAY, include=True)
+
     def __init__(self, date_: date) -> None:
         self._date = date_
 
     def generate(self) -> str:
-        raise NotImplementedError
+        text = (
+            "#アイの歌声を聴かせて 淡路島の洲本オリオンさんで"
+            f"{self.START_DAY:%-m/%-d(%a)}から{self.LAST_DAY:%-m/%-d(%a)}まで上映中！"
+            f"（今日を含めて残り{self.END_COUNT(self._date)}日）\n\n"
+        )
+        text += "たたーん🎵 上映時間は、毎日 15:30〜\n"
+        text += "詳しくは https://www.sumoto-orion.com/?p=895 をどうぞ！"
+        return text
 
 
 THEATER_CONTENT_CLASSES = {
