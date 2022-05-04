@@ -112,6 +112,14 @@ class WasedaShochikuContent(Content):
         return text
 
 
+class CinemaNekoContent(Content):
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self):
+        raise NotImplementedError
+
+
 THEATER_CONTENT_CLASSES = {"waseda-shochiku": WasedaShochikuContent}
 
 
