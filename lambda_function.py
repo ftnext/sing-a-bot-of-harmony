@@ -90,28 +90,25 @@ class Content(ABC):
 
 
 class WasedaShochikuContent(Content):
-    START_DAY = date(2022, 5, 7)
-    # 各劇場の上映開始の前日であと1日になってほしい
-    COUNT_DOWN = DayCountDown(START_DAY, include=False)
+    LAST_DAY = date(2022, 5, 13)
+    COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
 
     def __init__(self, date_: date) -> None:
         self._date = date_
 
     def generate(self) -> str:
         text = (
-            f"#アイの歌声を聴かせて 早稲田松竹さんで{self.START_DAY:%-m/%-d(%a)}から上映開始！"
-            f"（今日を含めて{self.COUNT_DOWN(self._date)}日後）\n\n"
+            f"#アイの歌声を聴かせて 早稲田松竹さんで{self.LAST_DAY:%-m/%-d(%a)}まで上映中！"
+            f"（今日を含めて残り{self.COUNT_DOWN(self._date)}日）\n"
+            "竜そば・サイコトと日替わり2️⃣本立て\n\n"
         )
         text += (
-            "たたーん🎵 開映時間は\n"
-            "- 5/7(土)・10(火)・13(金)が 13:00 / 17:45\n"
-            "- 5/9(月)・12(木)が 12:25 / 16:35 / 20:45\n"
-            "- 5/8(日)・11(水)は上映なし\n\n"
+            "開映時間は\n"
+            "- 5/7(土)・10(火)・13(金) 13:00 / 17:45\n"
+            "- 5/9(月)・12(木) 12:25 / 16:35 / 20:45\n"
+            "- 5/8(日)・11(水) 上映なし\n\n"
         )
-        text += (
-            "詳しくは "
-            "http://wasedashochiku.co.jp/archives/schedule/19087#film2 をどうぞ！"
-        )
+        text += "詳しくは http://wasedashochiku.co.jp/archives/schedule/19087 をどうぞ"
         return text
 
 
