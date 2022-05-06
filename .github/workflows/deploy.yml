@@ -19,9 +19,14 @@ jobs:
         run: |
           python -m pip install -U pip
           python -m pip install -r requirements.lock
-      # TODO: https://github.com/ftnext/sing-a-bot-of-harmony/issues/17
-      # - name: Run unittests
-      #   run: python -m unittest -v
+      - name: Set up locale
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y locales
+          sudo locale-gen ja_JP.UTF-8
+          echo "export LANG=ja_JP.UTF-8" >> ~/.bashrc
+      - name: Run unittests
+        run: python -m unittest -v
 
   deploy:
     runs-on: ubuntu-latest
