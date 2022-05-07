@@ -181,6 +181,7 @@ THEATER_CONTENT_CLASSES = {
     "waseda-shochiku": WasedaShochikuContent,
     "cinema-neko": CinemaNekoContent,
     "sumoto-orion": SumotoOrionContent,
+    "nagoya-109cinemas": Nagoya109CinemasContent,
 }
 
 
