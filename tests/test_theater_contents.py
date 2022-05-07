@@ -6,6 +6,7 @@ from unittest.mock import MagicMock
 from lambda_function import (
     CinemaNekoContent,
     Content,
+    Nagoya109CinemasContent,
     SumotoOrionContent,
     WasedaShochikuContent,
 )
@@ -108,3 +109,13 @@ class SumotoOrionContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+
+class Nagoya109CinemasContentTestCase(TestCase):
+    def test_init(self):
+        date_ = MagicMock(spec=date)
+
+        actual = Nagoya109CinemasContent(date_)
+
+        self.assertIsInstance(actual, Content)
+        self.assertEqual(actual._date, date_)
