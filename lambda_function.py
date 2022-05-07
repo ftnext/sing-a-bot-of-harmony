@@ -158,6 +158,14 @@ class SumotoOrionContent(Content):
         return self._date.weekday() in (1, 2, 5, 6)
 
 
+class Nagoya109CinemasContent(Content):
+    def __init__(self, date_):
+        self._date = date_
+
+    def generate(self):
+        raise NotImplementedError
+
+
 THEATER_CONTENT_CLASSES = {
     "waseda-shochiku": WasedaShochikuContent,
     "cinema-neko": CinemaNekoContent,
