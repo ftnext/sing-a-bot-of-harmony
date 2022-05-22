@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import locale
 import os
-from abc import ABC, abstractmethod
 from datetime import date, datetime
 from random import randint
 from typing import TYPE_CHECKING
@@ -11,7 +10,7 @@ from zoneinfo import ZoneInfo
 from requests_oauthlib import OAuth1Session
 from sparkling_counter import DayCountDown, XthDayCount
 
-from harmonizer_bot.contents import Nagoya109CinemasContent
+from harmonizer_bot.contents import Content, Nagoya109CinemasContent
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -83,12 +82,6 @@ def generate_time_signal_text(today: date) -> str:
             f"アイの歌声を聴かせて 非公式Botが{today:%-m/%-d}の午後2時をお伝えします🌈",
         ]
     )
-
-
-class Content(ABC):
-    @abstractmethod
-    def generate(self) -> str:
-        raise NotImplementedError
 
 
 class WasedaShochikuContent(Content):
