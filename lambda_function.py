@@ -192,4 +192,17 @@ def lambda_handler(event: Mapping, context: Mapping) -> None:
 
 
 if __name__ == "__main__":
-    lambda_handler({}, {})
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="bot_mode")
+
+    theater_parser = subparsers.add_parser("theater")
+    theater_parser.add_argument("theater", choices=THEATER_CONTENT_CLASSES)
+
+    args = parser.parse_args()
+
+    tweet = print  # NOQA: F811 (redefine for debug)
+
+    if args.bot_mode == "theater":
+        lambda_handler({"bot-mode": "theater", "theater": args.theater}, {})
