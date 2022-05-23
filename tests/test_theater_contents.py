@@ -3,7 +3,7 @@ from textwrap import dedent
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from harmonizer_bot.contents import Content
+from harmonizer_bot.contents.base import Content
 from lambda_function import (
     CinemaNekoContent,
     SumotoOrionContent,
