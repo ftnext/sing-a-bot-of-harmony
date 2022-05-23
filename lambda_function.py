@@ -10,7 +10,8 @@ from zoneinfo import ZoneInfo
 from requests_oauthlib import OAuth1Session
 from sparkling_counter import DayCountDown, XthDayCount
 
-from harmonizer_bot.contents import Content, Nagoya109CinemasContent
+from harmonizer_bot.contents.base import Content
+from harmonizer_bot.contents.theaters import Nagoya109CinemasContent
 
 if TYPE_CHECKING:
     from collections.abc import Mapping

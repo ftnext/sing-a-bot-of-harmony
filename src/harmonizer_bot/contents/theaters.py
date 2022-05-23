@@ -1,13 +1,8 @@
-from abc import ABC, abstractmethod
 from datetime import date
 
 from sparkling_counter import DayCountDown
 
-
-class Content(ABC):
-    @abstractmethod
-    def generate(self) -> str:
-        raise NotImplementedError
+from .base import Content
 
 
 class Nagoya109CinemasContent(Content):
