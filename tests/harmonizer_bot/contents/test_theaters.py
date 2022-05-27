@@ -33,3 +33,21 @@ class Nagoya109CinemasContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+    def test_generate_31th_only(self):
+        expected = dedent(
+            """\
+            #アイの歌声を聴かせて 愛知の109シネマズ名古屋さんの映画祭でライブ音響上映！！
+
+            - 5/28(土) 16:30〜
+            - 5/31(火) 16:35〜 （あと3日！）
+
+            チケット発売中！🎫
+            詳しくは https://109cinemas.net/events/liveonkyo_nagoya/ をどうぞ！
+            """
+        ).rstrip()
+
+        content = Nagoya109CinemasContent(date(2022, 5, 28))
+        actual = content.generate()
+
+        self.assertEqual(actual, expected)
