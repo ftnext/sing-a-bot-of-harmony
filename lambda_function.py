@@ -40,7 +40,27 @@ oauth = OAuth1Session(
 )
 
 
-def generate_text(today: date) -> str:
+class TextGenerator:
+    def __init__(self) -> None:
+        self.event_handlers = {}
+
+    def register(self, event_name: str):
+        def wrapped(func):
+            self.event_handlers[event_name] = func
+            return func
+
+        return wrapped
+
+    def generate(self, event_name: str, *, date_: date, **kwargs) -> str:
+        handler = self.event_handlers[event_name]
+        return handler(date_, **kwargs)
+
+
+root_generator = TextGenerator()
+
+
+@root_generator.register("morning-greeting")
+def generate_text(today: date, **kwargs) -> str:
     text = (
         f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{AINOUTA_XDAY_COUNT(today)}日目です。\n"
     )
@@ -51,7 +71,8 @@ def generate_text(today: date) -> str:
     return text + "今日も、元気で、頑張るぞっ、おーっ"
 
 
-def generate_information_text(today: date) -> str:
+@root_generator.register("information")
+def generate_information_text(today: date, **kwargs) -> str:
     text = (
         "アイの歌声を聴かせて 劇場で上映中！🎬 "
         "https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
@@ -74,7 +95,8 @@ SIGNAL_SCENE_PHRASES = [
 ]
 
 
-def generate_time_signal_text(today: date) -> str:
+@root_generator.register("time-signal")
+def generate_time_signal_text(today: date, **kwargs) -> str:
     index = randint(-len(SIGNAL_SCENE_PHRASES), -1)
     return "\n".join(
         SIGNAL_SCENE_PHRASES[index:]
@@ -162,6 +184,13 @@ THEATER_CONTENT_CLASSES = {
 }
 
 
+@root_generator.register("theater")
+def generate_theater_text(today: date, *, theater: str, **kwargs) -> str:
+    content_class = THEATER_CONTENT_CLASSES.get(theater)
+    content = content_class(today)
+    return content.generate()
+
+
 def tweet(text: str) -> None:
     payload = {"text": text}
     response = oauth.post("https://api.twitter.com/2/tweets", json=payload)
@@ -173,22 +202,9 @@ def lambda_handler(event: Mapping, context: Mapping) -> None:
     print(event)
     mode = event.get("bot-mode")
     today = datetime.now(ASIA_TOKYO).date()
-    if mode == "information":
-        text = generate_information_text(today)
-        tweet(text)
-        return
-    elif mode == "time-signal":
-        text = generate_time_signal_text(today)
-        tweet(text)
-        return
-    elif mode == "theater":
-        theater = event.get("theater")
-        content_class = THEATER_CONTENT_CLASSES.get(theater)
-        content = content_class(today)
-        text = content.generate()
-        tweet(text)
-        return
-    text = generate_text(today)
+    text = root_generator.generate(
+        mode, date_=today, theater=event.get("theater")
+    )
     tweet(text)
 
 
