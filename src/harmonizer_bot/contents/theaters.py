@@ -101,8 +101,8 @@ class Nagoya109CinemasContent(Content):
         )
 
         text = "#アイの歌声を聴かせて 愛知の109シネマズ名古屋さんの映画祭でライブ音響上映！！\n\n"
-        text += f"- 5/28(土) 16:30〜{rest_to_1st_run}\n"
-        text += f"- 5/31(火) 16:35〜{rest_to_2nd_run}\n\n"
+        text += f"- {self.RUN_1ST:%-m/%-d(%a)} 16:30〜{rest_to_1st_run}\n"
+        text += f"- {self.RUN_2ND:%-m/%-d(%a)} 16:35〜{rest_to_2nd_run}\n\n"
         text += "チケット発売中！🎫\n"
         text += "詳しくは https://109cinemas.net/events/liveonkyo_nagoya/ をどうぞ！"
         return text
