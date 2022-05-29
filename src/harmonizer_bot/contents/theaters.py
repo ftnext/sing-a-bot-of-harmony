@@ -1,9 +1,81 @@
+import locale
 from datetime import date
 
 from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
 from .base import Content
+
+locale.setlocale(locale.LC_TIME, "ja_JP.UTF-8")
+
+
+class WasedaShochikuContent(Content):
+    LAST_DAY = date(2022, 5, 13)
+    COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        text = (
+            f"#アイの歌声を聴かせて 早稲田松竹さんで{self.LAST_DAY:%-m/%-d(%a)}まで上映中！"
+            f"（今日を含めて残り{self.COUNT_DOWN(self._date)}日）\n"
+            "竜そば・サイコトと日替わり2️⃣本立て\n\n"
+        )
+        text += (
+            "開映時間は\n"
+            "- 5/7(土)・10(火)・13(金) 13:00 / 17:45\n"
+            "- 5/9(月)・12(木) 12:25 / 16:35 / 20:45\n"
+            "- 5/8(日)・11(水) 上映なし\n\n"
+        )
+        text += "詳しくは http://wasedashochiku.co.jp/archives/schedule/19087 をどうぞ"
+        return text
+
+
+class CinemaNekoContent(Content):
+    START_DAY = date(2022, 4, 22)
+    LAST_DAY = date(2022, 5, 15)
+    END_COUNT = DayCountDown(LAST_DAY, include=True)
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        text = (
+            "#アイの歌声を聴かせて 青梅のシネマネコさんで"
+            f"{self.START_DAY:%-m/%-d(%a)}から{self.LAST_DAY:%-m/%-d(%a)}まで上映中！"
+            f"（今日を含めて残り{self.END_COUNT(self._date)}日）\n\n"
+        )
+        text += "たたーん🎵 上映時間は、毎日 15:40〜 （5/10(火)は定休日）\n"
+        text += "詳しくは https://cinema-neko.com/movie_detail.php?id=94c58c03-e4b1-484d-8a0f-bc9bb885493c をどうぞ！\n\n"  # NOQA: E501
+        text += "シネマネコさんのラッキープレイスはー、カフェ！☕️"
+        return text
+
+
+class SumotoOrionContent(Content):
+    START_DAY = date(2022, 4, 29)
+    LAST_DAY = date(2022, 5, 12)
+    END_COUNT = DayCountDown(LAST_DAY, include=True)
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        text = (
+            "#アイの歌声を聴かせて 淡路島の洲本オリオンさんで"
+            f"{self.START_DAY:%-m/%-d(%a)}から{self.LAST_DAY:%-m/%-d(%a)}まで上映中！"
+            f"（今日を含めて残り{self.END_COUNT(self._date)}日）\n\n"
+        )
+        text += "たたーん🎵 上映時間は、毎日 15:30〜\n"
+        text += "詳しくは https://www.sumoto-orion.com/?p=895 をどうぞ！"
+        if self._add_yelling():
+            text += "\n\n"
+            text += "さらに水曜日・日曜日は 18:00〜 無発声応援上映追加！🤗"
+        return text
+
+    def _add_yelling(self):
+        # 水曜(2)・日曜(6)と前日は無発生応援上映を追加する
+        return self._date.weekday() in (1, 2, 5, 6)
 
 
 class Nagoya109CinemasContent(Content):
