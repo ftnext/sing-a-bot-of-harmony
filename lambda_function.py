@@ -10,11 +10,6 @@ from requests_oauthlib import OAuth1Session
 from sparkling_counter import DayCountDown, XthDayCount
 
 from harmonizer_bot.contents import Nagoya109CinemasContent
-from harmonizer_bot.contents.theaters import (
-    CinemaNekoContent,
-    SumotoOrionContent,
-    WasedaShochikuContent,
-)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -109,9 +104,6 @@ def generate_time_signal_text(today: date, **kwargs) -> str:
 
 
 THEATER_CONTENT_CLASSES = {
-    "waseda-shochiku": WasedaShochikuContent,
-    "cinema-neko": CinemaNekoContent,
-    "sumoto-orion": SumotoOrionContent,
     "nagoya-109cinemas": Nagoya109CinemasContent,
 }
 
