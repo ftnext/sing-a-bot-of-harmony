@@ -214,6 +214,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="bot_mode")
 
+    morning_greeting_parser = subparsers.add_parser("morning-greeting")
+    information_parser = subparsers.add_parser("information")
+    time_signal_parser = subparsers.add_parser("time-signal")
+
     theater_parser = subparsers.add_parser("theater")
     theater_parser.add_argument("theater", choices=THEATER_CONTENT_CLASSES)
 
@@ -221,5 +225,11 @@ if __name__ == "__main__":
 
     tweet = print  # NOQA: F811 (redefine for debug)
 
-    if args.bot_mode == "theater":
+    if args.bot_mode == "morning-greeting":
+        lambda_handler({"bot-mode": "morning-greeting"}, {})
+    elif args.bot_mode == "information":
+        lambda_handler({"bot-mode": "information"}, {})
+    elif args.bot_mode == "time-signal":
+        lambda_handler({"bot-mode": "time-signal"}, {})
+    elif args.bot_mode == "theater":
         lambda_handler({"bot-mode": "theater", "theater": args.theater}, {})
