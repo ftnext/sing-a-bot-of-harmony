@@ -150,6 +150,7 @@ if __name__ == "__main__":
     morning_greeting_parser = subparsers.add_parser("morning-greeting")
     information_parser = subparsers.add_parser("information")
     time_signal_parser = subparsers.add_parser("time-signal")
+    birthday_parser = subparsers.add_parser("birthday")
 
     theater_parser = subparsers.add_parser("theater")
     theater_parser.add_argument("theater", choices=THEATER_CONTENT_CLASSES)
