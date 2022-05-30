@@ -149,11 +149,7 @@ if __name__ == "__main__":
 
     tweet = print  # NOQA: F811 (redefine for debug)
 
-    if args.bot_mode == "morning-greeting":
-        lambda_handler({"bot-mode": "morning-greeting"}, {})
-    elif args.bot_mode == "information":
-        lambda_handler({"bot-mode": "information"}, {})
-    elif args.bot_mode == "time-signal":
-        lambda_handler({"bot-mode": "time-signal"}, {})
-    elif args.bot_mode == "theater":
-        lambda_handler({"bot-mode": "theater", "theater": args.theater}, {})
+    event = {"bot-mode": args.bot_mode}
+    if args.bot_mode == "theater":
+        event["theater"] = args.theater
+    lambda_handler(event, {})
