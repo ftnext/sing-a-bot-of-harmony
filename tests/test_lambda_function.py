@@ -1,8 +1,13 @@
 from datetime import date
 from textwrap import dedent
 from unittest import TestCase
+from unittest.mock import patch
 
-from lambda_function import generate_information_text, generate_text
+from lambda_function import (
+    generate_information_text,
+    generate_text,
+    generate_time_signal_text,
+)
 
 
 class GenerateTextTestCase(TestCase):
@@ -35,3 +40,24 @@ class GenerateInformationTextTestCase(TestCase):
         actual = generate_information_text(date(2022, 5, 29))
 
         self.assertEqual(actual, expected)
+
+
+class GenerateTimeSignalTextTestCase(TestCase):
+    @patch("lambda_function.randint", return_value=-5)
+    def test_time_signal(self, randint):
+        expected = dedent(
+            """\
+            👩🏻‍🔬「悟美」
+            👩🏻‍🔬「さーとーみ」
+            👧🏻「... 😳」
+            👧🏻「えっ、いま何時？」
+            👩🏻‍🔬「にぃじ」
+
+            アイの歌声を聴かせて 非公式Botが10/30の午後2時をお伝えします🌈
+            """
+        ).rstrip()
+
+        actual = generate_time_signal_text(date(2021, 10, 30))
+
+        self.assertEqual(actual, expected)
+        randint.assert_called_once_with(-6, -1)
