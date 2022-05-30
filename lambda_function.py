@@ -115,6 +115,15 @@ def generate_theater_text(today: date, *, theater: str, **kwargs) -> str:
     return content.generate()
 
 
+@root_generator.register("birthday")
+def count_down_birthday(today: date, **kwargs):
+    birthday_counter = DayCountDown(date(2022, 6, 6), include=False)
+    text = "アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、シオン！\n"
+    text += f"6/6まであと{birthday_counter(today)}日\n"
+    text += "https://twitter.com/ainouta_movie/status/1440982253895446535"
+    return text
+
+
 def tweet(text: str) -> None:
     payload = {"text": text}
     response = oauth.post("https://api.twitter.com/2/tweets", json=payload)
