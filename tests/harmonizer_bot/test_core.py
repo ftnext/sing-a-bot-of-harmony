@@ -1,6 +1,7 @@
 from datetime import date
 from unittest import TestCase
 
+from harmonizer_bot.contents.base import Content
 from harmonizer_bot.core import TextGenerator
 
 
@@ -19,6 +20,23 @@ class TextGeneratorTestCase(TestCase):
         self.assertEqual(sut.event_handlers, {"func1": f1, "function2": f2})
         self.assertEqual(f1(), 42)
         self.assertEqual(f2("spam"), "Hello spam")
+
+    def test_register_content_class(self):
+        sut = TextGenerator()
+
+        @sut.register("awesome")
+        class AwesomeContent(Content):
+            def __init__(self, date_):
+                self._date = date_
+
+            def generate(self):
+                return f"{self._date:%-m/%-d} is awesome day!"
+
+        self.assertEqual(sut.event_handlers, {"awesome": AwesomeContent})
+        self.assertEqual(
+            AwesomeContent(date(2021, 12, 31)).generate(),
+            "12/31 is awesome day!",
+        )
 
     def test_generate(self):
         sut = TextGenerator()
