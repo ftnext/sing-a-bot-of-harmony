@@ -10,6 +10,7 @@ from requests_oauthlib import OAuth1Session
 from sparkling_counter import DayCountDown, XthDayCount
 
 from harmonizer_bot.contents import Nagoya109CinemasContent
+from harmonizer_bot.core import TextGenerator
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -34,23 +35,6 @@ access_token_secret = os.getenv("TWITTER_API_ACCESS_TOKEN_SECRET")
 oauth = OAuth1Session(
     consumer_key, client_secret, access_token, access_token_secret
 )
-
-
-class TextGenerator:
-    def __init__(self) -> None:
-        self.event_handlers = {}
-
-    def register(self, event_name: str):
-        def wrapped(func):
-            self.event_handlers[event_name] = func
-            return func
-
-        return wrapped
-
-    def generate(self, event_name: str, *, date_: date, **kwargs) -> str:
-        handler = self.event_handlers[event_name]
-        return handler(date_, **kwargs)
-
 
 root_generator = TextGenerator()
 
