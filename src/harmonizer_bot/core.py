@@ -1,3 +1,6 @@
+from datetime import date
+
+
 class TextGenerator:
     def __init__(self) -> None:
         self.event_handlers = {}
@@ -9,5 +12,6 @@ class TextGenerator:
 
         return wrapped
 
-    def generate(self, event_name: str, **kwargs):
-        raise NotImplementedError
+    def generate(self, event_name: str, *, date_: date, **kwargs) -> str:
+        handler = self.event_handlers[event_name]
+        return handler(date_, **kwargs)
