@@ -1,4 +1,7 @@
+import inspect
 from datetime import date
+
+from .contents.base import Content
 
 
 class TextGenerator:
@@ -14,4 +17,10 @@ class TextGenerator:
 
     def generate(self, event_name: str, *, date_: date, **kwargs) -> str:
         handler = self.event_handlers[event_name]
-        return handler(date_, **kwargs)
+
+        if inspect.isfunction(handler):
+            return handler(date_, **kwargs)
+
+        if inspect.isclass(handler) and issubclass(handler, Content):
+            instance = handler(date_)
+            return instance.generate()
