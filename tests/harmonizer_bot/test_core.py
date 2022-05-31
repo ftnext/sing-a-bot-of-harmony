@@ -56,3 +56,19 @@ class TextGeneratorTestCase(TestCase):
             sut.generate("evening", date_=date(2022, 6, 6), name="Shion"),
             "こんばんは、Shionさん 06/06",
         )
+
+    def test_generate_content_class(self):
+        sut = TextGenerator()
+
+        @sut.register("awesome")
+        class AwesomeContent(Content):
+            def __init__(self, date_):
+                self._date = date_
+
+            def generate(self):
+                return f"{self._date:%-m/%-d} is awesome day!"
+
+        self.assertEqual(
+            sut.generate("awesome", date_=date(2022, 6, 1)),
+            "6/1 is awesome day!",
+        )
