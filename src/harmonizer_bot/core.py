@@ -8,3 +8,6 @@ class TextGenerator:
             return func
 
         return wrapped
+
+    def generate(self, event_name: str, **kwargs):
+        raise NotImplementedError
