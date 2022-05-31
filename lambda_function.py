@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import random
 from datetime import date, datetime
 from random import randint
 from typing import TYPE_CHECKING
@@ -100,10 +101,23 @@ def generate_theater_text(today: date, *, theater: str, **kwargs) -> str:
 
 @root_generator.register("birthday")
 def count_down_birthday(today: date, **kwargs):
+    profile_links = [
+        "https://twitter.com/ainouta_movie/status/1440982253895446535",
+        "https://twitter.com/ainouta_movie/status/1459355340886085634",
+        "https://twitter.com/ainouta_movie/status/1470619559820283907",
+    ]
+    profiles = [
+        "星座はふたご座♊️",
+        "部活は帰宅部",
+        "特技は歌🎤🎶",
+        "いま、好きな人は「いる」！！",
+        "サトミ！私が幸せにしてあげる！",
+    ]
     birthday_counter = DayCountDown(date(2022, 6, 6), include=False)
-    text = "アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、シオン！\n"
-    text += f"6/6まであと{birthday_counter(today)}日\n"
-    text += "https://twitter.com/ainouta_movie/status/1440982253895446535"
+    text = "#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、シオン！\n"
+    text += f"6/6まであと{birthday_counter(today)}日\n\n"
+    text += f"{random.choice(profiles)}\n"
+    text += random.choice(profile_links)
     return text
 
 
