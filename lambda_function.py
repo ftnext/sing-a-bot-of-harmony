@@ -87,16 +87,15 @@ def generate_time_signal_text(today: date, **kwargs) -> str:
     )
 
 
-THEATER_CONTENT_CLASSES = {
-    "nagoya-109cinemas": Nagoya109CinemasContent,
-}
+theater_text_generator = TextGenerator()
+Nagoya109CinemasContent = theater_text_generator.register("nagoya-109cinemas")(
+    Nagoya109CinemasContent
+)
 
 
 @root_generator.register("theater")
 def generate_theater_text(today: date, *, theater: str, **kwargs) -> str:
-    content_class = THEATER_CONTENT_CLASSES.get(theater)
-    content = content_class(today)
-    return content.generate()
+    return theater_text_generator.generate(theater, date_=today)
 
 
 @root_generator.register("birthday")
@@ -137,7 +136,9 @@ if __name__ == "__main__":
     birthday_parser = subparsers.add_parser("birthday")
 
     theater_parser = subparsers.add_parser("theater")
-    theater_parser.add_argument("theater", choices=THEATER_CONTENT_CLASSES)
+    theater_parser.add_argument(
+        "theater", choices=theater_text_generator.event_handlers
+    )
 
     args = parser.parse_args()
 
