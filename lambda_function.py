@@ -41,7 +41,7 @@ root_generator = TextGenerator()
 
 
 @root_generator.register("morning-greeting")
-def generate_text(today: date, **kwargs) -> str:
+def generate_text(today: date, /, **kwargs) -> str:
     text = (
         f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{AINOUTA_XDAY_COUNT(today)}日目です。\n"
     )
@@ -53,7 +53,7 @@ def generate_text(today: date, **kwargs) -> str:
 
 
 @root_generator.register("information")
-def generate_information_text(today: date, **kwargs) -> str:
+def generate_information_text(today: date, /, **kwargs) -> str:
     text = (
         "アイの歌声を聴かせて 劇場で上映中！🎬 "
         "https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
@@ -77,7 +77,7 @@ SIGNAL_SCENE_PHRASES = [
 
 
 @root_generator.register("time-signal")
-def generate_time_signal_text(today: date, **kwargs) -> str:
+def generate_time_signal_text(today: date, /, **kwargs) -> str:
     index = randint(-len(SIGNAL_SCENE_PHRASES), -1)
     return "\n".join(
         SIGNAL_SCENE_PHRASES[index:]
@@ -95,12 +95,12 @@ Nagoya109CinemasContent = theater_text_generator.register("nagoya-109cinemas")(
 
 
 @root_generator.register("theater")
-def generate_theater_text(today: date, *, theater: str, **kwargs) -> str:
+def generate_theater_text(today: date, /, *, theater: str, **kwargs) -> str:
     return theater_text_generator.generate(theater, date_=today)
 
 
 @root_generator.register("birthday")
-def count_down_birthday(today: date, **kwargs):
+def count_down_birthday(today: date, /, **kwargs):
     profile_links = [
         "https://twitter.com/ainouta_movie/status/1440982253895446535",
         "https://twitter.com/ainouta_movie/status/1459355340886085634",
