@@ -106,17 +106,18 @@ def count_down_birthday(today: date, **kwargs):
         "https://twitter.com/ainouta_movie/status/1459355340886085634",
         "https://twitter.com/ainouta_movie/status/1470619559820283907",
     ]
-    profiles = [
-        "星座はふたご座♊️",
-        "部活は帰宅部",
-        "特技は歌🎤🎶",
-        "いま、好きな人は「いる」！！",
-        "サトミ！私が幸せにしてあげる！",
+    lines = [
+        "サトミ！ いま、幸せ？",
+        "私が幸せにしてあげる！",
+        "サトミを幸せにする方法、思い付いちゃった！",
+        "秘密はね、最後に明かされるんだよ",
     ]
     birthday_counter = DayCountDown(date(2022, 6, 6), include=False)
     text = "#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、シオン！\n"
     text += f"6/6まであと{birthday_counter(today)}日\n\n"
-    text += f"{random.choice(profiles)}\n"
+    text += "／\n"
+    text += f" {random.choice(lines)}\n"
+    text += "＼\n"
     text += random.choice(profile_links)
     return text
 
