@@ -1,6 +1,6 @@
 from datetime import date
 from textwrap import dedent
-from unittest import TestCase
+from unittest import TestCase, skip
 from unittest.mock import patch
 
 from lambda_function import (
@@ -11,6 +11,7 @@ from lambda_function import (
 
 
 class GenerateTextTestCase(TestCase):
+    @skip("WIP implementing...")
     def test_greeting(self):
         expected = dedent(
             """\
