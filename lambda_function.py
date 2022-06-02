@@ -39,8 +39,15 @@ root_generator = TextGenerator()
 
 @root_generator.register("morning-greeting")
 def generate_text(today: date, /, **kwargs) -> str:
+    greetings = [
+        "https://twitter.com/ainouta_movie/status/1455308673669029891",
+        "https://twitter.com/ainouta_movie/status/1456033452499914767",
+        "https://twitter.com/ainouta_movie/status/1456395834946465794",
+        "https://twitter.com/ainouta_movie/status/1458570163771555840",
+    ]
     content = MorningGreetingContent(today)
-    return content.generate()
+    text = content.generate()
+    return text + f"\n{random.choice(greetings)}"
 
 
 @root_generator.register("information")
