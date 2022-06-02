@@ -11,6 +11,7 @@ from requests_oauthlib import OAuth1Session
 from sparkling_counter import DayCountDown, XthDayCount
 
 from harmonizer_bot.contents import Nagoya109CinemasContent
+from harmonizer_bot.contents.base import Content
 from harmonizer_bot.core import TextGenerator
 
 if TYPE_CHECKING:
@@ -18,15 +19,9 @@ if TYPE_CHECKING:
 
 ASIA_TOKYO = ZoneInfo("Asia/Tokyo")
 
-AINOUTA_XDAY_COUNT = XthDayCount(date(2021, 10, 29))
-
 STREAMING_LAST_DAY = date(2022, 6, 10)
 # 6/10であと1日（その日が最後）になってほしい
 STREAMING_PERIOD_COUNT = DayCountDown(STREAMING_LAST_DAY, include=True)
-
-DISK_RELEASE_DAY = date(2022, 7, 27)
-# 7/26であと1日になってほしい（翌日にはリリース）
-DISK_RELEASE_COUNT = DayCountDown(DISK_RELEASE_DAY, include=False)
 
 consumer_key = os.getenv("TWITTER_API_KEY")
 client_secret = os.getenv("TWITTER_API_KEY_SECRET")
@@ -40,16 +35,33 @@ oauth = OAuth1Session(
 root_generator = TextGenerator()
 
 
+class MorningGreetingContent(Content):
+    AINOUTA_XDAY_COUNT = XthDayCount(date(2021, 10, 29))
+
+    DISK_RELEASE_DAY = date(2022, 7, 27)
+    # 7/26であと1日になってほしい（翌日にはリリース）
+    DISK_RELEASE_COUNT = DayCountDown(DISK_RELEASE_DAY, include=False)
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        text = (
+            f"{self._date:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から"
+            f"{self.AINOUTA_XDAY_COUNT(self._date)}日目です。\n"
+        )
+        text += (
+            "Blu-ray&DVDリリース📀まで今日を含めて"
+            f"あと{self.DISK_RELEASE_COUNT(self._date)}日です"
+            f"({self.DISK_RELEASE_DAY:%-m/%-d}発売。現在予約期間)。\n\n"
+        )
+        return text + "今日も、元気で、頑張るぞっ、おーっ"
+
+
 @root_generator.register("morning-greeting")
 def generate_text(today: date, /, **kwargs) -> str:
-    text = (
-        f"{today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{AINOUTA_XDAY_COUNT(today)}日目です。\n"
-    )
-    text += (
-        f"Blu-ray&DVDリリース📀まで今日を含めてあと{DISK_RELEASE_COUNT(today)}日です"
-        f"({DISK_RELEASE_DAY:%-m/%-d}発売。現在予約期間)。\n\n"
-    )
-    return text + "今日も、元気で、頑張るぞっ、おーっ"
+    content = MorningGreetingContent(today)
+    return content.generate()
 
 
 @root_generator.register("information")
