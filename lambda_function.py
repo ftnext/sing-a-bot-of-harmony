@@ -43,7 +43,11 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1455308673669029891",
         "https://twitter.com/ainouta_movie/status/1456033452499914767",
         "https://twitter.com/ainouta_movie/status/1456395834946465794",
+        "https://twitter.com/ainouta_movie/status/1457483003983134721",
+        "https://twitter.com/ainouta_movie/status/1457845393379577860",
+        "https://twitter.com/ainouta_movie/status/1458207779118673920",
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
+        "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
     content = MorningGreetingContent(today)
     text = content.generate()
