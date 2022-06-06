@@ -14,6 +14,7 @@ from harmonizer_bot.contents import (
     MorningGreetingContent,
     Nagoya109CinemasContent,
 )
+from harmonizer_bot.contents.birthday import ShionBirthdayContent
 from harmonizer_bot.core import TextGenerator
 
 if TYPE_CHECKING:
@@ -103,25 +104,8 @@ def generate_theater_text(today: date, /, *, theater: str, **kwargs) -> str:
 
 @root_generator.register("birthday")
 def count_down_birthday(today: date, /, **kwargs):
-    profile_links = [
-        "https://twitter.com/ainouta_movie/status/1440982253895446535",
-        "https://twitter.com/ainouta_movie/status/1459355340886085634",
-        "https://twitter.com/ainouta_movie/status/1470619559820283907",
-    ]
-    lines = [
-        "サトミ！ いま、幸せ？",
-        "私が幸せにしてあげる！",
-        "サトミを幸せにする方法、思い付いちゃった！",
-        "秘密はね、最後に明かされるんだよ",
-    ]
-    birthday_counter = DayCountDown(date(2022, 6, 6), include=False)
-    text = "#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、シオン！\n"
-    text += f"6/6まであと{birthday_counter(today)}日\n\n"
-    text += "／\n"
-    text += f" {random.choice(lines)}\n"
-    text += "＼\n"
-    text += random.choice(profile_links)
-    return text
+    content = ShionBirthdayContent(today)
+    return content.generate()
 
 
 def tweet(text: str) -> None:
