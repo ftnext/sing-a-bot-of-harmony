@@ -58,14 +58,13 @@ def generate_text(today: date, /, **kwargs) -> str:
 @root_generator.register("information")
 def generate_information_text(today: date, /, **kwargs) -> str:
     text = (
-        "アイの歌声を聴かせて 劇場で上映中！🎬 "
-        "https://eigakan.org/theaterpage/schedule.php?t=ainouta\n"
-    )
-    text += (
-        f"期間限定配信🎥は今日を含めてあと{STREAMING_PERIOD_COUNT(today)}日です"
+        "#アイの歌声を聴かせて 期間限定配信🎥は"
+        f"今日を含めてあと{STREAMING_PERIOD_COUNT(today)}日です"
         f"({STREAMING_LAST_DAY:%-m/%-d}まで)。\n\n"
     )
-    text += "今夜はきれいなお月さまでしょうか？"
+    text += "📣たたーん！ 6/10(金)20:30〜 Twitterスペースで #みんなでアイうた\n"
+    text += "作品の感想やお気に入りのシーンなど公式先輩が募集中！詳しくは👇\n"
+    text += "https://twitter.com/ainouta_movie/status/1533649254425968640"
     return text
 
 
