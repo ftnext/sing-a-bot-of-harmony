@@ -1,12 +1,9 @@
-import locale
 from datetime import date
 
 from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
 from .base import Content
-
-locale.setlocale(locale.LC_TIME, "ja_JP.UTF-8")
 
 
 class WasedaShochikuContent(Content):
