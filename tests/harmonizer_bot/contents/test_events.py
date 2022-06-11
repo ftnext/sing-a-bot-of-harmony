@@ -19,15 +19,16 @@ class PlayAllTogetherContentTestCase(TestCase):
     def test_generate(self):
         expected = dedent(
             """\
-            #アイの歌声を聴かせて 期間限定配信🎥は今日を含めてあと13日です(6/10まで)。
+            #アイの歌声を聴かせて 期間限定配信🎥は終了。
+            で・す・が、6/10(金)のTwitterスペース #みんなでアイうた が楽しめます（1週間程度とのことなので、今日を含めてあと2日くらい）。
 
-            📣たたーん！ 6/10(金)20:30〜 Twitterスペースで #みんなでアイうた
-            作品の感想やお気に入りのシーンなど公式先輩が募集中！詳しくは👇
-            https://twitter.com/ainouta_movie/status/1533649254425968640
+            公式先輩、ありがとうございます❤️
+            もう一度ラジオを聴かせて！
+            https://twitter.com/ainouta_movie/status/1535260028474896384
             """
         ).rstrip()
 
-        content = PlayAllTogetherContent(date(2022, 5, 29))
+        content = PlayAllTogetherContent(date(2022, 6, 16))
         actual = content.generate()
 
         self.assertEqual(actual, expected)
