@@ -18,7 +18,8 @@ class PlayAllTogetherContent(Content):
     def generate(self) -> str:
         text = (
             "#アイの歌声を聴かせて 期間限定配信🎥は終了。\n"
-            "で・す・が、6/10(金)のTwitterスペース #みんなでアイうた が楽しめます"
+            f"で・す・が、{self.STREAMING_LAST_DAY:%-m/%-d(%a)}の"
+            "Twitterスペース #みんなでアイうた が楽しめます"
             "（1週間程度とのことなので、"
             f"今日を含めてあと{self.REPLAY_PERIOD_COUNT(self._date)}日くらい）。\n\n"
         )
