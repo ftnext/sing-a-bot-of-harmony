@@ -12,9 +12,9 @@ from requests_oauthlib import OAuth1Session
 from harmonizer_bot.contents import (
     MorningGreetingContent,
     Nagoya109CinemasContent,
+    PlayAllTogetherContent,
 )
 from harmonizer_bot.contents.birthday import ShionBirthdayContent
-from harmonizer_bot.contents.events import PlayAllTogetherContent
 from harmonizer_bot.core import TextGenerator
 
 if TYPE_CHECKING:
