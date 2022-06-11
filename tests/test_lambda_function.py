@@ -3,11 +3,7 @@ from textwrap import dedent
 from unittest import TestCase, skip
 from unittest.mock import patch
 
-from lambda_function import (
-    generate_information_text,
-    generate_text,
-    generate_time_signal_text,
-)
+from lambda_function import generate_text, generate_time_signal_text
 
 
 class GenerateTextTestCase(TestCase):
@@ -23,23 +19,6 @@ class GenerateTextTestCase(TestCase):
         ).rstrip()
 
         actual = generate_text(date(2022, 5, 30))
-
-        self.assertEqual(actual, expected)
-
-
-class GenerateInformationTextTestCase(TestCase):
-    def test_information(self):
-        expected = dedent(
-            """\
-            #アイの歌声を聴かせて 期間限定配信🎥は今日を含めてあと13日です(6/10まで)。
-
-            📣たたーん！ 6/10(金)20:30〜 Twitterスペースで #みんなでアイうた
-            作品の感想やお気に入りのシーンなど公式先輩が募集中！詳しくは👇
-            https://twitter.com/ainouta_movie/status/1533649254425968640
-            """
-        ).rstrip()
-
-        actual = generate_information_text(date(2022, 5, 29))
 
         self.assertEqual(actual, expected)
 
