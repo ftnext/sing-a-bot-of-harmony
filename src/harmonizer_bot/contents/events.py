@@ -30,8 +30,18 @@ class PlayAllTogetherContent(Content):
 
 
 class HappyProjectContent(Content):
+    ANNOUNCEMENT_DAY = date(2022, 6, 20)
+    ANNOUNCEMENT_COUNT = DayCountDown(ANNOUNCEMENT_DAY, include=False)
+
     def __init__(self, date_: date) -> None:
         self._date = date_
 
     def generate(self) -> str:
-        raise NotImplementedError
+        text = "先日の「みんなでアイうた」スペースで告知がありましたが、\n"
+        text += "ヒナタカさんがアイの歌声を聴かせて関連の企画を進めていらっしゃるそうです！\n\n"
+        text += (
+            f"あと{self.ANNOUNCEMENT_COUNT(self._date)}日で発表予定！"
+            f"（{self.ANNOUNCEMENT_DAY:%-m/%-d}までの残り日数を数えています）\n"
+        )
+        text += "https://twitter.com/HinatakaJeF/status/1535251286014427137"
+        return text
