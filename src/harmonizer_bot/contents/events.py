@@ -27,3 +27,7 @@ class PlayAllTogetherContent(Content):
         text += "もう一度ラジオを聴かせて！\n"
         text += "https://twitter.com/ainouta_movie/status/1535260028474896384"
         return text
+
+
+class HappyProjectContent:
+    ...
