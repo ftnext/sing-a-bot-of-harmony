@@ -1,21 +1,13 @@
 from datetime import date
 from textwrap import dedent
 from unittest import TestCase
-from unittest.mock import MagicMock
 
-from harmonizer_bot.contents.base import Content
 from harmonizer_bot.contents.events import PlayAllTogetherContent
 
+from .support import ContentTestCase
 
-class PlayAllTogetherContentTestCase(TestCase):
-    def test_init(self):
-        date_ = MagicMock(spec=date)
 
-        actual = PlayAllTogetherContent(date_)
-
-        self.assertIsInstance(actual, Content)
-        self.assertEqual(actual._date, date_)
-
+class DeprecatedPlayAllTogetherContentTestCase(TestCase):
     def test_generate(self):
         expected = dedent(
             """\
@@ -32,3 +24,7 @@ class PlayAllTogetherContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+
+class PlayAllTogetherContentTestCase(ContentTestCase):
+    target_class = PlayAllTogetherContent
