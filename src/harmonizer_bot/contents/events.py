@@ -29,5 +29,9 @@ class PlayAllTogetherContent(Content):
         return text
 
 
-class HappyProjectContent:
-    ...
+class HappyProjectContent(Content):
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        raise NotImplementedError
