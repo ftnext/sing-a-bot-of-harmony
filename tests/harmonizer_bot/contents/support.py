@@ -1,4 +1,5 @@
 from datetime import date
+from textwrap import dedent
 from unittest import TestCase
 from unittest.mock import MagicMock
 
@@ -14,7 +15,7 @@ class ContentTesterMetaclass(type):
 
         class AddTests:
             def __init__(self, tester_cls):
-                for test_func in [self.test_init]:
+                for test_func in [self.test_init, self.test_generate]:
                     test_name = test_func.__name__
 
                     def wrapper(self, test_func=test_func):
@@ -29,6 +30,14 @@ class ContentTesterMetaclass(type):
 
                 tester.assertIsInstance(actual, Content)
                 tester.assertEqual(actual._date, date_)
+
+            def test_generate(self, tester):
+                expected = dedent(tester.generated_content).strip()
+
+                content = tester.target_class(tester.generation_date)
+                actual = content.generate()
+
+                tester.assertEqual(actual, expected)
 
         AddTests(cls)
 
