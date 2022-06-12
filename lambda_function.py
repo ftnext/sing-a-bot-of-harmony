@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 from requests_oauthlib import OAuth1Session
 
 from harmonizer_bot.contents import (
+    HappyProjectContent,
     MorningGreetingContent,
     Nagoya109CinemasContent,
     PlayAllTogetherContent,
@@ -96,6 +97,12 @@ def count_down_birthday(today: date, /, **kwargs):
     return content.generate()
 
 
+@root_generator.register("hinataka-project")
+def happy_project_text(today: date, /, **kwargs):
+    content = HappyProjectContent(today)
+    return content.generate()
+
+
 def tweet(text: str) -> None:
     payload = {"text": text}
     response = oauth.post("https://api.twitter.com/2/tweets", json=payload)
@@ -123,6 +130,7 @@ if __name__ == "__main__":
     information_parser = subparsers.add_parser("information")
     time_signal_parser = subparsers.add_parser("time-signal")
     birthday_parser = subparsers.add_parser("birthday")
+    project_parser = subparsers.add_parser("hinataka-project")
 
     theater_parser = subparsers.add_parser("theater")
     theater_parser.add_argument(
