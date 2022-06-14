@@ -23,4 +23,4 @@ class Sentences(BasePart):
         object.__setattr__(self, "values", args)
 
     def format(self) -> str:
-        raise NotImplementedError
+        return "".join(sentence.format() for sentence in self.values).rstrip()
