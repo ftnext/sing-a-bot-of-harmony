@@ -11,5 +11,5 @@ class Sentence(BasePart):
     def __init__(self, value: str, /) -> None:
         self.value = value
 
-    def format(self):
-        raise NotImplementedError
+    def format(self) -> str:
+        return f"{self.value}\n"
