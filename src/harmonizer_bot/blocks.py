@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 
 class BasePart(ABC):
@@ -7,9 +8,10 @@ class BasePart(ABC):
         raise NotImplementedError
 
 
+@dataclass(frozen=True)
 class Sentence(BasePart):
     def __init__(self, value: str, /) -> None:
-        self.value = value
+        object.__setattr__(self, "value", value)
 
     def format(self) -> str:
         return f"{self.value}\n"
