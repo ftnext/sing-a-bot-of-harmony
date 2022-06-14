@@ -17,6 +17,10 @@ class Sentence(BasePart):
         return f"{self.value}\n"
 
 
-class Sentences:
-    def __init__(self) -> None:
+@dataclass(frozen=True)
+class Sentences(BasePart):
+    def __init__(self, *args) -> None:
+        object.__setattr__(self, "values", args)
+
+    def format(self) -> str:
         raise NotImplementedError
