@@ -2,6 +2,7 @@ from datetime import date
 
 from sparkling_counter import DayCountDown, XthDayCount
 
+from ..blocks import NEW_LINE, Sentence, Sentences
 from .base import Content
 
 
@@ -16,13 +17,17 @@ class MorningGreetingContent(Content):
         self._date = date_
 
     def generate(self) -> str:
-        text = (
-            f"{self._date:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から"
-            f"{self.AINOUTA_XDAY_COUNT(self._date)}日目です。\n"
+        sentences = Sentences(
+            Sentence(
+                f"{self._date:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から"
+                f"{self.AINOUTA_XDAY_COUNT(self._date)}日目です。"
+            ),
+            Sentence(
+                "Blu-ray&DVDリリース📀まで今日を含めて"
+                f"あと{self.DISK_RELEASE_COUNT(self._date)}日です"
+                f"({self.DISK_RELEASE_DAY:%-m/%-d}発売。現在予約期間)。"
+            ),
+            NEW_LINE,
+            Sentence("今日も、元気で、頑張るぞっ、おーっ"),
         )
-        text += (
-            "Blu-ray&DVDリリース📀まで今日を含めて"
-            f"あと{self.DISK_RELEASE_COUNT(self._date)}日です"
-            f"({self.DISK_RELEASE_DAY:%-m/%-d}発売。現在予約期間)。\n\n"
-        )
-        return text + "今日も、元気で、頑張るぞっ、おーっ"
+        return sentences.format()
