@@ -7,6 +7,9 @@ class BasePart(ABC):
         raise NotImplementedError
 
 
-class Sentence:
-    def __init__(self) -> None:
+class Sentence(BasePart):
+    def __init__(self, value: str, /) -> None:
+        self.value = value
+
+    def format(self):
         raise NotImplementedError
