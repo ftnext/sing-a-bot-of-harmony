@@ -11,3 +11,11 @@ class SentenceTestCase(TestCase):
         actual = Sentence(sentence)
 
         self.assertIsInstance(actual, BasePart)
+
+    def test_format(self):
+        sentence = Sentence("これはテストのための文です。")
+
+        actual = sentence.format()
+
+        expected = "これはテストのための文です。\n"
+        self.assertEqual(actual, expected)
