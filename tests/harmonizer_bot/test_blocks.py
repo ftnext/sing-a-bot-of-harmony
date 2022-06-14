@@ -29,3 +29,17 @@ class SentencesTestCase(TestCase):
         actual = Sentences(sentence1, sentence2)
 
         self.assertIsInstance(actual, BasePart)
+
+    def test_format(self):
+        sentence1 = MagicMock(spec=Sentence)
+        sentence2 = MagicMock(spec=Sentence)
+        sentence1.format.return_value = "やっはろー、1文目\n"
+        sentence2.format.return_value = "これは2文目。ごきげんよう\n"
+
+        sentences = Sentences(sentence1, sentence2)
+        actual = sentences.format()
+
+        expected = "やっはろー、1文目\nこれは2文目。ごきげんよう"
+        self.assertEqual(actual, expected)
+        sentence1.format.assert_called_once_with()
+        sentence2.format.assert_called_once_with()
