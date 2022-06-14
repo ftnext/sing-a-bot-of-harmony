@@ -17,6 +17,9 @@ class Sentence(BasePart):
         return f"{self.value}\n"
 
 
+NEW_LINE = Sentence("")
+
+
 @dataclass(frozen=True)
 class Sentences(BasePart):
     def __init__(self, *args) -> None:
