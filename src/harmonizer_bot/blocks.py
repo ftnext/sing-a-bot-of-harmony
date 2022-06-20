@@ -20,8 +20,12 @@ class Sentence(BasePart):
 NEW_LINE = Sentence("")
 
 
-class Balloon:
-    ...
+@dataclass(frozen=True)
+class Balloon(BasePart):
+    value: str
+
+    def format(self) -> str:
+        raise NotImplementedError
 
 
 @dataclass(frozen=True)
