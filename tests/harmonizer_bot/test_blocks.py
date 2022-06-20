@@ -1,3 +1,4 @@
+from textwrap import dedent
 from unittest import TestCase
 from unittest.mock import MagicMock
 
@@ -28,6 +29,20 @@ class BalloonTestCase(TestCase):
         actual = Balloon(sentence)
 
         self.assertIsInstance(actual, BasePart)
+
+    def test_format(self):
+        balloon = Balloon("吹き出しの中の一文です！")
+
+        actual = balloon.format()
+
+        expected = dedent(
+            """
+            ／
+             吹き出しの中の一文です！
+            ＼
+            """
+        ).strip()
+        self.assertEqual(actual, expected)
 
 
 class SentencesTestCase(TestCase):
