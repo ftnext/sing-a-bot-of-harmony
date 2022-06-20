@@ -22,29 +22,6 @@ class SentenceTestCase(TestCase):
         self.assertEqual(actual, expected)
 
 
-class BalloonTestCase(TestCase):
-    def test_init(self):
-        sentence = MagicMock(spec=str)
-
-        actual = Balloon(sentence)
-
-        self.assertIsInstance(actual, BasePart)
-
-    def test_format(self):
-        balloon = Balloon("吹き出しの中の一文です！")
-
-        actual = balloon.format()
-
-        expected = dedent(
-            """
-            ／
-             吹き出しの中の一文です！
-            ＼
-            """
-        ).strip()
-        self.assertEqual(actual, expected)
-
-
 class SentencesTestCase(TestCase):
     def test_init(self):
         sentence1 = MagicMock(spec=Sentence)
@@ -67,3 +44,26 @@ class SentencesTestCase(TestCase):
         self.assertEqual(actual, expected)
         sentence1.format.assert_called_once_with()
         sentence2.format.assert_called_once_with()
+
+
+class BalloonTestCase(TestCase):
+    def test_init(self):
+        sentence = MagicMock(spec=str)
+
+        actual = Balloon(sentence)
+
+        self.assertIsInstance(actual, BasePart)
+
+    def test_format(self):
+        balloon = Balloon("吹き出しの中の一文です！")
+
+        actual = balloon.format()
+
+        expected = dedent(
+            """
+            ／
+             吹き出しの中の一文です！
+            ＼
+            """
+        ).strip()
+        self.assertEqual(actual, expected)
