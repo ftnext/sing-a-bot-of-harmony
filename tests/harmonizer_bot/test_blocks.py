@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from harmonizer_bot.blocks import BasePart, Sentence, Sentences
+from harmonizer_bot.blocks import Balloon, BasePart, Sentence, Sentences
 
 
 class SentenceTestCase(TestCase):
@@ -19,6 +19,15 @@ class SentenceTestCase(TestCase):
 
         expected = "これはテストのための文です。\n"
         self.assertEqual(actual, expected)
+
+
+class BalloonTestCase(TestCase):
+    def test_init(self):
+        sentence = MagicMock(spec=str)
+
+        actual = Balloon(sentence)
+
+        self.assertIsInstance(actual, BasePart)
 
 
 class SentencesTestCase(TestCase):

@@ -20,6 +20,10 @@ class Sentence(BasePart):
 NEW_LINE = Sentence("")
 
 
+class Balloon:
+    ...
+
+
 @dataclass(frozen=True)
 class Sentences(BasePart):
     def __init__(self, *args) -> None:
