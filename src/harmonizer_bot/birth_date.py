@@ -9,7 +9,7 @@ class MainCharacter(Enum):
     AYA = auto()
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, order=True)
 class Birthday:
     month: int
     day: int
@@ -23,4 +23,9 @@ class Birthdays:
     values: Mapping[MainCharacter, Birthday]
 
     def next_from(self, date_: date):
-        raise NotImplementedError
+        sorted_items = sorted(self.values.items(), key=lambda t: t[1])
+        for i in range(len(sorted_items) - 1):
+            first = sorted_items[i][1].to_date(date_.year)
+            second = sorted_items[i + 1][1].to_date(date_.year)
+            if first < date_ <= second:
+                return sorted_items[i + 1][0]
