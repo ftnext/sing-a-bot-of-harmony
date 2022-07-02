@@ -21,3 +21,6 @@ class Birthday:
 @dataclass(frozen=True)
 class Birthdays:
     values: Mapping[MainCharacter, Birthday]
+
+    def next_from(self, date_: date):
+        raise NotImplementedError
