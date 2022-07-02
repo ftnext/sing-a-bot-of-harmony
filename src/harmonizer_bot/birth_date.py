@@ -8,4 +8,4 @@ class Birthday:
     day: int
 
     def to_date(self, year: int) -> date:
-        raise NotImplementedError
+        return date(year, self.month, self.day)
