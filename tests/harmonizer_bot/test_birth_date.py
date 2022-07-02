@@ -13,13 +13,13 @@ class BirthdayTestCase(TestCase):
 
 
 class BirthdaysTestCase(TestCase):
-    def test_next_birthday(self):
+    def test_next_character(self):
         birthdays = Birthdays(
             {
                 MainCharacter.SHION: Birthday(6, 6),
                 MainCharacter.AYA: Birthday(7, 8),
             }
         )
-        actual = birthdays.next_from(date(2022, 6, 7))
+        actual = birthdays.next_character(date(2022, 6, 7))
 
         self.assertEqual(actual, MainCharacter.AYA)

@@ -22,7 +22,7 @@ class Birthday:
 class Birthdays:
     values: Mapping[MainCharacter, Birthday]
 
-    def next_from(self, date_: date):
+    def next_character(self, date_: date) -> MainCharacter:
         sorted_items = sorted(self.values.items(), key=lambda t: t[1])
         for i in range(len(sorted_items) - 1):
             first = sorted_items[i][1].to_date(date_.year)
