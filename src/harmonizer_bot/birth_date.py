@@ -22,12 +22,13 @@ class Birthday:
 class Birthdays:
     values: Mapping[MainCharacter, Birthday]
 
-    def next_character(self, date_: date) -> MainCharacter:
+    def next_character(self, date_: date) -> tuple[MainCharacter, date]:
         sorted_items = sorted(self.values.items(), key=lambda t: t[1])
-        if date_ <= sorted_items[0][1].to_date(date_.year):
-            return sorted_items[0][0]
+        head_date = sorted_items[0][1].to_date(date_.year)
+        if date_ <= head_date:
+            return sorted_items[0][0], head_date
         for i in range(len(sorted_items) - 1):
             first = sorted_items[i][1].to_date(date_.year)
             second = sorted_items[i + 1][1].to_date(date_.year)
             if first < date_ <= second:
-                return sorted_items[i + 1][0]
+                return sorted_items[i + 1][0], second
