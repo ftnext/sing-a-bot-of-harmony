@@ -20,7 +20,10 @@ class BirthdaysTestCase(TestCase):
         }
 
     def test_next_character(self):
-        parameters = [(date(2022, 6, 7), MainCharacter.AYA)]
+        parameters = [
+            (date(2022, 6, 7), MainCharacter.AYA),
+            (date(2022, 7, 8), MainCharacter.AYA),  # the day
+        ]
         sut = Birthdays(self.birthdays)
         for date_, expected in parameters:
             with self.subTest(date_=date_, expected=expected):
