@@ -3,6 +3,12 @@ from dataclasses import dataclass
 from datetime import date
 from enum import Enum, auto
 
+from harmonizer_bot.contents.base import Content
+from harmonizer_bot.contents.birthday import (
+    AyaBirthdayContent,
+    ShionBirthdayContent,
+)
+
 
 class MainCharacter(Enum):
     SHION = auto()
@@ -36,3 +42,23 @@ class Birthdays:
             second = sorted_items[i + 1][1].to_date(date_.year)
             if first < date_ <= second:
                 return sorted_items[i + 1][0], second
+
+
+class MainCharacterBirthdayDispatcher:
+    def __init__(self):
+        self.birthdays = Birthdays(
+            {
+                MainCharacter.SHION: Birthday(6, 6),
+                MainCharacter.AYA: Birthday(7, 8),
+                MainCharacter.GOCCHAN: Birthday(11, 20),
+            }
+        )
+        self.contents = {
+            MainCharacter.SHION: ShionBirthdayContent,
+            MainCharacter.AYA: AyaBirthdayContent,
+        }
+
+    def dispatch(self, date_: date) -> Content:
+        next_character, next_birthday = self.birthdays.next_character(date_)
+        content_class = self.contents[next_character]
+        return content_class(next_birthday, date_)
