@@ -21,11 +21,11 @@ class BirthdaysTestCase(TestCase):
 
     def test_next_character(self):
         parameters = [
-            (date(2022, 6, 7), MainCharacter.AYA),
-            (date(2022, 7, 8), MainCharacter.AYA),  # the day
+            (date(2022, 6, 7), (MainCharacter.AYA, date(2022, 7, 8))),
+            (date(2022, 7, 8), (MainCharacter.AYA, date(2022, 7, 8))),
             # Before all dates
-            (date(2022, 6, 1), MainCharacter.SHION),
-            (date(2022, 6, 6), MainCharacter.SHION),  # the day
+            (date(2022, 6, 1), (MainCharacter.SHION, date(2022, 6, 6))),
+            (date(2022, 6, 6), (MainCharacter.SHION, date(2022, 6, 6))),
         ]
         sut = Birthdays(self.birthdays)
         for date_, expected in parameters:
@@ -43,4 +43,4 @@ class BirthdaysTestCase(TestCase):
         )
         actual = sut.next_character(date(2022, 6, 7))
 
-        self.assertEqual(actual, MainCharacter.AYA)
+        self.assertEqual(actual, (MainCharacter.AYA, date(2022, 7, 8)))
