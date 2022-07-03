@@ -33,5 +33,10 @@ class ShionBirthdayContent(Content):
         return text
 
 
-class AyaBirthdayContent:
-    ...
+class AyaBirthdayContent(Content):
+    def __init__(self, birthday: date, date_: date) -> None:
+        self._birthday = birthday
+        self._date = date_
+
+    def generate(self) -> str:
+        raise NotImplementedError
