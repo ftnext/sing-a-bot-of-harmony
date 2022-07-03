@@ -24,6 +24,8 @@ class Birthdays:
 
     def next_character(self, date_: date) -> MainCharacter:
         sorted_items = sorted(self.values.items(), key=lambda t: t[1])
+        if date_ <= sorted_items[0][1].to_date(date_.year):
+            return sorted_items[0][0]
         for i in range(len(sorted_items) - 1):
             first = sorted_items[i][1].to_date(date_.year)
             second = sorted_items[i + 1][1].to_date(date_.year)
