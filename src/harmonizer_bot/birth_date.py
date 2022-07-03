@@ -7,6 +7,7 @@ from enum import Enum, auto
 class MainCharacter(Enum):
     SHION = auto()
     AYA = auto()
+    GOCCHAN = auto()
 
 
 @dataclass(frozen=True, order=True)

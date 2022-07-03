@@ -46,3 +46,11 @@ class BirthdaysTestCase(TestCase):
         actual = sut.next_character(date(2022, 6, 7))
 
         self.assertEqual(actual, (MainCharacter.AYA, date(2022, 7, 8)))
+
+    def test_next_character_added(self):
+        sut = Birthdays(
+            {**self.birthdays, MainCharacter.GOCCHAN: Birthday(11, 20)}
+        )
+        actual = sut.next_character(date(2022, 7, 22))
+
+        self.assertEqual(actual, (MainCharacter.GOCCHAN, date(2022, 11, 20)))
