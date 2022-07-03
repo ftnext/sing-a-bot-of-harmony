@@ -20,10 +20,13 @@ class BirthdaysTestCase(TestCase):
         }
 
     def test_next_character(self):
+        parameters = [(date(2022, 6, 7), MainCharacter.AYA)]
         sut = Birthdays(self.birthdays)
-        actual = sut.next_character(date(2022, 6, 7))
+        for date_, expected in parameters:
+            with self.subTest(date_=date_, expected=expected):
+                actual = sut.next_character(date_)
 
-        self.assertEqual(actual, MainCharacter.AYA)
+                self.assertEqual(actual, expected)
 
     def test_next_character_unsorted(self):
         sut = Birthdays(
