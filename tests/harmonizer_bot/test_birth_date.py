@@ -24,3 +24,14 @@ class BirthdaysTestCase(TestCase):
         actual = sut.next_character(date(2022, 6, 7))
 
         self.assertEqual(actual, MainCharacter.AYA)
+
+    def test_next_character_unsorted(self):
+        sut = Birthdays(
+            {
+                MainCharacter.AYA: Birthday(7, 8),
+                MainCharacter.SHION: Birthday(6, 6),
+            }
+        )
+        actual = sut.next_character(date(2022, 6, 7))
+
+        self.assertEqual(actual, MainCharacter.AYA)
