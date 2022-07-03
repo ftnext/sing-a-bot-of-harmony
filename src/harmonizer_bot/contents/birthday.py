@@ -3,6 +3,8 @@ from datetime import date
 
 from sparkling_counter import DayCountDown
 
+from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+
 from .base import Content
 
 
@@ -39,4 +41,13 @@ class AyaBirthdayContent(Content):
         self._date = date_
 
     def generate(self) -> str:
-        raise NotImplementedError
+        count_down = DayCountDown(self._birthday, include=False)
+        sentences = Sentences(
+            Sentence("#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、アヤ！"),
+            Sentence(f"{self._birthday:%-m/%-d}まであと{count_down(self._date)}日"),
+            NEW_LINE,
+            Sentence(
+                "https://twitter.com/ainouta_movie/status/1442413708462858244"
+            ),
+        )
+        return sentences.format()
