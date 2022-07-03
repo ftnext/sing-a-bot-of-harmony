@@ -27,6 +27,9 @@ class Birthdays:
         head_date = sorted_items[0][1].to_date(date_.year)
         if date_ <= head_date:
             return sorted_items[0][0], head_date
+        tail_date = sorted_items[-1][1].to_date(date_.year)
+        if tail_date < date_:
+            return sorted_items[0][0], head_date.replace(date_.year + 1)
         for i in range(len(sorted_items) - 1):
             first = sorted_items[i][1].to_date(date_.year)
             second = sorted_items[i + 1][1].to_date(date_.year)
