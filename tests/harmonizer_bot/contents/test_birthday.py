@@ -55,3 +55,18 @@ class AyaBirthdayContentTestCase(TestCase):
         self.assertIsInstance(actual, Content)
         self.assertEqual(actual._birthday, birthday)
         self.assertEqual(actual._date, date_)
+
+    def test_generate(self):
+        expected = dedent(
+            """\
+            #アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、アヤ！
+            7/8まであと7日
+
+            https://twitter.com/ainouta_movie/status/1442413708462858244
+            """
+        ).rstrip()
+
+        content = AyaBirthdayContent(date(2022, 7, 8), date(2022, 7, 1))
+        actual = content.generate()
+
+        self.assertEqual(actual, expected)
