@@ -26,6 +26,8 @@ class BirthdaysTestCase(TestCase):
             # Before all dates
             (date(2022, 6, 1), (MainCharacter.SHION, date(2022, 6, 6))),
             (date(2022, 6, 6), (MainCharacter.SHION, date(2022, 6, 6))),
+            # After all dates
+            (date(2022, 7, 22), (MainCharacter.SHION, date(2023, 6, 6))),
         ]
         sut = Birthdays(self.birthdays)
         for date_, expected in parameters:
