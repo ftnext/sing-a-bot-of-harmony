@@ -23,6 +23,8 @@ class BirthdaysTestCase(TestCase):
         parameters = [
             (date(2022, 6, 7), MainCharacter.AYA),
             (date(2022, 7, 8), MainCharacter.AYA),  # the day
+            # Before all dates
+            (date(2022, 6, 1), MainCharacter.SHION),
         ]
         sut = Birthdays(self.birthdays)
         for date_, expected in parameters:
