@@ -31,3 +31,7 @@ class ShionBirthdayContent(Content):
         text += "＼\n"
         text += random.choice(self.PROFILE_LINKS)
         return text
+
+
+class AyaBirthdayContent:
+    ...
