@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 
 from requests_oauthlib import OAuth1Session
 
+from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
     HappyProjectContent,
     MorningGreetingContent,
@@ -93,7 +94,7 @@ def generate_theater_text(today: date, /, *, theater: str, **kwargs) -> str:
 
 @root_generator.register("birthday")
 def count_down_birthday(today: date, /, **kwargs):
-    content = ShionBirthdayContent(today)
+    content = MainCharacterBirthdayDispatcher().dispatch(today)
     return content.generate()
 
 
