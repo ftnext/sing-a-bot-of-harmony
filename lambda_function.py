@@ -16,7 +16,6 @@ from harmonizer_bot.contents import (
     Nagoya109CinemasContent,
     PlayAllTogetherContent,
 )
-from harmonizer_bot.contents.birthday import ShionBirthdayContent
 from harmonizer_bot.core import TextGenerator
 
 if TYPE_CHECKING:
