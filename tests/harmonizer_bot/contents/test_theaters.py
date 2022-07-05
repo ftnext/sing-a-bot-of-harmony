@@ -6,10 +6,13 @@ from unittest.mock import MagicMock
 from harmonizer_bot.contents.base import Content
 from harmonizer_bot.contents.theaters import (
     CinemaNekoContent,
+    CinePipiaContent,
     Nagoya109CinemasContent,
     SumotoOrionContent,
     WasedaShochikuContent,
 )
+
+from .support import ContentTestCase
 
 
 class WasedaShochikuContentTestCase(TestCase):
@@ -155,3 +158,14 @@ class Nagoya109CinemasContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+
+class CinePipiaContentTestCase(ContentTestCase):
+    target_class = CinePipiaContent
+    generation_date = date(2022, 7, 20)
+    generated_content = """
+    アイの歌声を聴かせて 兵庫のシネ・ピピアさんで7/22(金)から1週間上映、あと2日！
+
+    たたーん🎵 上映時間は、毎日 14:10〜
+    詳しくは http://www.cinepipia.com/schedule2.htm をどうぞ！
+    """

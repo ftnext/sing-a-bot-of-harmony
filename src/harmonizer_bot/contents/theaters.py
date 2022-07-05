@@ -103,3 +103,7 @@ class Nagoya109CinemasContent(Content):
         text += "チケット発売中！🎫\n"
         text += "詳しくは https://109cinemas.net/events/liveonkyo_nagoya/ をどうぞ！"
         return text
+
+
+class CinePipiaContent:
+    ...
