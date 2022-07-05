@@ -105,5 +105,9 @@ class Nagoya109CinemasContent(Content):
         return text
 
 
-class CinePipiaContent:
-    ...
+class CinePipiaContent(Content):
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        raise NotImplementedError
