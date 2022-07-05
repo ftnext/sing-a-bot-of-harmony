@@ -3,6 +3,8 @@ from datetime import date
 from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
+from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+
 from .base import Content
 
 
@@ -106,8 +108,20 @@ class Nagoya109CinemasContent(Content):
 
 
 class CinePipiaContent(Content):
+    START_DAY = date(2022, 7, 22)
+    START_COUNT_DOWN = DayCountDown(START_DAY, include=False)
+
     def __init__(self, date_: date) -> None:
         self._date = date_
 
     def generate(self) -> str:
-        raise NotImplementedError
+        sentences = Sentences(
+            Sentence(
+                f"アイの歌声を聴かせて 兵庫のシネ・ピピアさんで{self.START_DAY:%-m/%-d(%a)}から"
+                f"1週間上映、あと{self.START_COUNT_DOWN(self._date)}日！"
+            ),
+            NEW_LINE,
+            Sentence("たたーん🎵 上映時間は、毎日 14:10〜"),
+            Sentence("詳しくは http://www.cinepipia.com/schedule2.htm をどうぞ！"),
+        )
+        return sentences.format()
