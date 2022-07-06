@@ -2,6 +2,8 @@ from datetime import date
 
 from sparkling_counter import DayCountDown
 
+from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+
 from .base import Content
 
 
@@ -30,11 +32,25 @@ class PlayAllTogetherContent(Content):
 
 
 class PublishingLimitedTimeContent(Content):
+    LAST_DAY = date(2022, 7, 27)
+    PUBLISHING_PERIOD_COUNT = DayCountDown(LAST_DAY, include=True)
+
     def __init__(self, date_: date) -> None:
         self._date = date_
 
     def generate(self) -> str:
-        raise NotImplementedError
+        sentences = Sentences(
+            Sentence("#アイの歌声を聴かせて 冒頭17分がYouTubeで期間限定公開中！"),
+            Sentence(
+                f"Blu-ray & DVDが発売する{self.LAST_DAY:%-m/%-d(%a)}まで公開"
+                f"（今日を含めてあと{self.PUBLISHING_PERIOD_COUNT(self._date)}日）"
+            ),
+            NEW_LINE,
+            Sentence(
+                "https://twitter.com/ainouta_movie/status/1540893361229377536"
+            ),
+        )
+        return sentences.format()
 
 
 class HappyProjectContent(Content):
