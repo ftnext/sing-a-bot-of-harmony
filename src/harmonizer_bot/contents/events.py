@@ -29,6 +29,10 @@ class PlayAllTogetherContent(Content):
         return text
 
 
+class PublishingLimitedTimeContent:
+    ...
+
+
 class HappyProjectContent(Content):
     ANNOUNCEMENT_DAY = date(2022, 6, 20)
     ANNOUNCEMENT_COUNT = DayCountDown(ANNOUNCEMENT_DAY, include=False)

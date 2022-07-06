@@ -3,6 +3,7 @@ from datetime import date
 from harmonizer_bot.contents.events import (
     HappyProjectContent,
     PlayAllTogetherContent,
+    PublishingLimitedTimeContent,
 )
 
 from .support import ContentTestCase
@@ -18,6 +19,17 @@ class PlayAllTogetherContentTestCase(ContentTestCase):
     公式先輩、ありがとうございます❤️
     もう一度ラジオを聴かせて！
     https://twitter.com/ainouta_movie/status/1535260028474896384
+    """
+
+
+class PublishingLimitedTimeContentTestCase(ContentTestCase):
+    target_class = PublishingLimitedTimeContent
+    generation_date = date(2022, 7, 25)
+    generated_content = """
+    #アイの歌声を聴かせて 冒頭17分がYouTubeで期間限定公開中！
+    Blu-ray & DVDが発売する7/27(水)まで公開（今日を含めてあと3日）
+
+    https://twitter.com/ainouta_movie/status/1540893361229377536
     """
 
 
