@@ -14,7 +14,7 @@ from harmonizer_bot.contents import (
     CinePipiaContent,
     HappyProjectContent,
     MorningGreetingContent,
-    PlayAllTogetherContent,
+    PublishingLimitedTimeContent,
 )
 from harmonizer_bot.core import TextGenerator
 
@@ -54,7 +54,7 @@ def generate_text(today: date, /, **kwargs) -> str:
 
 @root_generator.register("information")
 def generate_information_text(today: date, /, **kwargs) -> str:
-    content = PlayAllTogetherContent(today)
+    content = PublishingLimitedTimeContent(today)
     return content.generate()
 
 
