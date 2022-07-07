@@ -70,3 +70,19 @@ class AyaBirthdayContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+    def test_generate_the_day(self):
+        expected = dedent(
+            """\
+            本日7/8は #アイの歌声を聴かせて のキャラクター アヤの誕生日！
+            たんじょうびー、おめでとう🎶
+
+            さらに、本日22時より #吉浦康裕スペース 🎉
+            https://twitter.com/yoshiura_rikka/status/1545029267758542848
+            """
+        ).rstrip()
+
+        content = AyaBirthdayContent(date(2022, 7, 8), date(2022, 7, 8))
+        actual = content.generate()
+
+        self.assertEqual(actual, expected)
