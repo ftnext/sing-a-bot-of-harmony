@@ -99,3 +99,18 @@ class GocchanBirthdayContentTestCase(TestCase):
         self.assertIsInstance(actual, Content)
         self.assertEqual(actual._birthday, birthday)
         self.assertEqual(actual._date, date_)
+
+    def test_generate(self):
+        expected = dedent(
+            """\
+            アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！
+            11/20まであと3日
+            """
+        ).rstrip()
+
+        content = GocchanBirthdayContent(
+            date(2022, 11, 20), date(2022, 11, 17)
+        )
+        actual = content.generate()
+
+        self.assertEqual(actual, expected)
