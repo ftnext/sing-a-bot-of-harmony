@@ -6,6 +6,7 @@ from enum import Enum, auto
 from harmonizer_bot.contents.base import Content
 from harmonizer_bot.contents.birthday import (
     AyaBirthdayContent,
+    GocchanBirthdayContent,
     ShionBirthdayContent,
 )
 
@@ -56,6 +57,7 @@ class MainCharacterBirthdayDispatcher:
         self.contents = {
             MainCharacter.SHION: ShionBirthdayContent,
             MainCharacter.AYA: AyaBirthdayContent,
+            MainCharacter.GOCCHAN: GocchanBirthdayContent,
         }
 
     def dispatch(self, date_: date) -> Content:
