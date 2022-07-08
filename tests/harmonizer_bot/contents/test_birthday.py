@@ -6,6 +6,7 @@ from unittest.mock import MagicMock, patch
 from harmonizer_bot.contents.base import Content
 from harmonizer_bot.contents.birthday import (
     AyaBirthdayContent,
+    GocchanBirthdayContent,
     ShionBirthdayContent,
 )
 
@@ -86,3 +87,15 @@ class AyaBirthdayContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+
+
+class GocchanBirthdayContentTestCase(TestCase):
+    def test_init(self):
+        birthday = MagicMock(spec=date)
+        date_ = MagicMock(spec=date)
+
+        actual = GocchanBirthdayContent(birthday, date_)
+
+        self.assertIsInstance(actual, Content)
+        self.assertEqual(actual._birthday, birthday)
+        self.assertEqual(actual._date, date_)

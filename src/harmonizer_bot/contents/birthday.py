@@ -69,3 +69,7 @@ class AyaBirthdayContent(Content):
                 ),
             )
         return sentences.format()
+
+
+class GocchanBirthdayContent:
+    ...
