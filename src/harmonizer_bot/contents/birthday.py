@@ -71,5 +71,10 @@ class AyaBirthdayContent(Content):
         return sentences.format()
 
 
-class GocchanBirthdayContent:
-    ...
+class GocchanBirthdayContent(Content):
+    def __init__(self, birthday: date, date_: date) -> None:
+        self._birthday = birthday
+        self._date = date_
+
+    def generate(self) -> str:
+        raise NotImplementedError
