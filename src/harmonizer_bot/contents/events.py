@@ -42,7 +42,7 @@ class PublishingLimitedTimeContent(Content):
         sentences = Sentences(
             Sentence("#アイの歌声を聴かせて 冒頭17分がYouTubeで期間限定公開中！"),
             Sentence(
-                f"Blu-ray & DVDが発売する{self.LAST_DAY:%-m/%-d(%a)}まで公開"
+                f"Blu-ray&DVD発売、さらにレンタル配信開始する{self.LAST_DAY:%-m/%-d(%a)}まで公開"
                 f"（今日を含めてあと{self.PUBLISHING_PERIOD_COUNT(self._date)}日）"
             ),
             NEW_LINE,
