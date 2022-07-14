@@ -23,7 +23,7 @@ class MorningGreetingContent(Content):
                 f"{self.AINOUTA_XDAY_COUNT(self._date)}日目です。"
             ),
             Sentence(
-                "Blu-ray&DVDリリース📀まで今日を含めて"
+                "Blu-ray&DVDリリース📀そしてレンタル配信開始まで、今日を含めて"
                 f"あと{self.DISK_RELEASE_COUNT(self._date)}日です"
                 f"({self.DISK_RELEASE_DAY:%-m/%-d}発売。現在予約期間)。"
             ),
