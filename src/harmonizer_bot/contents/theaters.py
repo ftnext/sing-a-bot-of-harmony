@@ -122,6 +122,7 @@ class CinePipiaContent(Content):
             ),
             NEW_LINE,
             Sentence("たたーん🎵 上映時間は、毎日 14:10〜"),
-            Sentence("詳しくは http://www.cinepipia.com/schedule2.htm をどうぞ！"),
+            Sentence("詳しくは http://www.cinepipia.com/schedule.htm をどうぞ！"),
+            Sentence("上映7日前から予約できます！"),
         )
         return sentences.format()
