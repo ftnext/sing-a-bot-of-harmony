@@ -165,7 +165,7 @@ class CinePipiaContentTestCase(ContentTestCase):
     target_class = CinePipiaContent
     generation_date = date(2022, 7, 20)
     generated_content = """
-    アイの歌声を聴かせて 兵庫のシネ・ピピアさんで7/22(金)から1週間上映、あと2日！
+    #アイの歌声を聴かせて 兵庫のシネ・ピピアさんで7/22(金)から1週間上映、あと2日！
 
     たたーん🎵 上映時間は、毎日 14:10〜
     詳しくは http://www.cinepipia.com/schedule.htm をどうぞ！

@@ -117,7 +117,7 @@ class CinePipiaContent(Content):
     def generate(self) -> str:
         sentences = Sentences(
             Sentence(
-                f"アイの歌声を聴かせて 兵庫のシネ・ピピアさんで{self.START_DAY:%-m/%-d(%a)}から"
+                f"#アイの歌声を聴かせて 兵庫のシネ・ピピアさんで{self.START_DAY:%-m/%-d(%a)}から"
                 f"1週間上映、あと{self.START_COUNT_DOWN(self._date)}日！"
             ),
             NEW_LINE,
