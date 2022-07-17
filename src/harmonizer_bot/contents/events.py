@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 from sparkling_counter import DayCountDown
 
@@ -33,7 +33,10 @@ class PlayAllTogetherContent(Content):
 
 class PublishingLimitedTimeContent(Content):
     LAST_DAY = date(2022, 7, 27)
-    PUBLISHING_PERIOD_COUNT = DayCountDown(LAST_DAY, include=True)
+    # 「7/27まで期間限定公開」だが7/27になった直後に見られない可能性が高くなった
+    PUBLISHING_PERIOD_COUNT = DayCountDown(
+        LAST_DAY + timedelta(days=-1), include=True
+    )
 
     def __init__(self, date_: date) -> None:
         self._date = date_
@@ -47,7 +50,7 @@ class PublishingLimitedTimeContent(Content):
             ),
             NEW_LINE,
             Sentence(
-                "https://twitter.com/ainouta_movie/status/1540893361229377536"
+                "https://twitter.com/ainouta_movie/status/1548502758092931072"
             ),
         )
         return sentences.format()
