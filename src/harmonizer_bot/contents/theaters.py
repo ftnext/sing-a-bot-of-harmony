@@ -109,7 +109,8 @@ class Nagoya109CinemasContent(Content):
 
 class CinePipiaContent(Content):
     START_DAY = date(2022, 7, 22)
-    START_COUNT_DOWN = DayCountDown(START_DAY, include=False)
+    LAST_DAY = date(2022, 7, 28)
+    END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
 
     def __init__(self, date_: date) -> None:
         self._date = date_
@@ -117,12 +118,15 @@ class CinePipiaContent(Content):
     def generate(self) -> str:
         sentences = Sentences(
             Sentence(
-                f"#アイの歌声を聴かせて 兵庫のシネ・ピピアさんで{self.START_DAY:%-m/%-d(%a)}から"
-                f"1週間上映、あと{self.START_COUNT_DOWN(self._date)}日！"
+                "#アイの歌声を聴かせて 兵庫（宝塚市）のシネ・ピピアさんで"
+                f"{self.START_DAY:%-m/%-d(%a)}から{self.LAST_DAY:%-m/%-d(%a)}まで"
+                f"上映中🌻（今日を含めてあと{self.END_COUNT_DOWN(self._date)}日！）"
             ),
             NEW_LINE,
             Sentence("たたーん🎵 上映時間は、毎日 14:10〜"),
             Sentence("詳しくは http://www.cinepipia.com/schedule.htm をどうぞ！"),
-            Sentence("上映7日前から予約できます！"),
+            Sentence("予約は上映7日前から、つまりどの日も予約できます！"),
+            NEW_LINE,
+            Sentence("この夏、アイうたは西が熱い！"),
         )
         return sentences.format()
