@@ -1,8 +1,8 @@
 import locale
 
 from .events import (  # NOQA: F401
+    DiskReleaseFestivalContent,
     HappyProjectContent,
-    PublishingLimitedTimeContent,
 )
 from .greetings import MorningGreetingContent  # NOQA: F401
 from .theaters import CinePipiaContent  # NOQA: F401
