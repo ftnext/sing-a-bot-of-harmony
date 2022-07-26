@@ -56,6 +56,28 @@ class PublishingLimitedTimeContent(Content):
         return sentences.format()
 
 
+class DiskReleaseFestivalContent(Content):
+    FESTIVAL_DAY = date(2022, 8, 6)
+    FESTIVAL_COUNT = DayCountDown(FESTIVAL_DAY, include=False)
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        sentences = Sentences(
+            Sentence(
+                "#アイの歌声を聴かせて Blu-ray&DVD発売（さらにレンタル配信開始）記念の"
+                f"吉浦監督スペシャルトークイベントまであと{self.FESTIVAL_COUNT(self._date)}日！"
+            ),
+            Sentence("イベントの配信チケット販売中！（「アーカイブは8/20 22:00まで購入可」とのこと）"),
+            NEW_LINE,
+            Sentence(
+                "https://twitter.com/LOFTPLUSONE/status/1550390521314820096"
+            ),
+        )
+        return sentences.format()
+
+
 class HappyProjectContent(Content):
     ANNOUNCEMENT_DAY = date(2022, 6, 20)
     ANNOUNCEMENT_COUNT = DayCountDown(ANNOUNCEMENT_DAY, include=False)
