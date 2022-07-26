@@ -12,9 +12,9 @@ from requests_oauthlib import OAuth1Session
 from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
     CinePipiaContent,
+    DiskReleaseFestivalContent,
     HappyProjectContent,
     MorningGreetingContent,
-    PublishingLimitedTimeContent,
 )
 from harmonizer_bot.core import TextGenerator
 
@@ -54,7 +54,7 @@ def generate_text(today: date, /, **kwargs) -> str:
 
 @root_generator.register("information")
 def generate_information_text(today: date, /, **kwargs) -> str:
-    content = PublishingLimitedTimeContent(today)
+    content = DiskReleaseFestivalContent(today)
     return content.generate()
 
 
