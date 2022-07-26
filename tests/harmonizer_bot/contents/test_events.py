@@ -1,6 +1,7 @@
 from datetime import date
 
 from harmonizer_bot.contents.events import (
+    DiskReleaseFestivalContent,
     HappyProjectContent,
     PlayAllTogetherContent,
     PublishingLimitedTimeContent,
@@ -30,6 +31,17 @@ class PublishingLimitedTimeContentTestCase(ContentTestCase):
     Blu-ray&DVD発売、さらにレンタル配信開始する7/27(水)まで公開（今日を含めてあと2日）
 
     https://twitter.com/ainouta_movie/status/1548502758092931072
+    """
+
+
+class DiskReleaseFestivalContentTestCase(ContentTestCase):
+    target_class = DiskReleaseFestivalContent
+    generation_date = date(2022, 8, 4)
+    generated_content = """
+    #アイの歌声を聴かせて Blu-ray&DVD発売（さらにレンタル配信開始）記念の吉浦監督スペシャルトークイベントまであと2日！
+    イベントの配信チケット販売中！（「アーカイブは8/20 22:00まで購入可」とのこと）
+
+    https://twitter.com/LOFTPLUSONE/status/1550390521314820096
     """
 
 
