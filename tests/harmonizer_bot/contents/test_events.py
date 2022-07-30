@@ -36,12 +36,12 @@ class PublishingLimitedTimeContentTestCase(ContentTestCase):
 
 class DiskReleaseFestivalContentTestCase(ContentTestCase):
     target_class = DiskReleaseFestivalContent
-    generation_date = date(2022, 8, 4)
+    generation_date = date(2022, 8, 2)
     generated_content = """
-    #アイの歌声を聴かせて Blu-ray&DVD発売（さらにレンタル配信開始）記念の吉浦監督スペシャルトークイベントまであと2日！
-    イベントの配信チケット販売中！（「アーカイブは8/20 22:00まで購入可」とのこと）
+    #アイの歌声を聴かせて Blu-ray&DVD発売（さらにレンタル配信開始）記念の吉浦監督スペシャルトークイベントまであと4日！
+    8月3日(水) 23時55分までフォームで質問募集中（今日を含めてあと2日！）
 
-    https://twitter.com/LOFTPLUSONE/status/1550390521314820096
+    https://twitter.com/animageplus/status/1552833151877058560
     """
 
 
