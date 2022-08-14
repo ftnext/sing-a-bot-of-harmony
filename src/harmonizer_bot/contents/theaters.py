@@ -130,3 +130,39 @@ class CinePipiaContent(Content):
             Sentence("この夏、アイうたは西が熱い！"),
         )
         return sentences.format()
+
+
+class AeonCinemaNishiyamatoContent(Content):
+    START_DAY = date(2022, 8, 5)
+    LAST_DAY = date(2022, 8, 21)
+    END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
+    AWESOME_TWEETS = (
+        "https://twitter.com/ac_nishiyamato/status/1457939683955011586",
+        "https://twitter.com/ac_nishiyamato/status/1463045853497606147",
+        "https://twitter.com/ac_nishiyamato/status/1467773350407995393",
+        "https://twitter.com/ac_nishiyamato/status/1555437288129064960",
+    )
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        count = self.END_COUNT_DOWN(self._date)
+        sentences = Sentences(
+            Sentence(
+                "#アイの歌声を聴かせて 奈良のイオンシネマ西大和さんで"
+                f"{self.START_DAY:%-m/%-d(%a)}から"
+                f"閉館日の{self.LAST_DAY:%-m/%-d(%a)}まで上映中😭"
+                f"（今日を含めてあと{count}日！）",
+            ),
+            NEW_LINE,
+            Sentence("たたーん🎵 上映時間は 8/14(日)は18:25〜、8/15(月)から8/18(木)は18:00〜"),
+            Sentence(
+                "https://www.aeoncinema.com/cinema2/nishiyamato/"
+                "movie/88652/index.html"
+            ),
+            NEW_LINE,
+            Sentence("アイうた愛あふれる映画館なのです！"),
+            Sentence(self.AWESOME_TWEETS[count % len(self.AWESOME_TWEETS)]),
+        )
+        return sentences.format()
