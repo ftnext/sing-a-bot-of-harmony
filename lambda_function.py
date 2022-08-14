@@ -11,7 +11,7 @@ from requests_oauthlib import OAuth1Session
 
 from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
-    CinePipiaContent,
+    AeonCinemaNishiyamatoContent,
     DiskReleaseFestivalContent,
     HappyProjectContent,
     MorningGreetingContent,
@@ -81,8 +81,8 @@ def generate_time_signal_text(today: date, /, **kwargs) -> str:
 
 
 theater_text_generator = TextGenerator()
-CinePipiaContent = theater_text_generator.register("cinepipia")(
-    CinePipiaContent
+CinePipiaContent = theater_text_generator.register("ac_nishiyamato")(
+    AeonCinemaNishiyamatoContent
 )
 
 
