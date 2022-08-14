@@ -75,7 +75,7 @@ def generate_time_signal_text(today: date, /, **kwargs) -> str:
         SIGNAL_SCENE_PHRASES[index:]
         + [
             "",
-            f"アイの歌声を聴かせて 非公式Botが{today:%-m/%-d}の午後2時をお伝えします🌈",
+            f"アイの歌声を聴かせて 非公式Botが{today:%Y/%-m/%-d(%a)}の午後2時をお伝えします🌈",
         ]
     )
 

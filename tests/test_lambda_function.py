@@ -34,7 +34,7 @@ class GenerateTimeSignalTextTestCase(TestCase):
             👧🏻「えっ、いま何時？」
             👩🏻‍🔬「にぃじ」
 
-            アイの歌声を聴かせて 非公式Botが10/30の午後2時をお伝えします🌈
+            アイの歌声を聴かせて 非公式Botが2021/10/30(土)の午後2時をお伝えします🌈
             """
         ).rstrip()
 
