@@ -182,7 +182,7 @@ class AeonCinemaNishiyamatoContentTestCase(ContentTestCase):
     generated_content = """
     #アイの歌声を聴かせて 奈良のイオンシネマ西大和さんで8/5(金)から閉館日の8/21(日)まで上映中😭（今日を含めてあと4日！）
 
-    たたーん🎵 上映時間は 8/14(日)は18:25〜、8/15(月)から8/18(木)は18:00〜
+    たたーん🎵 上映時間は 8/15(月)〜8/20(土) 18:00〜、8/21(日) 15:40〜
     https://www.aeoncinema.com/cinema2/nishiyamato/movie/88652/index.html
 
     アイうた愛あふれる映画館なのです！

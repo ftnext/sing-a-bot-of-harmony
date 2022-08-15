@@ -156,7 +156,7 @@ class AeonCinemaNishiyamatoContent(Content):
                 f"（今日を含めてあと{count}日！）",
             ),
             NEW_LINE,
-            Sentence("たたーん🎵 上映時間は 8/14(日)は18:25〜、8/15(月)から8/18(木)は18:00〜"),
+            Sentence("たたーん🎵 上映時間は 8/15(月)〜8/20(土) 18:00〜、8/21(日) 15:40〜"),
             Sentence(
                 "https://www.aeoncinema.com/cinema2/nishiyamato/"
                 "movie/88652/index.html"
