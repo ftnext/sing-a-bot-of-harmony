@@ -15,6 +15,7 @@ from harmonizer_bot.contents import (
     DiskReleaseFestivalContent,
     HappyProjectContent,
     MorningGreetingContent,
+    TsukaguchiSunSunTheaterContent,
 )
 from harmonizer_bot.core import TextGenerator
 
@@ -83,6 +84,9 @@ def generate_time_signal_text(today: date, /, **kwargs) -> str:
 theater_text_generator = TextGenerator()
 CinePipiaContent = theater_text_generator.register("ac_nishiyamato")(
     AeonCinemaNishiyamatoContent
+)
+_ = theater_text_generator.register("tsukaguchi_sunsun")(
+    TsukaguchiSunSunTheaterContent
 )
 
 
