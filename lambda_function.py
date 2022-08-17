@@ -82,7 +82,7 @@ def generate_time_signal_text(today: date, /, **kwargs) -> str:
 
 
 theater_text_generator = TextGenerator()
-CinePipiaContent = theater_text_generator.register("ac_nishiyamato")(
+_ = theater_text_generator.register("ac_nishiyamato")(
     AeonCinemaNishiyamatoContent
 )
 _ = theater_text_generator.register("tsukaguchi_sunsun")(
