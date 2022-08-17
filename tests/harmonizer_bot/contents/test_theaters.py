@@ -10,6 +10,7 @@ from harmonizer_bot.contents.theaters import (
     CinePipiaContent,
     Nagoya109CinemasContent,
     SumotoOrionContent,
+    TsukaguchiSunSunTheaterContent,
     WasedaShochikuContent,
 )
 
@@ -187,4 +188,17 @@ class AeonCinemaNishiyamatoContentTestCase(ContentTestCase):
 
     アイうた愛あふれる映画館なのです！
     https://twitter.com/ac_nishiyamato/status/1457939683955011586
+    """
+
+
+class TsukaguchiSunSunTheaterContentTestCase(ContentTestCase):
+    target_class = TsukaguchiSunSunTheaterContent
+    generation_date = date(2022, 8, 24)
+    generated_content = """
+    #アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで8/19(金)から8/25(木)まで上映！
+
+    たたーん🎵 上映時間は毎日 19:30〜
+
+    音響に定評ある劇場で再上映。これは期待大なのです！
+    https://twitter.com/sunsuntheater/status/1559821528174235648
     """
