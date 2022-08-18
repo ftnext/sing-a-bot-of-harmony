@@ -195,10 +195,10 @@ class TsukaguchiSunSunTheaterContentTestCase(ContentTestCase):
     target_class = TsukaguchiSunSunTheaterContent
     generation_date = date(2022, 8, 24)
     generated_content = """
-    #アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで8/19(金)から8/25(木)まで上映！
+    #アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで8/19(金)から8/25(木)まで上映中（今日を含めてあと2日！）
 
     たたーん🎵 上映時間は毎日 19:30〜
 
-    音響に定評ある劇場で再上映。これは期待大なのです！
+    「あの歓喜の歌声が最高の音響で帰ってくる！」 これはもう、最高なのです！
     https://twitter.com/sunsuntheater/status/1559821528174235648
     """

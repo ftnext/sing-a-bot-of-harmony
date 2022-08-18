@@ -169,16 +169,22 @@ class AeonCinemaNishiyamatoContent(Content):
 
 
 class TsukaguchiSunSunTheaterContent(Content):
+    LAST_DAY = date(2022, 8, 25)
+    END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
+
     def __init__(self, date_: date) -> None:
         self._date = date_
 
     def generate(self) -> str:
         sentences = Sentences(
-            Sentence("#アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで8/19(金)から8/25(木)まで上映！"),
+            Sentence(
+                "#アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで8/19(金)から8/25(木)まで上映中"
+                f"（今日を含めてあと{self.END_COUNT_DOWN(self._date)}日！）"
+            ),
             NEW_LINE,
             Sentence("たたーん🎵 上映時間は毎日 19:30〜"),
             NEW_LINE,
-            Sentence("音響に定評ある劇場で再上映。これは期待大なのです！"),
+            Sentence("「あの歓喜の歌声が最高の音響で帰ってくる！」 これはもう、最高なのです！"),
             Sentence(
                 "https://twitter.com/sunsuntheater/status/1559821528174235648"
             ),
