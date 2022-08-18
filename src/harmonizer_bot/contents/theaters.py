@@ -169,6 +169,7 @@ class AeonCinemaNishiyamatoContent(Content):
 
 
 class TsukaguchiSunSunTheaterContent(Content):
+    START_DAY = date(2022, 8, 19)
     LAST_DAY = date(2022, 8, 25)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
 
@@ -178,7 +179,9 @@ class TsukaguchiSunSunTheaterContent(Content):
     def generate(self) -> str:
         sentences = Sentences(
             Sentence(
-                "#アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで8/19(金)から8/25(木)まで上映中"
+                "#アイの歌声を聴かせて 兵庫 尼崎の塚口サンサン劇場さんで"
+                f"{self.START_DAY:%-m/%-d(%a)}から"
+                f"{self.LAST_DAY:%-m/%-d(%a)}まで上映中"
                 f"（今日を含めてあと{self.END_COUNT_DOWN(self._date)}日！）"
             ),
             NEW_LINE,
