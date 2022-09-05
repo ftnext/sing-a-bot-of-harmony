@@ -9,6 +9,7 @@ from harmonizer_bot.contents.birthday import (
     GocchanBirthdayContent,
     ShionBirthdayContent,
 )
+from harmonizer_bot.date import BirthDate
 
 
 class MainCharacter(Enum):
@@ -30,19 +31,20 @@ class Birthday:
 class Birthdays:
     values: Mapping[MainCharacter, Birthday]
 
-    def next_character(self, date_: date) -> tuple[MainCharacter, date]:
+    def next_character(self, date_: date) -> tuple[MainCharacter, BirthDate]:
         sorted_items = sorted(self.values.items(), key=lambda t: t[1])
         head_date = sorted_items[0][1].to_date(date_.year)
         if date_ <= head_date:
-            return sorted_items[0][0], head_date
+            return sorted_items[0][0], BirthDate.from_(head_date)
         tail_date = sorted_items[-1][1].to_date(date_.year)
         if tail_date < date_:
-            return sorted_items[0][0], head_date.replace(date_.year + 1)
+            next_year_date = head_date.replace(date_.year + 1)
+            return sorted_items[0][0], BirthDate.from_(next_year_date)
         for i in range(len(sorted_items) - 1):
             first = sorted_items[i][1].to_date(date_.year)
             second = sorted_items[i + 1][1].to_date(date_.year)
             if first < date_ <= second:
-                return sorted_items[i + 1][0], second
+                return sorted_items[i + 1][0], BirthDate.from_(second)
 
 
 class MainCharacterBirthdayDispatcher:
