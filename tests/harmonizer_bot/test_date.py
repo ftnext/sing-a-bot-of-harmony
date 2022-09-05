@@ -15,3 +15,8 @@ class BirthDateTestCase(TestCase):
     def test_convert_from_date(self):
         date_ = date(2022, 11, 20)
         self.assertEqual(BirthDate.from_(date_), BirthDate(2022, 11, 20))
+
+    def test_equal(self):
+        self.assertTrue(BirthDate(2022, 12, 31) == BirthDate(2022, 12, 31))
+        # assertNotEqual ではassertionできなかったので以下のようにしている
+        self.assertFalse(BirthDate(2022, 12, 31) == date(2022, 12, 31))
