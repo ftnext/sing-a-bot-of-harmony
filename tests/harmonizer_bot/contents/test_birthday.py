@@ -9,6 +9,7 @@ from harmonizer_bot.contents.birthday import (
     GocchanBirthdayContent,
     ShionBirthdayContent,
 )
+from harmonizer_bot.date import BirthDate
 
 
 class ShionBirthdayContentTestCase(TestCase):
@@ -48,7 +49,7 @@ class ShionBirthdayContentTestCase(TestCase):
 
 class AyaBirthdayContentTestCase(TestCase):
     def test_init(self):
-        birthday = MagicMock(spec=date)
+        birthday = MagicMock(spec=BirthDate)
         date_ = MagicMock(spec=date)
 
         actual = AyaBirthdayContent(birthday, date_)
@@ -67,7 +68,7 @@ class AyaBirthdayContentTestCase(TestCase):
             """
         ).rstrip()
 
-        content = AyaBirthdayContent(date(2022, 7, 8), date(2022, 7, 1))
+        content = AyaBirthdayContent(BirthDate(2022, 7, 8), date(2022, 7, 1))
         actual = content.generate()
 
         self.assertEqual(actual, expected)
@@ -83,7 +84,7 @@ class AyaBirthdayContentTestCase(TestCase):
             """
         ).rstrip()
 
-        content = AyaBirthdayContent(date(2022, 7, 8), date(2022, 7, 8))
+        content = AyaBirthdayContent(BirthDate(2022, 7, 8), date(2022, 7, 8))
         actual = content.generate()
 
         self.assertEqual(actual, expected)
@@ -91,7 +92,7 @@ class AyaBirthdayContentTestCase(TestCase):
 
 class GocchanBirthdayContentTestCase(TestCase):
     def test_init(self):
-        birthday = MagicMock(spec=date)
+        birthday = MagicMock(spec=BirthDate)
         date_ = MagicMock(spec=date)
 
         actual = GocchanBirthdayContent(birthday, date_)
@@ -109,7 +110,7 @@ class GocchanBirthdayContentTestCase(TestCase):
         ).rstrip()
 
         content = GocchanBirthdayContent(
-            date(2022, 11, 20), date(2022, 11, 17)
+            BirthDate(2022, 11, 20), date(2022, 11, 17)
         )
         actual = content.generate()
 

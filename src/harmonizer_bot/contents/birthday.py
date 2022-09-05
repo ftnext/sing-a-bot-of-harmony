@@ -5,6 +5,7 @@ from sparkling_counter import DayCountDown
 from sparkling_counter.core import ArrivingTheDayException
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+from harmonizer_bot.date import BirthDate
 
 from .base import Content
 
@@ -37,7 +38,7 @@ class ShionBirthdayContent(Content):
 
 
 class AyaBirthdayContent(Content):
-    def __init__(self, birthday: date, date_: date) -> None:
+    def __init__(self, birthday: BirthDate, date_: date) -> None:
         self._birthday = birthday
         self._date = date_
 
@@ -46,9 +47,7 @@ class AyaBirthdayContent(Content):
         try:
             sentences = Sentences(
                 Sentence("#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、アヤ！"),
-                Sentence(
-                    f"{self._birthday:%-m/%-d}まであと{count_down(self._date)}日"
-                ),
+                Sentence(f"{self._birthday}まであと{count_down(self._date)}日"),
                 NEW_LINE,
                 Sentence(
                     "https://twitter.com/ainouta_movie/"
@@ -57,9 +56,7 @@ class AyaBirthdayContent(Content):
             )
         except ArrivingTheDayException:
             sentences = Sentences(
-                Sentence(
-                    f"本日{self._birthday:%-m/%-d}は #アイの歌声を聴かせて のキャラクター アヤの誕生日！"
-                ),
+                Sentence(f"本日{self._birthday}は #アイの歌声を聴かせて のキャラクター アヤの誕生日！"),
                 Sentence("たんじょうびー、おめでとう🎶"),
                 NEW_LINE,
                 Sentence("さらに、本日22時より #吉浦康裕スペース 🎉"),
@@ -72,7 +69,7 @@ class AyaBirthdayContent(Content):
 
 
 class GocchanBirthdayContent(Content):
-    def __init__(self, birthday: date, date_: date) -> None:
+    def __init__(self, birthday: BirthDate, date_: date) -> None:
         self._birthday = birthday
         self._date = date_
 
@@ -80,6 +77,6 @@ class GocchanBirthdayContent(Content):
         count_down = DayCountDown(self._birthday, include=False)
         sentences = Sentences(
             Sentence("アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！"),
-            Sentence(f"{self._birthday:%-m/%-d}まであと{count_down(self._date)}日"),
+            Sentence(f"{self._birthday}まであと{count_down(self._date)}日"),
         )
         return sentences.format()
