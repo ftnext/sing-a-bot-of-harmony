@@ -11,11 +11,9 @@ from requests_oauthlib import OAuth1Session
 
 from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
-    AeonCinemaNishiyamatoContent,
     DiskReleaseFestivalContent,
     HappyProjectContent,
     MorningGreetingContent,
-    TsukaguchiSunSunTheaterContent,
 )
 from harmonizer_bot.core import TextGenerator
 
@@ -82,12 +80,6 @@ def generate_time_signal_text(today: date, /, **kwargs) -> str:
 
 
 theater_text_generator = TextGenerator()
-_ = theater_text_generator.register("ac_nishiyamato")(
-    AeonCinemaNishiyamatoContent
-)
-_ = theater_text_generator.register("tsukaguchi_sunsun")(
-    TsukaguchiSunSunTheaterContent
-)
 
 
 @root_generator.register("theater")
