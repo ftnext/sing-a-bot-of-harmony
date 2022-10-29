@@ -193,3 +193,7 @@ class TsukaguchiSunSunTheaterContent(Content):
             ),
         )
         return sentences.format()
+
+
+class CinemaCityContent:
+    pass

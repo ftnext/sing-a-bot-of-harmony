@@ -6,6 +6,7 @@ from unittest.mock import MagicMock
 from harmonizer_bot.contents.base import Content
 from harmonizer_bot.contents.theaters import (
     AeonCinemaNishiyamatoContent,
+    CinemaCityContent,
     CinemaNekoContent,
     CinePipiaContent,
     Nagoya109CinemasContent,
@@ -201,4 +202,19 @@ class TsukaguchiSunSunTheaterContentTestCase(ContentTestCase):
 
     「あの歓喜の歌声が最高の音響で帰ってくる！」 これはもう、最高なのです！
     https://twitter.com/sunsuntheater/status/1559821528174235648
+    """
+
+
+class CinemaCityContentTestCase(ContentTestCase):
+    target_class = CinemaCityContent
+    generation_date = date(2022, 10, 30)
+    generated_content = """
+    #アイの歌声を聴かせて 立川のシネマシティさんで10/29(土)から11/10(木)まで公開一周年記念上映中！
+    今日を含めてあと12日📡
+
+    10/29(土) 18:30-（監督トーク！）
+    10/30(日) 15:55- & 21:15-
+    10/31(月)-11/2(水) 20:15-
+
+    https://twitter.com/cinemacity_jp/status/1580848214365700097
     """
