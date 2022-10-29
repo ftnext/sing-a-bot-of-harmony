@@ -195,5 +195,29 @@ class TsukaguchiSunSunTheaterContent(Content):
         return sentences.format()
 
 
-class CinemaCityContent:
-    pass
+class CinemaCityContent(Content):
+    START_DAY = date(2022, 10, 29)
+    LAST_DAY = date(2022, 11, 10)
+    END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        sentences = Sentences(
+            Sentence(
+                "#アイの歌声を聴かせて 立川のシネマシティさんで"
+                f"{self.START_DAY:%-m/%-d(%a)}から"
+                f"{self.LAST_DAY:%-m/%-d(%a)}まで公開一周年記念上映中！"
+            ),
+            Sentence("今日を含めてあと12日📡"),
+            NEW_LINE,
+            Sentence("10/29(土) 18:30-（監督トーク！）"),
+            Sentence("10/30(日) 15:55- & 21:15-"),
+            Sentence("10/31(月)-11/2(水) 20:15-"),
+            NEW_LINE,
+            Sentence(
+                "https://twitter.com/cinemacity_jp/status/1580848214365700097"
+            ),
+        )
+        return sentences.format()
