@@ -5,9 +5,6 @@ from .events import (  # NOQA: F401
     HappyProjectContent,
 )
 from .greetings import MorningGreetingContent  # NOQA: F401
-from .theaters import (  # NOQA: F401
-    AeonCinemaNishiyamatoContent,
-    TsukaguchiSunSunTheaterContent,
-)
+from .theaters import CinemaCityContent  # NOQA: F401
 
 locale.setlocale(locale.LC_TIME, "ja_JP.UTF-8")
