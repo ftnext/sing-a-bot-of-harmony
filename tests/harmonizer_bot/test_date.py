@@ -1,7 +1,12 @@
-from datetime import date
+from datetime import date, time
 from unittest import TestCase
 
-from harmonizer_bot.date import BirthDate, CustomizedBaseDate, ScreenDate
+from harmonizer_bot.date import (
+    BirthDate,
+    CustomizedBaseDate,
+    ScreenDate,
+    ScreenStartTime,
+)
 
 
 class CustomizedBaseDateTestCase(TestCase):
@@ -52,3 +57,12 @@ class ScreenDateTestCase(TestCase):
     def test_format_month__day__day_of_the_week(self):
         screen_date = ScreenDate(2022, 4, 10)
         self.assertEqual(f"{screen_date}", "4/10(日)")
+
+
+class ScreenStartTimeTestCase(TestCase):
+    def test_can_create(self):
+        self.assertIsInstance(ScreenStartTime(18, 0), time)
+
+    def test_format_hour_and_minute(self):
+        start_time = ScreenStartTime(15, 5)
+        self.assertEqual(f"{start_time}", "15:05")

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, time
 
 
 class CustomizedBaseDate(date):
@@ -25,3 +25,8 @@ class BirthDate(CustomizedBaseDate):
 class ScreenDate(CustomizedBaseDate):
     def __str__(self) -> str:
         return f"{self:%-m/%-d(%a)}"
+
+
+class ScreenStartTime(time):
+    def __str__(self) -> str:
+        return f"{self:%H:%M}"
