@@ -12,6 +12,9 @@ class BirthDate(date):
             return False
         return super().__eq__(__o)
 
+    def __ne__(self, __o: object) -> bool:
+        return not self.__eq__(__o)
+
     @classmethod
     def from_(cls, date_: date) -> BirthDate:
         return cls(date_.year, date_.month, date_.day)

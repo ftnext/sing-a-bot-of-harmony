@@ -18,5 +18,5 @@ class BirthDateTestCase(TestCase):
 
     def test_equal(self):
         self.assertTrue(BirthDate(2022, 12, 31) == BirthDate(2022, 12, 31))
-        # assertNotEqual ではassertionできなかったので以下のようにしている
-        self.assertFalse(BirthDate(2022, 12, 31) == date(2022, 12, 31))
+        self.assertNotEqual(BirthDate(2022, 12, 31), date(2022, 12, 31))
+        self.assertNotEqual(date(2022, 12, 31), BirthDate(2022, 12, 31))
