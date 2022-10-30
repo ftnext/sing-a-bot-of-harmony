@@ -20,3 +20,8 @@ class CustomizedBaseDate(date):
 class BirthDate(CustomizedBaseDate):
     def __str__(self) -> str:
         return f"{self:%-m/%-d}"
+
+
+class ScreenDate(CustomizedBaseDate):
+    def __str__(self) -> str:
+        return f"{self:%-m/%-d(%a)}"
