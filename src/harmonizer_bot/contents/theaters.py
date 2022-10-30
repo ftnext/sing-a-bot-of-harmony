@@ -6,6 +6,7 @@ from sparkling_counter.core import IllegalDayCountError
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
 from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
+from harmonizer_bot.schedules import DayToSlotsSchedule, DayToSlotsSchedules
 
 from .base import Content
 
@@ -201,20 +202,30 @@ class CinemaCityContent(Content):
     START_DAY = ScreenDate(2022, 10, 29)
     LAST_DAY = ScreenDate(2022, 11, 10)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
-    SCHEDULE = [
-        (ScreenDate(2022, 10, 29), [ScreenStartTime(18, 30)]),
-        (
-            ScreenDate(2022, 10, 30),
-            [ScreenStartTime(15, 55), ScreenStartTime(21, 15)],
-        ),
-        (ScreenDate(2022, 10, 31), [ScreenStartTime(20, 15)]),
-        (ScreenDate(2022, 11, 1), [ScreenStartTime(20, 15)]),
-        (ScreenDate(2022, 11, 2), [ScreenStartTime(20, 15)]),
-        (
-            ScreenDate(2022, 11, 3),
-            [ScreenStartTime(16, 0), ScreenStartTime(20, 50)],
-        ),
-    ]
+    SCHEDULES = DayToSlotsSchedules(
+        [
+            DayToSlotsSchedule(
+                ScreenDate(2022, 10, 29), [ScreenStartTime(18, 30)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 10, 30),
+                [ScreenStartTime(15, 55), ScreenStartTime(21, 15)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 10, 31), [ScreenStartTime(20, 15)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 1), [ScreenStartTime(20, 15)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 2), [ScreenStartTime(20, 15)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 3),
+                [ScreenStartTime(16, 0), ScreenStartTime(20, 50)],
+            ),
+        ]
+    )
 
     def __init__(self, date_: date) -> None:
         self._date = date_
@@ -237,11 +248,11 @@ class CinemaCityContent(Content):
 
     def build_schedule(self):
         today_and_future = filter(
-            lambda pair: pair[0] >= self._date, self.SCHEDULE
+            lambda schedule: schedule.day >= self._date, self.SCHEDULES
         )
         schedules = defaultdict(list)
-        for pair in list(today_and_future)[:5]:
-            schedules[tuple(pair[1])].append(pair[0])
+        for schedule in list(today_and_future)[:5]:
+            schedules[tuple(schedule.slots)].append(schedule.day)
         schedule_lines = []
         for start_times, dates in schedules.items():
             start_time_part = " & ".join(f"{st}-" for st in start_times)
