@@ -1,4 +1,3 @@
-from collections import defaultdict
 from datetime import date
 
 from sparkling_counter import DayCountDown
@@ -247,19 +246,5 @@ class CinemaCityContent(Content):
         return sentences.format()
 
     def build_schedule(self):
-        today_and_future = filter(
-            lambda schedule: schedule.day >= self._date, self.SCHEDULES
-        )
-        schedules = defaultdict(list)
-        for schedule in list(today_and_future)[:5]:
-            schedules[tuple(schedule.slots)].append(schedule.day)
-        schedule_lines = []
-        for start_times, dates in schedules.items():
-            start_time_part = " & ".join(f"{st}-" for st in start_times)
-            if len(dates) >= 2:
-                date_part = f"{dates[0]}-{dates[-1]}"
-            else:
-                date_part = f"{dates[0]}"
-            line = f"{date_part} {start_time_part}"
-            schedule_lines.append(line)
-        return schedule_lines
+        schedules = self.SCHEDULES.inverse(self._date, window=5)
+        return [str(schedule) for schedule in schedules]
