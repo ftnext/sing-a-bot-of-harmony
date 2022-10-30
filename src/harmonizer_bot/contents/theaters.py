@@ -1,10 +1,11 @@
+from collections import defaultdict
 from datetime import date
 
 from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
-from harmonizer_bot.date import ScreenDate
+from harmonizer_bot.date import ScreenDate, ScreenStartTime
 
 from .base import Content
 
@@ -200,6 +201,16 @@ class CinemaCityContent(Content):
     START_DAY = ScreenDate(2022, 10, 29)
     LAST_DAY = ScreenDate(2022, 11, 10)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
+    SCHEDULE = [
+        (ScreenDate(2022, 10, 29), [ScreenStartTime(18, 30)]),
+        (
+            ScreenDate(2022, 10, 30),
+            [ScreenStartTime(15, 55), ScreenStartTime(21, 15)],
+        ),
+        (ScreenDate(2022, 10, 31), [ScreenStartTime(20, 15)]),
+        (ScreenDate(2022, 11, 1), [ScreenStartTime(20, 15)]),
+        (ScreenDate(2022, 11, 2), [ScreenStartTime(20, 15)]),
+    ]
 
     def __init__(self, date_: date) -> None:
         self._date = date_
@@ -221,3 +232,21 @@ class CinemaCityContent(Content):
             ),
         )
         return sentences.format()
+
+    def build_schedule(self):
+        today_and_future = filter(
+            lambda pair: pair[0] >= self._date, self.SCHEDULE
+        )
+        schedules = defaultdict(list)
+        for pair in list(today_and_future)[:5]:
+            schedules[tuple(pair[1])].append(pair[0])
+        schedule_lines = []
+        for start_times, dates in schedules.items():
+            start_time_part = " & ".join(f"{st}-" for st in start_times)
+            if len(dates) >= 2:
+                date_part = f"{dates[0]}-{dates[-1]}"
+            else:
+                date_part = f"{dates[0]}"
+            line = f"{date_part} {start_time_part}"
+            schedule_lines.append(line)
+        return schedule_lines

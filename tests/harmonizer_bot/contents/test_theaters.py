@@ -218,3 +218,15 @@ class CinemaCityContentTestCase(ContentTestCase):
 
     https://twitter.com/cinemacity_jp/status/1580848214365700097
     """
+
+    def test_build_schedule(self):
+        expected = [
+            "10/29(土) 18:30-",
+            "10/30(日) 15:55- & 21:15-",
+            "10/31(月)-11/2(水) 20:15-",
+        ]
+        content = self.target_class(date(2022, 10, 29))
+
+        actual = content.build_schedule()
+
+        self.assertEqual(actual, expected)
