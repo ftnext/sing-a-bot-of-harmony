@@ -4,6 +4,7 @@ from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+from harmonizer_bot.date import ScreenDate
 
 from .base import Content
 
@@ -196,8 +197,8 @@ class TsukaguchiSunSunTheaterContent(Content):
 
 
 class CinemaCityContent(Content):
-    START_DAY = date(2022, 10, 29)
-    LAST_DAY = date(2022, 11, 10)
+    START_DAY = ScreenDate(2022, 10, 29)
+    LAST_DAY = ScreenDate(2022, 11, 10)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
 
     def __init__(self, date_: date) -> None:
@@ -207,8 +208,7 @@ class CinemaCityContent(Content):
         sentences = Sentences(
             Sentence(
                 "#アイの歌声を聴かせて 立川のシネマシティさんで"
-                f"{self.START_DAY:%-m/%-d(%a)}から"
-                f"{self.LAST_DAY:%-m/%-d(%a)}まで公開一周年記念上映中！"
+                f"{self.START_DAY}から{self.LAST_DAY}まで公開一周年記念上映中！"
             ),
             Sentence("今日を含めてあと12日📡"),
             NEW_LINE,
