@@ -235,7 +235,7 @@ class CinemaCityContent(Content):
                 "#アイの歌声を聴かせて 立川のシネマシティさんで"
                 f"{self.START_DAY}から{self.LAST_DAY}まで公開一周年記念上映中！"
             ),
-            Sentence("今日を含めてあと12日📡"),
+            Sentence(f"今日を含めてあと{self.END_COUNT_DOWN(self._date)}日📡"),
             NEW_LINE,
             *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
