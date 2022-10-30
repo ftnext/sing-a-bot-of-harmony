@@ -29,7 +29,7 @@ class CustomizedBaseDateTestCase(TestCase):
 
 class BirthDateTestCase(TestCase):
     def test_can_create(self):
-        self.assertIsInstance(BirthDate(2022, 6, 6), date)
+        self.assertIsInstance(BirthDate(2022, 6, 6), CustomizedBaseDate)
 
     def test_format_month_and_day(self):
         birth_date = BirthDate(2022, 4, 10)
