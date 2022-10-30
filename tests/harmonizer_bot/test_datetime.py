@@ -1,7 +1,7 @@
 from datetime import date, time
 from unittest import TestCase
 
-from harmonizer_bot.date import (
+from harmonizer_bot.datetime import (
     BirthDate,
     CustomizedBaseDate,
     ScreenDate,

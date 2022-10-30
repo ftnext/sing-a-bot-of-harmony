@@ -5,7 +5,7 @@ from sparkling_counter import DayCountDown
 from sparkling_counter.core import ArrivingTheDayException
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
-from harmonizer_bot.date import BirthDate
+from harmonizer_bot.datetime import BirthDate
 
 from .base import Content
 

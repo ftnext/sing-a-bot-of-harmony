@@ -9,7 +9,7 @@ from harmonizer_bot.contents.birthday import (
     GocchanBirthdayContent,
     ShionBirthdayContent,
 )
-from harmonizer_bot.date import BirthDate
+from harmonizer_bot.datetime import BirthDate
 
 
 class MainCharacter(Enum):

@@ -5,7 +5,7 @@ from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
-from harmonizer_bot.date import ScreenDate, ScreenStartTime
+from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
 
 from .base import Content
 
