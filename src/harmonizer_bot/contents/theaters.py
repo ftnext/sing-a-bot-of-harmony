@@ -210,6 +210,10 @@ class CinemaCityContent(Content):
         (ScreenDate(2022, 10, 31), [ScreenStartTime(20, 15)]),
         (ScreenDate(2022, 11, 1), [ScreenStartTime(20, 15)]),
         (ScreenDate(2022, 11, 2), [ScreenStartTime(20, 15)]),
+        (
+            ScreenDate(2022, 11, 3),
+            [ScreenStartTime(16, 0), ScreenStartTime(20, 50)],
+        ),
     ]
 
     def __init__(self, date_: date) -> None:
@@ -223,9 +227,7 @@ class CinemaCityContent(Content):
             ),
             Sentence("今日を含めてあと12日📡"),
             NEW_LINE,
-            Sentence("10/29(土) 18:30-（監督トーク！）"),
-            Sentence("10/30(日) 15:55- & 21:15-"),
-            Sentence("10/31(月)-11/2(水) 20:15-"),
+            *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
             Sentence(
                 "https://twitter.com/cinemacity_jp/status/1580848214365700097"
