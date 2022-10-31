@@ -24,6 +24,16 @@ class DayToSlotsSchedule:
 class DayToSlotsSchedules(Sequence):
     values: Sequence[DayToSlotsSchedule]
 
+    def __post_init__(self):
+        seen_dates = set()
+        for schedule in self.values:
+            if str(schedule.day) in seen_dates:
+                raise ValueError(
+                    f"Each date must be unique. {schedule.day} is duplicated: "
+                    f"{schedule}"
+                )
+            seen_dates.add(str(schedule.day))
+
     def __len__(self) -> int:
         return len(self.values)
 
