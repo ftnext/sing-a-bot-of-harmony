@@ -278,5 +278,46 @@ class CinemaCityContent(Content):
         return [str(schedule) for schedule in schedules]
 
 
-class ShinjukuPiccadillyContent:
-    ...
+class ShinjukuPiccadillyContent(Content):
+    START_DAY = ScreenDate(2022, 11, 5)
+    START_COUNT_DOWN = DayCountDown(START_DAY, include=False)
+    SCHEDULES = DayToSlotsSchedules(
+        [
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 5), [ScreenStartTime(9, 0)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 7), [ScreenStartTime(13, 50)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 8), [ScreenStartTime(15, 45)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 9), [ScreenStartTime(21, 0)]
+            ),
+        ]
+    )
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        sentences = Sentences(
+            Sentence(
+                "#アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！"
+                f"（{self.START_COUNT_DOWN(self._date)}日後から！）"
+            ),
+            NEW_LINE,
+            *[Sentence(line) for line in self.build_schedule()],
+            NEW_LINE,
+            Sentence(
+                "https://twitter.com/liveaudio_fes/status/1583348996785205248"
+            ),
+            NEW_LINE,
+            Sentence("気をつけてー、予告編がないってことにー🎵"),
+        )
+        return sentences.format()
+
+    def build_schedule(self):
+        schedules = self.SCHEDULES.inverse(self._date)
+        return [str(schedule) for schedule in schedules]
