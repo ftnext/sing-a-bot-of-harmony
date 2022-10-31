@@ -10,6 +10,7 @@ from harmonizer_bot.contents.theaters import (
     CinemaNekoContent,
     CinePipiaContent,
     Nagoya109CinemasContent,
+    ShinjukuPiccadillyContent,
     SumotoOrionContent,
     TsukaguchiSunSunTheaterContent,
     WasedaShochikuContent,
@@ -230,3 +231,20 @@ class CinemaCityContentTestCase(ContentTestCase):
         actual = content.build_schedule()
 
         self.assertEqual(actual, expected)
+
+
+class ShinjukuPiccadillyContentTestCase(ContentTestCase):
+    target_class = ShinjukuPiccadillyContent
+    generation_date = date(2022, 11, 1)
+    generated_content = """
+    #アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！（4日後から！）
+
+    11/5(土) 9:00-
+    11/7(月) 13:50-
+    11/8(火) 15:45-
+    11/9(水) 21:00-
+
+    https://twitter.com/liveaudio_fes/status/1583348996785205248
+
+    気をつけてー、予告編がないってことにー🎵
+    """

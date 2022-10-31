@@ -276,3 +276,7 @@ class CinemaCityContent(Content):
     def build_schedule(self):
         schedules = self.SCHEDULES.inverse(self._date, window=5)
         return [str(schedule) for schedule in schedules]
+
+
+class ShinjukuPiccadillyContent:
+    ...
