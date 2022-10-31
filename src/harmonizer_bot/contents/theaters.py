@@ -223,6 +223,34 @@ class CinemaCityContent(Content):
                 ScreenDate(2022, 11, 3),
                 [ScreenStartTime(16, 0), ScreenStartTime(20, 50)],
             ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 4),
+                [ScreenStartTime(18, 25), ScreenStartTime(21, 0)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 5),
+                [ScreenStartTime(18, 15), ScreenStartTime(20, 55)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 6),
+                [ScreenStartTime(18, 15), ScreenStartTime(20, 55)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 7),
+                [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 8),
+                [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 9),
+                [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 10),
+                [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
+            ),
         ]
     )
 
