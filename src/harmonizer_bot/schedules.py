@@ -13,6 +13,12 @@ class DayToSlotsSchedule:
     day: ScreenDate
     slots: Sequence[ScreenStartTime]
 
+    def __post_init__(self):
+        if len(self.slots) == 0:
+            raise ValueError(
+                f"Length of slots must be at least 1: {self.slots}"
+            )
+
 
 @dataclass(frozen=True)
 class DayToSlotsSchedules(Sequence):
