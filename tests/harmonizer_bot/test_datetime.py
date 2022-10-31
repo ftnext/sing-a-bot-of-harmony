@@ -66,3 +66,6 @@ class ScreenStartTimeTestCase(TestCase):
     def test_format_hour_and_minute(self):
         start_time = ScreenStartTime(15, 5)
         self.assertEqual(f"{start_time}", "15:05")
+
+        start_time2 = ScreenStartTime(5, 15)
+        self.assertEqual(f"{start_time2}", "5:15")
