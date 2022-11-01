@@ -321,3 +321,7 @@ class ShinjukuPiccadillyContent(Content):
     def build_schedule(self):
         schedules = self.SCHEDULES.inverse(self._date)
         return [str(schedule) for schedule in schedules]
+
+
+class WowowBroadCastContent:
+    ...
