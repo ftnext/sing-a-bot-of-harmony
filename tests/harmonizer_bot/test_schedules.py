@@ -41,3 +41,11 @@ class SlotToDaysScheduleTestCase(TestCase):
         )
 
         self.assertEqual(str(schedule), "11/10(木)-11/11(金) 11:38-")
+
+    def test_intermittent_period_string(self):
+        schedule = SlotToDaysSchedule(
+            (ScreenStartTime(23, 38),),
+            [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)],
+        )
+
+        self.assertEqual(str(schedule), "11/9(水) & 11/11(金) 23:38-")
