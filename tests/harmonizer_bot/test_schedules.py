@@ -1,6 +1,10 @@
 from unittest import TestCase
 
-from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
+from harmonizer_bot.datetime import (
+    ScreenDate,
+    ScreenDateCollection,
+    ScreenStartTime,
+)
 from harmonizer_bot.schedules import (
     DayToSlotsSchedule,
     DayToSlotsSchedules,
@@ -37,7 +41,9 @@ class SlotToDaysScheduleTestCase(TestCase):
     def test_continuous_period_string(self):
         schedule = SlotToDaysSchedule(
             (ScreenStartTime(11, 38),),
-            [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)],
+            ScreenDateCollection(
+                [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
+            ),
         )
 
         self.assertEqual(str(schedule), "11/10(木)-11/11(金) 11:38-")
@@ -45,7 +51,9 @@ class SlotToDaysScheduleTestCase(TestCase):
     def test_intermittent_period_string(self):
         schedule = SlotToDaysSchedule(
             (ScreenStartTime(23, 38),),
-            [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)],
+            ScreenDateCollection(
+                [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)]
+            ),
         )
 
         self.assertEqual(str(schedule), "11/9(水) & 11/11(金) 23:38-")

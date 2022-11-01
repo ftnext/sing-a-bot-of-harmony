@@ -5,7 +5,11 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date
 
-from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
+from harmonizer_bot.datetime import (
+    ScreenDate,
+    ScreenDateCollection,
+    ScreenStartTime,
+)
 
 
 @dataclass(frozen=True)
@@ -55,7 +59,7 @@ class DayToSlotsSchedules(Sequence):
             schedules[tuple(schedule.slots)].append(schedule.day)
         return SlotToDaysSchedules(
             [
-                SlotToDaysSchedule(slot, days)
+                SlotToDaysSchedule(slot, ScreenDateCollection(days))
                 for slot, days in schedules.items()
             ]
         )
@@ -64,27 +68,11 @@ class DayToSlotsSchedules(Sequence):
 @dataclass(frozen=True)
 class SlotToDaysSchedule:
     slot: tuple[ScreenStartTime]
-    days: Sequence[ScreenDate]
+    days: ScreenDateCollection
 
     def __str__(self) -> str:
         start_time_part = " & ".join(f"{st}-" for st in self.slot)
-
-        start_date = self.days[0]
-        date_part = f"{start_date}"
-        period_end_date = None
-        for day in self.days[1:]:
-            if (day - start_date).days == 1:
-                period_end_date = day
-                start_date = day
-                continue
-            if (day - start_date).days > 1:
-                if period_end_date:
-                    date_part += f"-{period_end_date}"
-                    period_end_date = None
-                date_part += f" & {day}"
-                start_date = day
-        if period_end_date:
-            date_part += f"-{period_end_date}"
+        date_part = f"{self.days}"
         return f"{date_part} {start_time_part}"
 
 
