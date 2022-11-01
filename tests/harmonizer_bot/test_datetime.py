@@ -79,3 +79,10 @@ class ScreenDateCollectionTestCase(TestCase):
         )
 
         self.assertEqual(str(screen_dates), "11/10(木)-11/11(金)")
+
+    def test_intermittent_period_string(self):
+        screen_dates = ScreenDateCollection(
+            [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)]
+        )
+
+        self.assertEqual(str(screen_dates), "11/9(水) & 11/11(金)")
