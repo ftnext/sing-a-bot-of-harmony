@@ -99,3 +99,16 @@ class ScreenDateCollectionTestCase(TestCase):
         )
 
         self.assertEqual(str(screen_dates), "11/9(水) & 11/11(金)")
+
+    def test_continuous_and_intermittent_mixed_string(self):
+        screen_dates = ScreenDateCollection(
+            [
+                ScreenDate(2022, 11, 4),
+                ScreenDate(2022, 11, 7),
+                ScreenDate(2022, 11, 8),
+                ScreenDate(2022, 11, 10),
+            ]
+        )
+
+        expected = "11/4(金) & 11/7(月)-11/8(火) & 11/10(木)"
+        self.assertEqual(str(screen_dates), expected)
