@@ -68,10 +68,23 @@ class SlotToDaysSchedule:
 
     def __str__(self) -> str:
         start_time_part = " & ".join(f"{st}-" for st in self.slot)
-        if len(self.days) >= 2:
-            date_part = f"{self.days[0]}-{self.days[-1]}"
-        else:
-            date_part = f"{self.days[0]}"
+
+        start_date = self.days[0]
+        date_part = f"{start_date}"
+        period_end_date = None
+        for day in self.days[1:]:
+            if (day - start_date).days == 1:
+                period_end_date = day
+                start_date = day
+                continue
+            if (day - start_date).days > 1:
+                if period_end_date:
+                    date_part += f"-{period_end_date}"
+                    period_end_date = None
+                date_part += f" & {day}"
+                start_date = day
+        if period_end_date:
+            date_part += f"-{period_end_date}"
         return f"{date_part} {start_time_part}"
 
 
