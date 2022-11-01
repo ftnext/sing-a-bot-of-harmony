@@ -1,7 +1,11 @@
 from unittest import TestCase
 
 from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
-from harmonizer_bot.schedules import DayToSlotsSchedule, DayToSlotsSchedules
+from harmonizer_bot.schedules import (
+    DayToSlotsSchedule,
+    DayToSlotsSchedules,
+    SlotToDaysSchedule,
+)
 
 
 class DayToSlotsScheduleTestCase(TestCase):
@@ -27,3 +31,13 @@ class DayToSlotsSchedulesTestCase(TestCase):
                     ),
                 ]
             )
+
+
+class SlotToDaysScheduleTestCase(TestCase):
+    def test_continuous_period_string(self):
+        schedule = SlotToDaysSchedule(
+            (ScreenStartTime(11, 38),),
+            [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)],
+        )
+
+        self.assertEqual(str(schedule), "11/10(木)-11/11(金) 11:38-")
