@@ -78,12 +78,20 @@ class ScreenDateCollectionTestCase(TestCase):
 
         self.assertEqual(str(screen_dates), "6/6(月)")
 
-    def test_continuous_period_string(self):
+    def test_continuous_period_string_with_start_and_end_dates(self):
         screen_dates = ScreenDateCollection(
             [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
         )
-
         self.assertEqual(str(screen_dates), "11/10(木)-11/11(金)")
+
+        screen_dates2 = ScreenDateCollection(
+            [
+                ScreenDate(2022, 11, 10),
+                ScreenDate(2022, 11, 11),
+                ScreenDate(2022, 11, 12),
+            ]
+        )
+        self.assertEqual(str(screen_dates2), "11/10(木)-11/12(土)")
 
     def test_intermittent_period_string(self):
         screen_dates = ScreenDateCollection(
