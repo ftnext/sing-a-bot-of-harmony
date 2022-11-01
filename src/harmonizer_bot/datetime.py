@@ -30,3 +30,7 @@ class ScreenDate(CustomizedBaseDate):
 class ScreenStartTime(time):
     def __str__(self) -> str:
         return f"{self:%-H:%M}"
+
+
+class ScreenDateCollection:
+    ...

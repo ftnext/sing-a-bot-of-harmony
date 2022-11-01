@@ -5,6 +5,7 @@ from harmonizer_bot.datetime import (
     BirthDate,
     CustomizedBaseDate,
     ScreenDate,
+    ScreenDateCollection,
     ScreenStartTime,
 )
 
@@ -69,3 +70,12 @@ class ScreenStartTimeTestCase(TestCase):
 
         start_time2 = ScreenStartTime(5, 15)
         self.assertEqual(f"{start_time2}", "5:15")
+
+
+class ScreenDateCollectionTestCase(TestCase):
+    def test_continuous_period_string(self):
+        screen_dates = ScreenDateCollection(
+            [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
+        )
+
+        self.assertEqual(str(screen_dates), "11/10(木)-11/11(金)")
