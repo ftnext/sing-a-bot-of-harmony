@@ -73,6 +73,11 @@ class ScreenStartTimeTestCase(TestCase):
 
 
 class ScreenDateCollectionTestCase(TestCase):
+    def test_single_date_string(self):
+        screen_dates = ScreenDateCollection([ScreenDate(2022, 6, 6)])
+
+        self.assertEqual(str(screen_dates), "6/6(月)")
+
     def test_continuous_period_string(self):
         screen_dates = ScreenDateCollection(
             [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
