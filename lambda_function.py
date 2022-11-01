@@ -16,6 +16,7 @@ from harmonizer_bot.contents import (
     HappyProjectContent,
     MorningGreetingContent,
     ShinjukuPiccadillyContent,
+    WowowBroadCastContent,
 )
 from harmonizer_bot.core import TextGenerator
 
@@ -86,6 +87,7 @@ _ = theater_text_generator.register("cinema_city")(CinemaCityContent)
 _ = theater_text_generator.register("shinjuku_piccadilly")(
     ShinjukuPiccadillyContent
 )
+_ = theater_text_generator.register("wowow")(WowowBroadCastContent)
 
 
 @root_generator.register("theater")
