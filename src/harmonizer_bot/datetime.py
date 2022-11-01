@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
+from dataclasses import dataclass
 from datetime import date, time
 
 
@@ -32,5 +34,31 @@ class ScreenStartTime(time):
         return f"{self:%-H:%M}"
 
 
-class ScreenDateCollection:
-    ...
+@dataclass(frozen=True)
+class ScreenDateCollection(Sequence):
+    values: Sequence[ScreenDate]
+
+    def __len__(self) -> int:
+        return len(self.values)
+
+    def __getitem__(self, key) -> ScreenStartTime:
+        return self.values[key]
+
+    def __str__(self) -> str:
+        start_date = self[0]
+        dates_string = f"{start_date}"
+        period_end_date = None
+        for day in self.values[1:]:
+            if (day - start_date).days == 1:
+                period_end_date = day
+                start_date = day
+                continue
+            if (day - start_date).days > 1:
+                if period_end_date:
+                    dates_string += f"-{period_end_date}"
+                    period_end_date = None
+                dates_string += f" & {day}"
+                start_date = day
+        if period_end_date:
+            dates_string += f"-{period_end_date}"
+        return dates_string
