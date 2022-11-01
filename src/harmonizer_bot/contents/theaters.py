@@ -323,5 +323,40 @@ class ShinjukuPiccadillyContent(Content):
         return [str(schedule) for schedule in schedules]
 
 
-class WowowBroadCastContent:
-    ...
+class WowowBroadCastContent(Content):
+    SCHEDULES = DayToSlotsSchedules(
+        [
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 4), [ScreenStartTime(21, 0)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 7), [ScreenStartTime(17, 0)]
+            ),
+            DayToSlotsSchedule(
+                ScreenDate(2022, 11, 14), [ScreenStartTime(17, 0)]
+            ),
+        ]
+    )
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        count_down = DayCountDown(self.SCHEDULES[0].day, include=False)
+        sentences = Sentences(
+            Sentence(
+                "#アイの歌声を聴かせて この11月、WOWOWで放送！"
+                f"（{count_down(self._date)}日後から！）"
+            ),
+            NEW_LINE,
+            *[Sentence(line) for line in self.build_schedule()],
+            NEW_LINE,
+            Sentence("https://www.wowow.co.jp/detail/179522"),
+            NEW_LINE,
+            Sentence("WOWOW加入されている方はぜひ！"),
+        )
+        return sentences.format()
+
+    def build_schedule(self):
+        slot_to_days_schedules = self.SCHEDULES.inverse(self._date)
+        return [str(schedule) for schedule in slot_to_days_schedules]
