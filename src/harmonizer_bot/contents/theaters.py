@@ -311,7 +311,7 @@ class ShinjukuPiccadillyContent(Content):
             *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
             Sentence(
-                "https://twitter.com/liveaudio_fes/status/1583348996785205248"
+                "https://twitter.com/liveaudio_fes/status/1587248058500259846"
             ),
             NEW_LINE,
             Sentence("気をつけてー、予告編がないってことにー🎵"),

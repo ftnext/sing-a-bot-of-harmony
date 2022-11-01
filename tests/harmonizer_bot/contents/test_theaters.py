@@ -244,7 +244,7 @@ class ShinjukuPiccadillyContentTestCase(ContentTestCase):
     11/8(火) 15:45-
     11/9(水) 21:00-
 
-    https://twitter.com/liveaudio_fes/status/1583348996785205248
+    https://twitter.com/liveaudio_fes/status/1587248058500259846
 
     気をつけてー、予告編がないってことにー🎵
     """
