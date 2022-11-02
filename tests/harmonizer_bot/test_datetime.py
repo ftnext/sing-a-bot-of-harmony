@@ -73,6 +73,10 @@ class ScreenStartTimeTestCase(TestCase):
 
 
 class ScreenDateCollectionTestCase(TestCase):
+    def test_cannot_create_when_dates_are_empty(self):
+        with self.assertRaises(ValueError):
+            _ = ScreenDateCollection([])
+
     def test_single_date_string(self):
         screen_dates = ScreenDateCollection([ScreenDate(2022, 6, 6)])
 
