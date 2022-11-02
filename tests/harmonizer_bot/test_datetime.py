@@ -1,6 +1,5 @@
 from datetime import date, time
 from unittest import TestCase
-from unittest.mock import MagicMock
 
 from harmonizer_bot.datetime import (
     BirthDate,
@@ -78,17 +77,26 @@ class ScreenDateCollectionTestCase(TestCase):
         with self.assertRaises(ValueError):
             _ = ScreenDateCollection([])
 
+    def test_cannot_create_from_not_ascending_dates(self):
+        dates = [
+            ScreenDate(2022, 11, 2),
+            ScreenDate(2022, 11, 1),
+            ScreenDate(2022, 11, 3),
+        ]
+        with self.assertRaises(ValueError):
+            _ = ScreenDateCollection(dates)
+
     def test_get_single_date(self):
-        screen_date_0 = MagicMock(spec=ScreenDate)
-        screen_date_1 = MagicMock(spec=ScreenDate)
+        screen_date_0 = ScreenDate(2022, 10, 30)
+        screen_date_1 = ScreenDate(2022, 10, 31)
         screen_dates = ScreenDateCollection([screen_date_0, screen_date_1])
 
         self.assertEqual(screen_dates[1], screen_date_1)
 
     def test_get_multiple_dates_with_slice(self):
-        screen_date_0 = MagicMock(spec=ScreenDate)
-        screen_date_1 = MagicMock(spec=ScreenDate)
-        screen_date_2 = MagicMock(spec=ScreenDate)
+        screen_date_0 = ScreenDate(2022, 11, 1)
+        screen_date_1 = ScreenDate(2022, 11, 2)
+        screen_date_2 = ScreenDate(2022, 11, 3)
         screen_dates = ScreenDateCollection(
             [screen_date_0, screen_date_1, screen_date_2]
         )

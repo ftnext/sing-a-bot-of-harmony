@@ -44,6 +44,10 @@ class ScreenDateCollection(Sequence):
                 f"Length of values must be at least 1: {self.values}"
             )
 
+        sorted_values = sorted(self.values)
+        if list(self.values) != sorted_values:
+            raise ValueError(f"Dates must be sorted ascending: {self.values}")
+
     def __len__(self) -> int:
         return len(self.values)
 
