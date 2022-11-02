@@ -38,6 +38,12 @@ class ScreenStartTime(time):
 class ScreenDateCollection(Sequence):
     values: Sequence[ScreenDate]
 
+    def __post_init__(self):
+        if len(self.values) == 0:
+            raise ValueError(
+                f"Length of values must be at least 1: {self.values}"
+            )
+
     def __len__(self) -> int:
         return len(self.values)
 
