@@ -1,4 +1,5 @@
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 from harmonizer_bot.datetime import (
     ScreenDate,
@@ -38,22 +39,13 @@ class DateToSlotsSchedulesTestCase(TestCase):
 
 
 class SlotToDatesScheduleTestCase(TestCase):
-    def test_continuous_period_string(self):
+    def test_str(self):
+        screen_dates = MagicMock(spec=ScreenDateCollection)
+        screen_dates_string = screen_dates.__str__.return_value
         schedule = SlotToDatesSchedule(
-            (ScreenStartTime(11, 38),),
-            ScreenDateCollection(
-                [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
-            ),
+            (ScreenStartTime(11, 38), ScreenStartTime(23, 38)), screen_dates
         )
 
-        self.assertEqual(str(schedule), "11/10(木)-11/11(金) 11:38-")
-
-    def test_intermittent_period_string(self):
-        schedule = SlotToDatesSchedule(
-            (ScreenStartTime(23, 38),),
-            ScreenDateCollection(
-                [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)]
-            ),
+        self.assertEqual(
+            str(schedule), f"{screen_dates_string} 11:38- & 23:38-"
         )
-
-        self.assertEqual(str(schedule), "11/9(水) & 11/11(金) 23:38-")
