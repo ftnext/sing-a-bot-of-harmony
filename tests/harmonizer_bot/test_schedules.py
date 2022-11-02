@@ -8,7 +8,7 @@ from harmonizer_bot.datetime import (
 from harmonizer_bot.schedules import (
     DateToSlotsSchedule,
     DateToSlotsSchedules,
-    SlotToDaysSchedule,
+    SlotToDatesSchedule,
 )
 
 
@@ -37,9 +37,9 @@ class DateToSlotsSchedulesTestCase(TestCase):
             )
 
 
-class SlotToDaysScheduleTestCase(TestCase):
+class SlotToDatesScheduleTestCase(TestCase):
     def test_continuous_period_string(self):
-        schedule = SlotToDaysSchedule(
+        schedule = SlotToDatesSchedule(
             (ScreenStartTime(11, 38),),
             ScreenDateCollection(
                 [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
@@ -49,7 +49,7 @@ class SlotToDaysScheduleTestCase(TestCase):
         self.assertEqual(str(schedule), "11/10(木)-11/11(金) 11:38-")
 
     def test_intermittent_period_string(self):
-        schedule = SlotToDaysSchedule(
+        schedule = SlotToDatesSchedule(
             (ScreenStartTime(23, 38),),
             ScreenDateCollection(
                 [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)]

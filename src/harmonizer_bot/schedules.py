@@ -46,7 +46,7 @@ class DateToSlotsSchedules(Sequence):
 
     def inverse(
         self, current: date, *, window: int | None = None
-    ) -> SlotToDaysSchedules:
+    ) -> SlotToDatesSchedules:
         # TODO self.values のソート
         current_and_future = filter(
             lambda schedule: schedule.date >= current, self.values
@@ -57,16 +57,16 @@ class DateToSlotsSchedules(Sequence):
         schedules = defaultdict(list)
         for schedule in current_and_future:
             schedules[tuple(schedule.slots)].append(schedule.date)
-        return SlotToDaysSchedules(
+        return SlotToDatesSchedules(
             [
-                SlotToDaysSchedule(slot, ScreenDateCollection(days))
+                SlotToDatesSchedule(slot, ScreenDateCollection(days))
                 for slot, days in schedules.items()
             ]
         )
 
 
 @dataclass(frozen=True)
-class SlotToDaysSchedule:
+class SlotToDatesSchedule:
     slot: tuple[ScreenStartTime]
     dates: ScreenDateCollection
 
@@ -77,11 +77,11 @@ class SlotToDaysSchedule:
 
 
 @dataclass(frozen=True)
-class SlotToDaysSchedules:
-    values: Sequence[SlotToDaysSchedule]
+class SlotToDatesSchedules:
+    values: Sequence[SlotToDatesSchedule]
 
     def __len__(self) -> int:
         return len(self.values)
 
-    def __getitem__(self, key) -> SlotToDaysSchedule:
+    def __getitem__(self, key) -> SlotToDatesSchedule:
         return self.values[key]
