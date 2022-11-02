@@ -47,7 +47,11 @@ class ScreenDateCollection(Sequence):
     def __len__(self) -> int:
         return len(self.values)
 
-    def __getitem__(self, key) -> ScreenStartTime:
+    def __getitem__(
+        self, key: int | slice
+    ) -> ScreenDate | ScreenDateCollection:
+        if isinstance(key, slice):
+            return self.__class__(self.values[key])
         return self.values[key]
 
     def __str__(self) -> str:
