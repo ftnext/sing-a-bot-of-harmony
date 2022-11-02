@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from datetime import date
 
 from harmonizer_bot.datetime import (
+    AscendingScreenDates,
     ScreenDate,
-    ScreenDateCollection,
     ScreenStartTime,
 )
 
@@ -59,7 +59,7 @@ class DateToSlotsSchedules(Sequence):
             schedules[tuple(schedule.slots)].append(schedule.date)
         return SlotToDatesSchedules(
             [
-                SlotToDatesSchedule(slot, ScreenDateCollection(days))
+                SlotToDatesSchedule(slot, AscendingScreenDates(days))
                 for slot, days in schedules.items()
             ]
         )
@@ -68,7 +68,7 @@ class DateToSlotsSchedules(Sequence):
 @dataclass(frozen=True)
 class SlotToDatesSchedule:
     slot: tuple[ScreenStartTime]
-    dates: ScreenDateCollection
+    dates: AscendingScreenDates
 
     def __str__(self) -> str:
         start_time_part = " & ".join(f"{st}-" for st in self.slot)

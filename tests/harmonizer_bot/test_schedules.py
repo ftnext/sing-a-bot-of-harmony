@@ -2,8 +2,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock
 
 from harmonizer_bot.datetime import (
+    AscendingScreenDates,
     ScreenDate,
-    ScreenDateCollection,
     ScreenStartTime,
 )
 from harmonizer_bot.schedules import (
@@ -40,7 +40,7 @@ class DateToSlotsSchedulesTestCase(TestCase):
 
 class SlotToDatesScheduleTestCase(TestCase):
     def test_str(self):
-        screen_dates = MagicMock(spec=ScreenDateCollection)
+        screen_dates = MagicMock(spec=AscendingScreenDates)
         screen_dates_string = screen_dates.__str__.return_value
         schedule = SlotToDatesSchedule(
             (ScreenStartTime(11, 38), ScreenStartTime(23, 38)), screen_dates

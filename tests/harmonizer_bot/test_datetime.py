@@ -2,10 +2,10 @@ from datetime import date, time
 from unittest import TestCase
 
 from harmonizer_bot.datetime import (
+    AscendingScreenDates,
     BirthDate,
     CustomizedBaseDate,
     ScreenDate,
-    ScreenDateCollection,
     ScreenStartTime,
 )
 
@@ -72,10 +72,10 @@ class ScreenStartTimeTestCase(TestCase):
         self.assertEqual(f"{start_time2}", "5:15")
 
 
-class ScreenDateCollectionTestCase(TestCase):
+class AscendingScreenDatesTestCase(TestCase):
     def test_cannot_create_when_dates_are_empty(self):
         with self.assertRaises(ValueError):
-            _ = ScreenDateCollection([])
+            _ = AscendingScreenDates([])
 
     def test_cannot_create_from_not_ascending_dates(self):
         dates = [
@@ -84,12 +84,12 @@ class ScreenDateCollectionTestCase(TestCase):
             ScreenDate(2022, 11, 3),
         ]
         with self.assertRaises(ValueError):
-            _ = ScreenDateCollection(dates)
+            _ = AscendingScreenDates(dates)
 
     def test_get_single_date(self):
         screen_date_0 = ScreenDate(2022, 10, 30)
         screen_date_1 = ScreenDate(2022, 10, 31)
-        screen_dates = ScreenDateCollection([screen_date_0, screen_date_1])
+        screen_dates = AscendingScreenDates([screen_date_0, screen_date_1])
 
         self.assertEqual(screen_dates[1], screen_date_1)
 
@@ -97,28 +97,28 @@ class ScreenDateCollectionTestCase(TestCase):
         screen_date_0 = ScreenDate(2022, 11, 1)
         screen_date_1 = ScreenDate(2022, 11, 2)
         screen_date_2 = ScreenDate(2022, 11, 3)
-        screen_dates = ScreenDateCollection(
+        screen_dates = AscendingScreenDates(
             [screen_date_0, screen_date_1, screen_date_2]
         )
 
-        expected_head2 = ScreenDateCollection([screen_date_0, screen_date_1])
+        expected_head2 = AscendingScreenDates([screen_date_0, screen_date_1])
         self.assertEqual(screen_dates[:2], expected_head2)
 
-        expected_tail2 = ScreenDateCollection([screen_date_1, screen_date_2])
+        expected_tail2 = AscendingScreenDates([screen_date_1, screen_date_2])
         self.assertEqual(screen_dates[1:], expected_tail2)
 
     def test_single_date_string(self):
-        screen_dates = ScreenDateCollection([ScreenDate(2022, 6, 6)])
+        screen_dates = AscendingScreenDates([ScreenDate(2022, 6, 6)])
 
         self.assertEqual(str(screen_dates), "6/6(月)")
 
     def test_continuous_period_string_with_start_and_end_dates(self):
-        screen_dates = ScreenDateCollection(
+        screen_dates = AscendingScreenDates(
             [ScreenDate(2022, 11, 10), ScreenDate(2022, 11, 11)]
         )
         self.assertEqual(str(screen_dates), "11/10(木)-11/11(金)")
 
-        screen_dates2 = ScreenDateCollection(
+        screen_dates2 = AscendingScreenDates(
             [
                 ScreenDate(2022, 11, 10),
                 ScreenDate(2022, 11, 11),
@@ -128,14 +128,14 @@ class ScreenDateCollectionTestCase(TestCase):
         self.assertEqual(str(screen_dates2), "11/10(木)-11/12(土)")
 
     def test_intermittent_period_string(self):
-        screen_dates = ScreenDateCollection(
+        screen_dates = AscendingScreenDates(
             [ScreenDate(2022, 11, 9), ScreenDate(2022, 11, 11)]
         )
 
         self.assertEqual(str(screen_dates), "11/9(水) & 11/11(金)")
 
     def test_continuous_and_intermittent_mixed_string(self):
-        screen_dates = ScreenDateCollection(
+        screen_dates = AscendingScreenDates(
             [
                 ScreenDate(2022, 11, 4),
                 ScreenDate(2022, 11, 7),

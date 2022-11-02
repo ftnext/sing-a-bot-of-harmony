@@ -35,7 +35,7 @@ class ScreenStartTime(time):
 
 
 @dataclass(frozen=True)
-class ScreenDateCollection(Sequence):
+class AscendingScreenDates(Sequence):
     values: Sequence[ScreenDate]
 
     def __post_init__(self):
@@ -53,7 +53,7 @@ class ScreenDateCollection(Sequence):
 
     def __getitem__(
         self, key: int | slice
-    ) -> ScreenDate | ScreenDateCollection:
+    ) -> ScreenDate | AscendingScreenDates:
         if isinstance(key, slice):
             return self.__class__(self.values[key])
         return self.values[key]
