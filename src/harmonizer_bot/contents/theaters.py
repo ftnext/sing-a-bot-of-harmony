@@ -5,7 +5,7 @@ from sparkling_counter.core import IllegalDayCountError
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
 from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
-from harmonizer_bot.schedules import DayToSlotsSchedule, DayToSlotsSchedules
+from harmonizer_bot.schedules import DateToSlotsSchedule, DateToSlotsSchedules
 
 from .base import Content
 
@@ -201,53 +201,53 @@ class CinemaCityContent(Content):
     START_DAY = ScreenDate(2022, 10, 29)
     LAST_DAY = ScreenDate(2022, 11, 10)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
-    SCHEDULES = DayToSlotsSchedules(
+    SCHEDULES = DateToSlotsSchedules(
         [
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 10, 29), [ScreenStartTime(18, 30)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 10, 30),
                 [ScreenStartTime(15, 55), ScreenStartTime(21, 15)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 10, 31), [ScreenStartTime(20, 15)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 1), [ScreenStartTime(20, 15)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 2), [ScreenStartTime(20, 15)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 3),
                 [ScreenStartTime(16, 0), ScreenStartTime(20, 50)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 4),
                 [ScreenStartTime(18, 25), ScreenStartTime(21, 0)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 5),
                 [ScreenStartTime(18, 15), ScreenStartTime(20, 55)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 6),
                 [ScreenStartTime(18, 15), ScreenStartTime(20, 55)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 7),
                 [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 8),
                 [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 9),
                 [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 10),
                 [ScreenStartTime(18, 15), ScreenStartTime(20, 50)],
             ),
@@ -281,18 +281,18 @@ class CinemaCityContent(Content):
 class ShinjukuPiccadillyContent(Content):
     START_DAY = ScreenDate(2022, 11, 5)
     START_COUNT_DOWN = DayCountDown(START_DAY, include=False)
-    SCHEDULES = DayToSlotsSchedules(
+    SCHEDULES = DateToSlotsSchedules(
         [
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 5), [ScreenStartTime(9, 0)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 7), [ScreenStartTime(13, 50)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 8), [ScreenStartTime(15, 45)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 9), [ScreenStartTime(21, 0)]
             ),
         ]
@@ -324,15 +324,15 @@ class ShinjukuPiccadillyContent(Content):
 
 
 class WowowBroadCastContent(Content):
-    SCHEDULES = DayToSlotsSchedules(
+    SCHEDULES = DateToSlotsSchedules(
         [
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 4), [ScreenStartTime(21, 0)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 7), [ScreenStartTime(17, 0)]
             ),
-            DayToSlotsSchedule(
+            DateToSlotsSchedule(
                 ScreenDate(2022, 11, 14), [ScreenStartTime(17, 0)]
             ),
         ]
@@ -342,7 +342,7 @@ class WowowBroadCastContent(Content):
         self._date = date_
 
     def generate(self) -> str:
-        count_down = DayCountDown(self.SCHEDULES[0].day, include=False)
+        count_down = DayCountDown(self.SCHEDULES[0].date, include=False)
         sentences = Sentences(
             Sentence(
                 "#アイの歌声を聴かせて この11月、WOWOWで放送！"

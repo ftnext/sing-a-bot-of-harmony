@@ -6,31 +6,31 @@ from harmonizer_bot.datetime import (
     ScreenStartTime,
 )
 from harmonizer_bot.schedules import (
-    DayToSlotsSchedule,
-    DayToSlotsSchedules,
+    DateToSlotsSchedule,
+    DateToSlotsSchedules,
     SlotToDaysSchedule,
 )
 
 
-class DayToSlotsScheduleTestCase(TestCase):
+class DateToSlotsScheduleTestCase(TestCase):
     def test_cannot_create_when_slots_are_empty(self):
         with self.assertRaises(ValueError):
-            _ = DayToSlotsSchedule(ScreenDate(2022, 10, 31), [])
+            _ = DateToSlotsSchedule(ScreenDate(2022, 10, 31), [])
 
 
-class DayToSlotsSchedulesTestCase(TestCase):
+class DateToSlotsSchedulesTestCase(TestCase):
     def test_cannot_create_when_date_are_duplicated(self):
         with self.assertRaises(ValueError):
-            _ = DayToSlotsSchedules(
+            _ = DateToSlotsSchedules(
                 [
-                    DayToSlotsSchedule(
+                    DateToSlotsSchedule(
                         ScreenDate(2022, 11, 1),
                         [ScreenStartTime(9, 30), ScreenStartTime(18, 15)],
                     ),
-                    DayToSlotsSchedule(
+                    DateToSlotsSchedule(
                         ScreenDate(2022, 11, 2), [ScreenStartTime(15, 0)]
                     ),
-                    DayToSlotsSchedule(
+                    DateToSlotsSchedule(
                         ScreenDate(2022, 11, 1), [ScreenStartTime(12, 45)]
                     ),
                 ]

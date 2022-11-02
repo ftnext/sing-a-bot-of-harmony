@@ -13,8 +13,8 @@ from harmonizer_bot.datetime import (
 
 
 @dataclass(frozen=True)
-class DayToSlotsSchedule:
-    day: ScreenDate
+class DateToSlotsSchedule:
+    date: ScreenDate
     slots: Sequence[ScreenStartTime]
 
     def __post_init__(self):
@@ -25,23 +25,23 @@ class DayToSlotsSchedule:
 
 
 @dataclass(frozen=True)
-class DayToSlotsSchedules(Sequence):
-    values: Sequence[DayToSlotsSchedule]
+class DateToSlotsSchedules(Sequence):
+    values: Sequence[DateToSlotsSchedule]
 
     def __post_init__(self):
         seen_dates = set()
         for schedule in self.values:
-            if str(schedule.day) in seen_dates:
+            if str(schedule.date) in seen_dates:
                 raise ValueError(
-                    f"Each date must be unique. {schedule.day} is duplicated: "
+                    f"Each date must be unique. {schedule.date} is duplicated: "
                     f"{schedule}"
                 )
-            seen_dates.add(str(schedule.day))
+            seen_dates.add(str(schedule.date))
 
     def __len__(self) -> int:
         return len(self.values)
 
-    def __getitem__(self, key) -> DayToSlotsSchedule:
+    def __getitem__(self, key) -> DateToSlotsSchedule:
         return self.values[key]
 
     def inverse(
@@ -49,14 +49,14 @@ class DayToSlotsSchedules(Sequence):
     ) -> SlotToDaysSchedules:
         # TODO self.values のソート
         current_and_future = filter(
-            lambda schedule: schedule.day >= current, self.values
+            lambda schedule: schedule.date >= current, self.values
         )
         current_and_future = (
             list(current_and_future)[:window] if window else current_and_future
         )
         schedules = defaultdict(list)
         for schedule in current_and_future:
-            schedules[tuple(schedule.slots)].append(schedule.day)
+            schedules[tuple(schedule.slots)].append(schedule.date)
         return SlotToDaysSchedules(
             [
                 SlotToDaysSchedule(slot, ScreenDateCollection(days))
