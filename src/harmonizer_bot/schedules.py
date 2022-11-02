@@ -33,8 +33,8 @@ class DateToSlotsSchedules(Sequence):
         for schedule in self.values:
             if str(schedule.date) in seen_dates:
                 raise ValueError(
-                    f"Each date must be unique. {schedule.date} is duplicated: "
-                    f"{schedule}"
+                    f"Each date must be unique. {schedule.date} is "
+                    f"duplicated: {schedule}"
                 )
             seen_dates.add(str(schedule.date))
 
