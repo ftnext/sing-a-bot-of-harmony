@@ -85,6 +85,20 @@ class ScreenDateCollectionTestCase(TestCase):
 
         self.assertEqual(screen_dates[1], screen_date_1)
 
+    def test_get_multiple_dates_with_slice(self):
+        screen_date_0 = MagicMock(spec=ScreenDate)
+        screen_date_1 = MagicMock(spec=ScreenDate)
+        screen_date_2 = MagicMock(spec=ScreenDate)
+        screen_dates = ScreenDateCollection(
+            [screen_date_0, screen_date_1, screen_date_2]
+        )
+
+        expected_head2 = ScreenDateCollection([screen_date_0, screen_date_1])
+        self.assertEqual(screen_dates[:2], expected_head2)
+
+        expected_tail2 = ScreenDateCollection([screen_date_1, screen_date_2])
+        self.assertEqual(screen_dates[1:], expected_tail2)
+
     def test_single_date_string(self):
         screen_dates = ScreenDateCollection([ScreenDate(2022, 6, 6)])
 
