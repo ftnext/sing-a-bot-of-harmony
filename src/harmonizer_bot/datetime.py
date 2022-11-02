@@ -55,10 +55,13 @@ class ScreenDateCollection(Sequence):
         return self.values[key]
 
     def __str__(self) -> str:
+        if len(self) == 1:
+            return str(self[0])
+
         start_date = self[0]
         dates_string = f"{start_date}"
         period_end_date = None
-        for day in self.values[1:]:
+        for day in self[1:]:
             if (day - start_date).days == 1:
                 period_end_date = day
                 start_date = day
