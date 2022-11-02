@@ -1,5 +1,6 @@
 from datetime import date, time
 from unittest import TestCase
+from unittest.mock import MagicMock
 
 from harmonizer_bot.datetime import (
     BirthDate,
@@ -76,6 +77,13 @@ class ScreenDateCollectionTestCase(TestCase):
     def test_cannot_create_when_dates_are_empty(self):
         with self.assertRaises(ValueError):
             _ = ScreenDateCollection([])
+
+    def test_get_single_date(self):
+        screen_date_0 = MagicMock(spec=ScreenDate)
+        screen_date_1 = MagicMock(spec=ScreenDate)
+        screen_dates = ScreenDateCollection([screen_date_0, screen_date_1])
+
+        self.assertEqual(screen_dates[1], screen_date_1)
 
     def test_single_date_string(self):
         screen_dates = ScreenDateCollection([ScreenDate(2022, 6, 6)])
