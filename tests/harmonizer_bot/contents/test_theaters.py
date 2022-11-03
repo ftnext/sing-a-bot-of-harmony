@@ -218,7 +218,8 @@ class CinemaCityContentTestCase(ContentTestCase):
     10/31(月)-11/2(水) 20:15-
     11/3(木) 16:00- & 20:50-
 
-    https://twitter.com/cinemacity_jp/status/1580848214365700097
+    🌕MV上映付き！
+    https://twitter.com/cinemacity_jp/status/1586504366231814144
     """
 
     def test_build_schedule(self):

@@ -267,8 +267,9 @@ class CinemaCityContent(Content):
             NEW_LINE,
             *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
+            Sentence("🌕MV上映付き！"),
             Sentence(
-                "https://twitter.com/cinemacity_jp/status/1580848214365700097"
+                "https://twitter.com/cinemacity_jp/status/1586504366231814144"
             ),
         )
         return sentences.format()
