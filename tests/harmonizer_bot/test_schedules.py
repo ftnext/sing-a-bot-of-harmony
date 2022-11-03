@@ -60,6 +60,16 @@ class DateToSlotsSchedulesTestCase(TestCase):
 
         self.assertEqual(schedules[1], self.schedule_1101)
 
+    def test_get_multiple_schedules_with_slice(self):
+        schedules = DateToSlotsSchedules(
+            [self.schedule_1102, self.schedule_1103, self.schedule_1101]
+        )
+
+        expected_head2 = DateToSlotsSchedules(
+            [self.schedule_1102, self.schedule_1103]
+        )
+        self.assertEqual(schedules[:2], expected_head2)
+
     def test_can_sort_ascending_date(self):
         schedules = DateToSlotsSchedules(
             [self.schedule_1102, self.schedule_1101, self.schedule_1103]
