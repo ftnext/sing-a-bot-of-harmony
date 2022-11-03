@@ -251,6 +251,25 @@ class ShinjukuPiccadillyContentTestCase(ContentTestCase):
     気をつけてー、予告編がないってことにー🎵
     """
 
+    def test_generate_on_the_day(self):
+        content = self.target_class(date(2022, 11, 8))
+
+        actual = content.generate()
+
+        expected = dedent(
+            """\
+            #アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！（本日です！🎦）
+
+            11/8(火) 15:45-
+            11/9(水) 21:00-
+
+            https://twitter.com/liveaudio_fes/status/1587248058500259846
+
+            気をつけてー、予告編がないってことにー🎵
+            """
+        ).rstrip()
+        self.assertEqual(actual, expected)
+
 
 class WowowBroadcastContentTestCase(ContentTestCase):
     target_class = WowowBroadCastContent
