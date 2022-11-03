@@ -1,6 +1,6 @@
 from datetime import date
 
-from sparkling_counter import DayCountDown
+from sparkling_counter import DayCountDown, XthDayCount
 from sparkling_counter.core import (
     ArrivingTheDayException,
     IllegalDayCountError,
@@ -204,6 +204,7 @@ class TsukaguchiSunSunTheaterContent(Content):
 class CinemaCityContent(Content, ScheduleBuildableMixin):
     START_DAY = ScreenDate(2022, 10, 29)
     LAST_DAY = ScreenDate(2022, 11, 10)
+    FROM_START_COUNT_DOWN = XthDayCount(START_DAY)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
     SCHEDULES = DateToSlotsSchedules(
         [
@@ -267,7 +268,10 @@ class CinemaCityContent(Content, ScheduleBuildableMixin):
                 "#アイの歌声を聴かせて 立川のシネマシティさんで"
                 f"{self.START_DAY}から{self.LAST_DAY}まで公開一周年記念上映中！"
             ),
-            Sentence(f"今日を含めてあと{self.END_COUNT_DOWN(self._date)}日📡"),
+            Sentence(
+                f"今日は{self.FROM_START_COUNT_DOWN(self._date)}日目"
+                f"（あと{self.END_COUNT_DOWN(self._date)}日！）📡"
+            ),
             NEW_LINE,
             *[Sentence(line) for line in self.build_schedule(window=5)],
             NEW_LINE,
