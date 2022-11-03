@@ -106,6 +106,24 @@ class DateToSlotsSchedulesTestCase(TestCase):
         self.assertEqual(actual, expected)
 
 
+class OnAndAfterTodayDateToSlotsSchedulesTestCase(TestCase):
+    def test_cannot_create_from_not_ascending_dates(self):
+        start_time1 = MagicMock(spec=ScreenStartTime)
+        start_time2 = MagicMock(spec=ScreenStartTime)
+
+        with self.assertRaises(ValueError):
+            _ = OnAndAfterTodayDateToSlotsSchedules(
+                [
+                    DateToSlotsSchedule(
+                        ScreenDate(2022, 11, 5), [start_time1]
+                    ),
+                    DateToSlotsSchedule(
+                        ScreenDate(2022, 11, 4), [start_time2]
+                    ),
+                ]
+            )
+
+
 class SlotToDatesScheduleTestCase(TestCase):
     def test_str(self):
         screen_dates = MagicMock(spec=AscendingScreenDates)
