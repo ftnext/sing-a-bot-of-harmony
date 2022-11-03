@@ -260,7 +260,7 @@ class WowowBroadcastContentTestCase(ContentTestCase):
     11/4(金) 21:00-
     11/7(月) & 11/14(月) 17:00-
 
-    https://www.wowow.co.jp/detail/179522
+    https://twitter.com/wowow_movie/status/1587738821684187137
 
     WOWOW加入されている方はぜひ！
     """

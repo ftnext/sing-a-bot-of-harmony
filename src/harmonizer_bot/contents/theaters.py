@@ -351,7 +351,9 @@ class WowowBroadCastContent(Content):
             NEW_LINE,
             *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
-            Sentence("https://www.wowow.co.jp/detail/179522"),
+            Sentence(
+                "https://twitter.com/wowow_movie/status/1587738821684187137"
+            ),
             NEW_LINE,
             Sentence("WOWOW加入されている方はぜひ！"),
         )
