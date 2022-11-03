@@ -20,6 +20,11 @@ class DateToSlotsScheduleTestCase(TestCase):
 
 
 class DateToSlotsSchedulesTestCase(TestCase):
+    def setUp(self):
+        self.start_time_1101 = MagicMock(spec=ScreenStartTime)
+        self.start_time_1102 = MagicMock(spec=ScreenStartTime)
+        self.start_time_1103 = MagicMock(spec=ScreenStartTime)
+
     def test_cannot_create_when_date_are_duplicated(self):
         with self.assertRaises(ValueError):
             _ = DateToSlotsSchedules(
@@ -38,19 +43,16 @@ class DateToSlotsSchedulesTestCase(TestCase):
             )
 
     def test_can_sort_ascending_date(self):
-        start_time_1101 = MagicMock(spec=ScreenStartTime)
-        start_time_1102 = MagicMock(spec=ScreenStartTime)
-        start_time_1103 = MagicMock(spec=ScreenStartTime)
         schedules = DateToSlotsSchedules(
             [
                 DateToSlotsSchedule(
-                    ScreenDate(2022, 11, 2), [start_time_1102]
+                    ScreenDate(2022, 11, 2), [self.start_time_1102]
                 ),
                 DateToSlotsSchedule(
-                    ScreenDate(2022, 11, 1), [start_time_1101]
+                    ScreenDate(2022, 11, 1), [self.start_time_1101]
                 ),
                 DateToSlotsSchedule(
-                    ScreenDate(2022, 11, 3), [start_time_1103]
+                    ScreenDate(2022, 11, 3), [self.start_time_1103]
                 ),
             ]
         )
@@ -60,13 +62,13 @@ class DateToSlotsSchedulesTestCase(TestCase):
         expected = DateToSlotsSchedules(
             [
                 DateToSlotsSchedule(
-                    ScreenDate(2022, 11, 1), [start_time_1101]
+                    ScreenDate(2022, 11, 1), [self.start_time_1101]
                 ),
                 DateToSlotsSchedule(
-                    ScreenDate(2022, 11, 2), [start_time_1102]
+                    ScreenDate(2022, 11, 2), [self.start_time_1102]
                 ),
                 DateToSlotsSchedule(
-                    ScreenDate(2022, 11, 3), [start_time_1103]
+                    ScreenDate(2022, 11, 3), [self.start_time_1103]
                 ),
             ]
         )
