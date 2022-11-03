@@ -53,6 +53,13 @@ class DateToSlotsSchedulesTestCase(TestCase):
                 ]
             )
 
+    def test_get_single_schedule(self):
+        schedules = DateToSlotsSchedules(
+            [self.schedule_1103, self.schedule_1101]
+        )
+
+        self.assertEqual(schedules[1], self.schedule_1101)
+
     def test_can_sort_ascending_date(self):
         schedules = DateToSlotsSchedules(
             [self.schedule_1102, self.schedule_1101, self.schedule_1103]
