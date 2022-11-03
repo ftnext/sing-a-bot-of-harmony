@@ -64,15 +64,8 @@ class DateToSlotsSchedules(Sequence):
     def inverse(
         self, current: date, *, window: int | None = None
     ) -> SlotToDatesSchedules:
-        sorted_schedules = self.sort()
-        current_and_future = filter(
-            lambda schedule: schedule.date >= current, sorted_schedules
-        )
-        current_and_future = (
-            list(current_and_future)[:window] if window else current_and_future
-        )
         schedules = defaultdict(list)
-        for schedule in current_and_future:
+        for schedule in self:
             schedules[tuple(schedule.slots)].append(schedule.date)
         return SlotToDatesSchedules(
             [
