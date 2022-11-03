@@ -44,6 +44,9 @@ class DateToSlotsSchedules(Sequence):
     def __getitem__(self, key) -> DateToSlotsSchedule:
         return self.values[key]
 
+    def sort(self):
+        raise NotImplementedError
+
     def inverse(
         self, current: date, *, window: int | None = None
     ) -> SlotToDatesSchedules:

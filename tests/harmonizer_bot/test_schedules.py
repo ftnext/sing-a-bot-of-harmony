@@ -37,6 +37,41 @@ class DateToSlotsSchedulesTestCase(TestCase):
                 ]
             )
 
+    def test_can_sort_ascending_date(self):
+        start_time_1101 = MagicMock(spec=ScreenStartTime)
+        start_time_1102 = MagicMock(spec=ScreenStartTime)
+        start_time_1103 = MagicMock(spec=ScreenStartTime)
+        schedules = DateToSlotsSchedules(
+            [
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 2), [start_time_1102]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 1), [start_time_1101]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 3), [start_time_1103]
+                ),
+            ]
+        )
+
+        actual = schedules.sort()
+
+        expected = DateToSlotsSchedules(
+            [
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 1), [start_time_1101]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 2), [start_time_1102]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 3), [start_time_1103]
+                ),
+            ]
+        )
+        self.assertEqual(actual, expected)
+
 
 class SlotToDatesScheduleTestCase(TestCase):
     def test_str(self):
