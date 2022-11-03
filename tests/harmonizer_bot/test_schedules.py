@@ -1,3 +1,4 @@
+from datetime import date
 from unittest import TestCase
 from unittest.mock import MagicMock
 
@@ -9,6 +10,7 @@ from harmonizer_bot.datetime import (
 from harmonizer_bot.schedules import (
     DateToSlotsSchedule,
     DateToSlotsSchedules,
+    OnAndAfterTodayDateToSlotsSchedules,
     SlotToDatesSchedule,
 )
 
@@ -64,6 +66,35 @@ class DateToSlotsSchedulesTestCase(TestCase):
                 DateToSlotsSchedule(
                     ScreenDate(2022, 11, 1), [self.start_time_1101]
                 ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 2), [self.start_time_1102]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 3), [self.start_time_1103]
+                ),
+            ]
+        )
+        self.assertEqual(actual, expected)
+
+    def test_can_select_on_and_after_specified_date(self):
+        schedules = DateToSlotsSchedules(
+            [
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 1), [self.start_time_1101]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 2), [self.start_time_1102]
+                ),
+                DateToSlotsSchedule(
+                    ScreenDate(2022, 11, 3), [self.start_time_1103]
+                ),
+            ]
+        )
+
+        actual = schedules.select_on_and_after(date(2022, 11, 2))
+
+        expected = OnAndAfterTodayDateToSlotsSchedules(
+            [
                 DateToSlotsSchedule(
                     ScreenDate(2022, 11, 2), [self.start_time_1102]
                 ),

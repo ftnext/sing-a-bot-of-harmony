@@ -48,6 +48,11 @@ class DateToSlotsSchedules(Sequence):
         sorted_values = sorted(self.values, key=lambda schedule: schedule.date)
         return self.__class__(sorted_values)
 
+    def select_on_and_after(
+        self, date: date
+    ) -> OnAndAfterTodayDateToSlotsSchedules:
+        raise NotImplementedError
+
     def inverse(
         self, current: date, *, window: int | None = None
     ) -> SlotToDatesSchedules:
@@ -67,6 +72,11 @@ class DateToSlotsSchedules(Sequence):
                 for slot, days in schedules.items()
             ]
         )
+
+
+@dataclass(frozen=True)
+class OnAndAfterTodayDateToSlotsSchedules(DateToSlotsSchedules):
+    values: Sequence[DateToSlotsSchedule]
 
 
 @dataclass(frozen=True)
