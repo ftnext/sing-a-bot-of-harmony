@@ -4,6 +4,7 @@ from sparkling_counter import DayCountDown
 from sparkling_counter.core import IllegalDayCountError
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+from harmonizer_bot.contents.mixins import ScheduleBuildableMixin
 from harmonizer_bot.datetime import ScreenDate, ScreenStartTime
 from harmonizer_bot.schedules import DateToSlotsSchedule, DateToSlotsSchedules
 
@@ -324,7 +325,7 @@ class ShinjukuPiccadillyContent(Content):
         return [str(schedule) for schedule in schedules]
 
 
-class WowowBroadCastContent(Content):
+class WowowBroadCastContent(Content, ScheduleBuildableMixin):
     SCHEDULES = DateToSlotsSchedules(
         [
             DateToSlotsSchedule(
@@ -359,7 +360,3 @@ class WowowBroadCastContent(Content):
             Sentence("WOWOW加入されている方はぜひ！"),
         )
         return sentences.format()
-
-    def build_schedule(self):
-        slot_to_days_schedules = self.SCHEDULES.inverse(self._date)
-        return [str(schedule) for schedule in slot_to_days_schedules]
