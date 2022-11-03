@@ -280,8 +280,6 @@ class CinemaCityContent(Content, ScheduleBuildableMixin):
 
 
 class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):
-    START_DAY = ScreenDate(2022, 11, 5)
-    START_COUNT_DOWN = DayCountDown(START_DAY, include=False)
     SCHEDULES = DateToSlotsSchedules(
         [
             DateToSlotsSchedule(
