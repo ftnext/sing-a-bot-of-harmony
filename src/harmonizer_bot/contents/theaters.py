@@ -280,7 +280,7 @@ class CinemaCityContent(Content):
         return [str(schedule) for schedule in schedules]
 
 
-class ShinjukuPiccadillyContent(Content):
+class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):
     START_DAY = ScreenDate(2022, 11, 5)
     START_COUNT_DOWN = DayCountDown(START_DAY, include=False)
     SCHEDULES = DateToSlotsSchedules(
@@ -319,10 +319,6 @@ class ShinjukuPiccadillyContent(Content):
             Sentence("気をつけてー、予告編がないってことにー🎵"),
         )
         return sentences.format()
-
-    def build_schedule(self):
-        schedules = self.SCHEDULES.inverse(self._date)
-        return [str(schedule) for schedule in schedules]
 
 
 class WowowBroadCastContent(Content, ScheduleBuildableMixin):
