@@ -339,7 +339,10 @@ class WowowBroadCastContent(Content, ScheduleBuildableMixin):
         self._date = date_
 
     def generate(self) -> str:
-        count_down = DayCountDown(self.SCHEDULES[0].date, include=False)
+        on_and_after_schedules = self.SCHEDULES.select_on_and_after(self._date)
+        count_down = DayCountDown(
+            on_and_after_schedules[0].date, include=False
+        )
         try:
             day_part = f"次回は{count_down(self._date)}日後！"
         except ArrivingTheDayException:
