@@ -51,7 +51,11 @@ class DateToSlotsSchedules(Sequence):
     def select_on_and_after(
         self, date: date
     ) -> OnAndAfterTodayDateToSlotsSchedules:
-        raise NotImplementedError
+        sorted_schedules = self.sort()
+        current_and_future = filter(
+            lambda schedule: schedule.date >= date, sorted_schedules
+        )
+        return OnAndAfterTodayDateToSlotsSchedules(list(current_and_future))
 
     def inverse(
         self, current: date, *, window: int | None = None
