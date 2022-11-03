@@ -45,7 +45,8 @@ class DateToSlotsSchedules(Sequence):
         return self.values[key]
 
     def sort(self):
-        raise NotImplementedError
+        sorted_values = sorted(self.values, key=lambda schedule: schedule.date)
+        return self.__class__(sorted_values)
 
     def inverse(
         self, current: date, *, window: int | None = None
