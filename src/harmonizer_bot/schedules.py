@@ -82,6 +82,11 @@ class DateToSlotsSchedules(Sequence):
 class OnAndAfterTodayDateToSlotsSchedules(DateToSlotsSchedules):
     values: Sequence[DateToSlotsSchedule]
 
+    def __post_init__(self):
+        sorted_values = sorted(self.values, key=lambda v: v.date)
+        if list(self.values) != sorted_values:
+            raise ValueError(f"Dates must be sorted ascending: {self.values}")
+
 
 @dataclass(frozen=True)
 class SlotToDatesSchedule:
