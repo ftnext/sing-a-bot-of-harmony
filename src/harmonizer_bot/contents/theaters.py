@@ -303,11 +303,17 @@ class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):
         self._date = date_
 
     def generate(self) -> str:
+        on_and_after_schedules = self.SCHEDULES.select_on_and_after(self._date)
+        count_down = DayCountDown(
+            on_and_after_schedules[0].date, include=False
+        )
+        try:
+            day_part = f"{count_down(self._date)}日後から！"
+        except ArrivingTheDayException:
+            day_part = "本日です！🎦"
+
         sentences = Sentences(
-            Sentence(
-                "#アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！"
-                f"（{self.START_COUNT_DOWN(self._date)}日後から！）"
-            ),
+            Sentence(f"#アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！（{day_part}）"),
             NEW_LINE,
             *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
