@@ -341,7 +341,7 @@ class WowowBroadCastContent(Content, ScheduleBuildableMixin):
     def generate(self) -> str:
         count_down = DayCountDown(self.SCHEDULES[0].date, include=False)
         try:
-            day_part = f"{count_down(self._date)}日後から！"
+            day_part = f"次回は{count_down(self._date)}日後！"
         except ArrivingTheDayException:
             day_part = "本日です！🎉"
 

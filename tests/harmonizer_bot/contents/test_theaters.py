@@ -256,7 +256,7 @@ class WowowBroadcastContentTestCase(ContentTestCase):
     target_class = WowowBroadCastContent
     generation_date = date(2022, 11, 2)
     generated_content = """
-    #アイの歌声を聴かせて この11月、WOWOWで放送！（2日後から！）
+    #アイの歌声を聴かせて この11月、WOWOWで放送！（次回は2日後！）
 
     11/4(金) 21:00-
     11/7(月) & 11/14(月) 17:00-
