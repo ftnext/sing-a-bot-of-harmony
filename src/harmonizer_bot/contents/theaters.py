@@ -1,7 +1,10 @@
 from datetime import date
 
 from sparkling_counter import DayCountDown
-from sparkling_counter.core import IllegalDayCountError
+from sparkling_counter.core import (
+    ArrivingTheDayException,
+    IllegalDayCountError,
+)
 
 from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
 from harmonizer_bot.contents.mixins import ScheduleBuildableMixin
@@ -337,11 +340,13 @@ class WowowBroadCastContent(Content, ScheduleBuildableMixin):
 
     def generate(self) -> str:
         count_down = DayCountDown(self.SCHEDULES[0].date, include=False)
+        try:
+            day_part = f"{count_down(self._date)}日後から！"
+        except ArrivingTheDayException:
+            day_part = "本日です！🎉"
+
         sentences = Sentences(
-            Sentence(
-                "#アイの歌声を聴かせて この11月、WOWOWで放送！"
-                f"（{count_down(self._date)}日後から！）"
-            ),
+            Sentence(f"#アイの歌声を聴かせて この11月、WOWOWで放送！（{day_part}）"),
             NEW_LINE,
             *[Sentence(line) for line in self.build_schedule()],
             NEW_LINE,
