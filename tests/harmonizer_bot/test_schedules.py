@@ -70,6 +70,11 @@ class DateToSlotsSchedulesTestCase(TestCase):
         )
         self.assertEqual(schedules[:2], expected_head2)
 
+        expected_tail2 = DateToSlotsSchedules(
+            [self.schedule_1103, self.schedule_1101]
+        )
+        self.assertEqual(schedules[1:], expected_tail2)
+
     def test_can_sort_ascending_date(self):
         schedules = DateToSlotsSchedules(
             [self.schedule_1102, self.schedule_1101, self.schedule_1103]
