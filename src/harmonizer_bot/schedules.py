@@ -41,7 +41,11 @@ class DateToSlotsSchedules(Sequence):
     def __len__(self) -> int:
         return len(self.values)
 
-    def __getitem__(self, key) -> DateToSlotsSchedule:
+    def __getitem__(
+        self, key: int | slice
+    ) -> DateToSlotsSchedule | DateToSlotsSchedules:
+        if isinstance(key, slice):
+            return self.__class__(self.values[key])
         return self.values[key]
 
     def sort(self):
