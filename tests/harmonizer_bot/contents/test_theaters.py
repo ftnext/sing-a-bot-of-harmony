@@ -265,3 +265,21 @@ class WowowBroadcastContentTestCase(ContentTestCase):
 
     WOWOW加入されている方はぜひ！
     """
+
+    def test_generate_on_the_day(self):
+        content = self.target_class(date(2022, 11, 7))
+
+        actual = content.generate()
+
+        expected = dedent(
+            """\
+            #アイの歌声を聴かせて この11月、WOWOWで放送！（本日です！🎉）
+
+            11/7(月) & 11/14(月) 17:00-
+
+            https://twitter.com/wowow_movie/status/1587738821684187137
+
+            WOWOW加入されている方はぜひ！
+            """
+        ).rstrip()
+        self.assertEqual(actual, expected)
