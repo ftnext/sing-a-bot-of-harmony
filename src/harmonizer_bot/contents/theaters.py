@@ -198,7 +198,7 @@ class TsukaguchiSunSunTheaterContent(Content):
         return sentences.format()
 
 
-class CinemaCityContent(Content):
+class CinemaCityContent(Content, ScheduleBuildableMixin):
     START_DAY = ScreenDate(2022, 10, 29)
     LAST_DAY = ScreenDate(2022, 11, 10)
     END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
@@ -266,7 +266,7 @@ class CinemaCityContent(Content):
             ),
             Sentence(f"今日を含めてあと{self.END_COUNT_DOWN(self._date)}日📡"),
             NEW_LINE,
-            *[Sentence(line) for line in self.build_schedule()],
+            *[Sentence(line) for line in self.build_schedule(window=5)],
             NEW_LINE,
             Sentence("🌕MV上映付き！"),
             Sentence(
@@ -274,10 +274,6 @@ class CinemaCityContent(Content):
             ),
         )
         return sentences.format()
-
-    def build_schedule(self):
-        schedules = self.SCHEDULES.inverse(self._date, window=5)
-        return [str(schedule) for schedule in schedules]
 
 
 class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):

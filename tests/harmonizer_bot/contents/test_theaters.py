@@ -230,7 +230,7 @@ class CinemaCityContentTestCase(ContentTestCase):
         ]
         content = self.target_class(date(2022, 10, 29))
 
-        actual = content.build_schedule()
+        actual = content.build_schedule(window=5)
 
         self.assertEqual(actual, expected)
 
