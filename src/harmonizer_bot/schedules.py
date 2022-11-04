@@ -61,7 +61,7 @@ class DateToSlotsSchedules(Sequence):
         )
         return OnAndAfterTodayDateToSlotsSchedules(list(current_and_future))
 
-    def inverse(self) -> SlotToDatesSchedules:
+    def transpose(self) -> SlotToDatesSchedules:
         schedules = defaultdict(list)
         for schedule in self:
             schedules[tuple(schedule.slots)].append(schedule.date)
