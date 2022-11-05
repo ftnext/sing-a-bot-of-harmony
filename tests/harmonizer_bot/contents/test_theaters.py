@@ -239,7 +239,7 @@ class ShinjukuPiccadillyContentTestCase(ContentTestCase):
     target_class = ShinjukuPiccadillyContent
     generation_date = date(2022, 11, 1)
     generated_content = """
-    #アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！（4日後から！）
+    #アイの歌声を聴かせて 新宿ピカデリーさんのライブ音響上映で4回上映！（次回は4日後！）
 
     11/5(土) 9:00-
     11/7(月) 13:50-

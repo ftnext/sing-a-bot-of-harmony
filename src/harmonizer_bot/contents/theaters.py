@@ -310,7 +310,7 @@ class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):
             on_and_after_schedules[0].date, include=False
         )
         try:
-            day_part = f"{count_down(self._date)}日後から！"
+            day_part = f"次回は{count_down(self._date)}日後！"
         except ArrivingTheDayException:
             day_part = "本日です！🎦"
 
