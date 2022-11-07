@@ -32,6 +32,10 @@ class CustomizedBaseDateTestCase(TestCase):
             date(2022, 12, 31), CustomizedBaseDate(2022, 12, 31)
         )
 
+    def test_convert_to_date(self):
+        base_date = CustomizedBaseDate(2022, 11, 20)
+        self.assertEqual(base_date.to_date(), date(2022, 11, 20))
+
 
 class BirthDateTestCase(TestCase):
     def test_can_create(self):

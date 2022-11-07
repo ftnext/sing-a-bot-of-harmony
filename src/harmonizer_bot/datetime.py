@@ -18,6 +18,9 @@ class CustomizedBaseDate(date):
     def from_(cls, date_: date) -> BirthDate:
         return cls(date_.year, date_.month, date_.day)
 
+    def to_date(self) -> date:
+        return date(self.year, self.month, self.day)
+
 
 class BirthDate(CustomizedBaseDate):
     def __str__(self) -> str:
