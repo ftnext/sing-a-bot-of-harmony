@@ -89,7 +89,7 @@ class SlotToDatesSchedule:
     dates: AscendingScreenDates
 
     def __str__(self) -> str:
-        start_time_part = " & ".join(f"{st}-" for st in self.slot)
+        start_time_part = " & ".join(f"{st}" for st in self.slot)
         dates_part = f"{self.dates}"
         return f"{dates_part} {start_time_part}"
 
