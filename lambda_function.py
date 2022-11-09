@@ -12,10 +12,10 @@ from requests_oauthlib import OAuth1Session
 from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
     CinemaCityContent,
-    DiskReleaseFestivalContent,
     HappyProjectContent,
     MorningGreetingContent,
     ShinjukuPiccadillyContent,
+    ShowingTheatersContent,
     WowowBroadCastContent,
 )
 from harmonizer_bot.core import TextGenerator
@@ -80,10 +80,7 @@ Blu-ray&DVD発売中📀
     return text
 
 
-@root_generator.register("information")
-def generate_information_text(today: date, /, **kwargs) -> str:
-    content = DiskReleaseFestivalContent(today)
-    return content.generate()
+_ = root_generator.register("information")(ShowingTheatersContent)
 
 
 SIGNAL_SCENE_PHRASES = [
