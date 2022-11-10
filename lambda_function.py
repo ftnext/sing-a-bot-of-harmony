@@ -60,10 +60,11 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
-    theaters = [("立川", CinemaCityContent), ("新宿", ShinjukuPiccadillyContent)]
+    candidates = [("立川", CinemaCityContent), ("新宿", ShinjukuPiccadillyContent)]
     slots = [
-        f"{area} {refer_slots(content_class, today)}"
-        for area, content_class in theaters
+        f"{area} {start_times}"
+        for area, content_class in candidates
+        if (start_times := refer_slots(content_class, today))
     ]
 
     on_the_screen_day_count = MorningGreetingContent.AINOUTA_XDAY_COUNT(today)
@@ -71,7 +72,7 @@ def generate_text(today: date, /, **kwargs) -> str:
 
     text = f"""\
 {today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{on_the_screen_day_count}日目、
-本日は映画館での上映が{len(theaters)}件（{'、'.join(slots)}）、
+本日は映画館での上映が{len(slots)}件（{'、'.join(slots)}）、
 Blu-ray&DVD発売中📀
 また各所で配信中です（発売&配信開始から{disk_and_stream_count}日目）
 
