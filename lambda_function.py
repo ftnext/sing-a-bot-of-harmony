@@ -70,10 +70,11 @@ def generate_text(today: date, /, **kwargs) -> str:
 
     on_the_screen_day_count = MorningGreetingContent.AINOUTA_XDAY_COUNT(today)
     disk_and_stream_count = MorningGreetingContent.DISK_XDAY_COUNT(today)
+    joined_slots_part = f"（{'、'.join(slots)}）" if slots else ""
 
     text = f"""\
 {today:%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{on_the_screen_day_count}日目、
-本日は映画館での上映が{len(slots)}件（{'、'.join(slots)}）、
+本日は映画館での上映が{len(slots)}件{joined_slots_part}、
 Blu-ray&DVD発売中📀
 また各所で配信中です（発売&配信開始から{disk_and_stream_count}日目）
 
