@@ -328,8 +328,54 @@ class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):
         return sentences.format()
 
 
-class TollywoodContent:
-    ...
+class TollywoodContent(Content, ScheduleBuildableMixin):
+    START_DAY = ScreenDate(2022, 11, 12)
+    LAST_DAY = ScreenDate(2022, 11, 18)
+    FROM_START_COUNT_DOWN = XthDayCount(START_DAY)
+    END_COUNT_DOWN = DayCountDown(LAST_DAY, include=True)
+    SCHEDULES = DateToSlotsSchedules(
+        [
+            DateToSlotsSchedule(
+                ScreenDate(2022, 11, 12), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 11, 13), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 11, 14), [ScreenStartTime(17, 20)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 11, 16), [ScreenStartTime(17, 20)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 11, 17), [ScreenStartTime(17, 20)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 11, 18), [ScreenStartTime(17, 20)]
+            ),
+        ]
+    )
+
+    def __init__(self, date_: date) -> None:
+        self._date = date_
+
+    def generate(self) -> str:
+        sentences = Sentences(
+            Sentence("#アイの歌声を聴かせて 下北沢のトリウッドさんにて1週間限定で再上映中！"),
+            Sentence(
+                f"今日は{self.FROM_START_COUNT_DOWN(self._date)}日目"
+                f"（あと{self.END_COUNT_DOWN(self._date)}日！）🎶"
+            ),
+            NEW_LINE,
+            *[Sentence(line) for line in self.build_schedule()],
+            NEW_LINE,
+            Sentence(
+                "https://twitter.com/tollywooder/status/1591024766441619457"
+            ),
+            NEW_LINE,
+            Sentence("インディーアニメ・インシネマで吉浦監督の『ペイル・コクーン』も上映！"),
+        )
+        return sentences.format()
 
 
 class WowowBroadCastContent(Content, ScheduleBuildableMixin):
