@@ -61,7 +61,7 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
-    candidates = [("立川", CinemaCityContent), ("新宿", ShinjukuPiccadillyContent)]
+    candidates = [("下北沢", TollywoodContent)]
     slots = [
         f"{area} {start_times}"
         for area, content_class in candidates
