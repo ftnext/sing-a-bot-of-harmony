@@ -6,6 +6,7 @@ from .resources import ShowingTheatersContent  # NOQA: F401
 from .theaters import (  # NOQA: F401
     CinemaCityContent,
     ShinjukuPiccadillyContent,
+    TollywoodContent,
     WowowBroadCastContent,
 )
 
