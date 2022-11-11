@@ -328,6 +328,10 @@ class ShinjukuPiccadillyContent(Content, ScheduleBuildableMixin):
         return sentences.format()
 
 
+class TollywoodContent:
+    ...
+
+
 class WowowBroadCastContent(Content, ScheduleBuildableMixin):
     SCHEDULES = DateToSlotsSchedules(
         [

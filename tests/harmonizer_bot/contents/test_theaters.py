@@ -12,6 +12,7 @@ from harmonizer_bot.contents.theaters import (
     Nagoya109CinemasContent,
     ShinjukuPiccadillyContent,
     SumotoOrionContent,
+    TollywoodContent,
     TsukaguchiSunSunTheaterContent,
     WasedaShochikuContent,
     WowowBroadCastContent,
@@ -269,6 +270,22 @@ class ShinjukuPiccadillyContentTestCase(ContentTestCase):
             """
         ).rstrip()
         self.assertEqual(actual, expected)
+
+
+class TollywoodContentTestCase(ContentTestCase):
+    target_class = TollywoodContent
+    generation_date = date(2022, 11, 13)
+    generated_content = """
+    #アイの歌声を聴かせて 下北沢のトリウッドさんにて1週間限定で再上映中！
+    今日は2日目（あと6日！）🎶
+
+    11/13(日) 14:30-
+    11/14(月) & 11/16(水)-11/18(金) 17:20-
+
+    https://twitter.com/tollywooder/status/1591024766441619457
+
+    インディーアニメ・インシネマで吉浦監督の『ペイル・コクーン』も上映！
+    """
 
 
 class WowowBroadcastContentTestCase(ContentTestCase):
