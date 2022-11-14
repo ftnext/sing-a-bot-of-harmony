@@ -15,7 +15,7 @@ class Sentence(BasePart):
         object.__setattr__(self, "value", value)
 
     def format(self) -> str:
-        return f"{self.value}\n"
+        return f"{self.value}"
 
 
 NEW_LINE = Sentence("")
@@ -27,7 +27,7 @@ class Sentences(BasePart):
         object.__setattr__(self, "values", args)
 
     def format(self) -> str:
-        return "".join(sentence.format() for sentence in self.values).rstrip()
+        return "\n".join(sentence.format() for sentence in self.values)
 
 
 @dataclass(frozen=True)

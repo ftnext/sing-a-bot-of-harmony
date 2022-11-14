@@ -18,7 +18,7 @@ class SentenceTestCase(TestCase):
 
         actual = sentence.format()
 
-        expected = "これはテストのための文です。\n"
+        expected = "これはテストのための文です。"
         self.assertEqual(actual, expected)
 
 
@@ -34,8 +34,8 @@ class SentencesTestCase(TestCase):
     def test_format(self):
         sentence1 = MagicMock(spec=Sentence)
         sentence2 = MagicMock(spec=Sentence)
-        sentence1.format.return_value = "やっはろー、1文目\n"
-        sentence2.format.return_value = "これは2文目。ごきげんよう\n"
+        sentence1.format.return_value = "やっはろー、1文目"
+        sentence2.format.return_value = "これは2文目。ごきげんよう"
 
         sentences = Sentences(sentence1, sentence2)
         actual = sentences.format()
