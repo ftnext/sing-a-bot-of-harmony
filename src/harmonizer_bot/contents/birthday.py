@@ -86,7 +86,6 @@ class GocchanBirthdayContent(Content):
             Sentence(f"{self._birthday}まであと{count_down(self._date)}日"),
             NEW_LINE,
             Balloon(random.choice(self.LINES)),
-            "\n",
             Sentence(random.choice(self.PROFILE_LINKS)),
         )
         return sentences.format()
