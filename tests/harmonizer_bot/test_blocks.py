@@ -67,3 +67,19 @@ class BalloonTestCase(TestCase):
             """
         ).strip()
         self.assertEqual(actual, expected)
+
+    def test_newline_after_balloon(self):
+        balloon = Balloon("Balloon message!")
+
+        sentences = Sentences(balloon, Sentence("After line."))
+        actual = sentences.format()
+
+        expected = dedent(
+            """
+            ／
+             Balloon message!
+            ＼
+            After line.
+            """
+        ).strip()
+        self.assertEqual(actual, expected)
