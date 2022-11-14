@@ -73,7 +73,7 @@ class GocchanBirthdayContent(Content):
         "https://twitter.com/ainouta_movie/status/1442051320035172360",
         "https://twitter.com/ainouta_movie/status/1459717725920522240",
     ]
-    LINES = ["すっげー自己紹介。おもしれーじゃん", "お前のこと、見くびってた", "よくわかってんじゃん！"]
+    LINES = ["すっげー自己紹介。おもしれーじゃん👏", "お前のこと、見くびってた", "よくわかってんじゃん！"]
 
     def __init__(self, birthday: BirthDate, date_: date) -> None:
         self._birthday = birthday
