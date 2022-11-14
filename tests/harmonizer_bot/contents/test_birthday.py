@@ -104,7 +104,7 @@ class GocchanBirthdayContentTestCase(TestCase):
     def test_generate(self):
         expected = dedent(
             """\
-            アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！
+            #アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！
             11/20まであと3日
             """
         ).rstrip()

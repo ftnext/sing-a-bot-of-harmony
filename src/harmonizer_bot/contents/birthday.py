@@ -76,7 +76,7 @@ class GocchanBirthdayContent(Content):
     def generate(self) -> str:
         count_down = DayCountDown(self._birthday, include=False)
         sentences = Sentences(
-            Sentence("アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！"),
+            Sentence("#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！"),
             Sentence(f"{self._birthday}まであと{count_down(self._date)}日"),
         )
         return sentences.format()
