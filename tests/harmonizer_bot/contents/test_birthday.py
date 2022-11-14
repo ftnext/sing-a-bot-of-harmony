@@ -1,7 +1,7 @@
 from datetime import date
 from textwrap import dedent
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, call, patch
 
 from harmonizer_bot.contents.base import Content
 from harmonizer_bot.contents.birthday import (
@@ -101,11 +101,21 @@ class GocchanBirthdayContentTestCase(TestCase):
         self.assertEqual(actual._birthday, birthday)
         self.assertEqual(actual._date, date_)
 
-    def test_generate(self):
+    @patch("harmonizer_bot.contents.birthday.random")
+    def test_generate(self, random):
+        random.choice.side_effect = (
+            "すっげー自己紹介。おもしれーじゃん👏",
+            "https://twitter.com/ainouta_movie/status/1442051320035172360",
+        )
         expected = dedent(
             """\
             #アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！
             11/20まであと3日
+
+            ／
+             すっげー自己紹介。おもしれーじゃん👏
+            ＼
+            https://twitter.com/ainouta_movie/status/1442051320035172360
             """
         ).rstrip()
 
@@ -115,3 +125,9 @@ class GocchanBirthdayContentTestCase(TestCase):
         actual = content.generate()
 
         self.assertEqual(actual, expected)
+        random.choice.assert_has_calls(
+            [
+                call(GocchanBirthdayContent.LINES),
+                call(GocchanBirthdayContent.PROFILE_LINKS),
+            ]
+        )

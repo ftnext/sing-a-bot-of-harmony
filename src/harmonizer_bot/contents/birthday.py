@@ -4,7 +4,7 @@ from datetime import date
 from sparkling_counter import DayCountDown
 from sparkling_counter.core import ArrivingTheDayException
 
-from harmonizer_bot.blocks import NEW_LINE, Sentence, Sentences
+from harmonizer_bot.blocks import NEW_LINE, Balloon, Sentence, Sentences
 from harmonizer_bot.datetime import BirthDate
 
 from .base import Content
@@ -69,6 +69,12 @@ class AyaBirthdayContent(Content):
 
 
 class GocchanBirthdayContent(Content):
+    PROFILE_LINKS = [
+        "https://twitter.com/ainouta_movie/status/1442051320035172360",
+        "https://twitter.com/ainouta_movie/status/1459717725920522240",
+    ]
+    LINES = ["すっげー自己紹介。おもしれーじゃん", "お前のこと、見くびってた", "よくわかってんじゃん！"]
+
     def __init__(self, birthday: BirthDate, date_: date) -> None:
         self._birthday = birthday
         self._date = date_
@@ -78,5 +84,9 @@ class GocchanBirthdayContent(Content):
         sentences = Sentences(
             Sentence("#アイの歌声を聴かせて のキャラクターで次に誕生日を迎えるのは、ゴッちゃん！"),
             Sentence(f"{self._birthday}まであと{count_down(self._date)}日"),
+            NEW_LINE,
+            Balloon(random.choice(self.LINES)),
+            "\n",
+            Sentence(random.choice(self.PROFILE_LINKS)),
         )
         return sentences.format()
