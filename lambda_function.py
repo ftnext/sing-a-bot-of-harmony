@@ -11,6 +11,7 @@ from requests_oauthlib import OAuth1Session
 
 from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
+    CinemaChupkiContent,
     CinemaCityContent,
     HappyProjectContent,
     MorningGreetingContent,
@@ -61,7 +62,7 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
-    candidates = [("下北沢", TollywoodContent)]
+    candidates = [("田端", CinemaChupkiContent)]
     slots = [
         f"{area} {start_times}"
         for area, content_class in candidates
