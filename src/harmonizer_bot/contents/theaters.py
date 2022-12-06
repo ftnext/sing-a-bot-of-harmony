@@ -378,6 +378,34 @@ class TollywoodContent(Content, ScheduleBuildableMixin):
         return sentences.format()
 
 
+class CinemaChupkiContent(Content, ScheduleBuildableMixin):
+    SCHEDULES = DateToSlotsSchedules(
+        [
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 5), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 6), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 8), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 9), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 10), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 11), [ScreenStartTime(17, 0)]
+            ),
+        ]
+    )
+
+    def generate(self) -> str:
+        raise NotImplementedError
+
+
 class WowowBroadCastContent(Content, ScheduleBuildableMixin):
     SCHEDULES = DateToSlotsSchedules(
         [
