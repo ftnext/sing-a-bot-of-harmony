@@ -41,6 +41,46 @@ class CinemaNekoContent(Content):
     START_DAY = date(2022, 4, 22)
     LAST_DAY = date(2022, 5, 15)
     END_COUNT = DayCountDown(LAST_DAY, include=True)
+    SCHEDULES = DateToSlotsSchedules(
+        [
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 16), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 17), [ScreenStartTime(16, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 18), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 19), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 21), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 22), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 23), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 24), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 25), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 26), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 28), [ScreenStartTime(14, 30)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 29), [ScreenStartTime(14, 30)]
+            ),
+        ]
+    )
 
     def __init__(self, date_: date) -> None:
         self._date = date_
