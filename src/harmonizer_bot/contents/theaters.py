@@ -543,3 +543,13 @@ class WowowBroadCastContent(Content, ScheduleBuildableMixin):
             Sentence("WOWOW加入されている方はぜひ！"),
         )
         return sentences.format()
+
+
+class CineCittaContent:
+    SCHEDULES = DateToSlotsSchedules(
+        [
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 31), [ScreenStartTime(18, 30)]
+            )
+        ]
+    )
