@@ -13,6 +13,7 @@ from harmonizer_bot.birth_date import MainCharacterBirthdayDispatcher
 from harmonizer_bot.contents import (
     CinemaChupkiContent,
     CinemaCityContent,
+    CinemaNekoContent,
     HappyProjectContent,
     MorningGreetingContent,
     ShinjukuPiccadillyContent,
@@ -62,7 +63,7 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
-    candidates = [("田端", CinemaChupkiContent)]
+    candidates = [("田端", CinemaChupkiContent), ("青梅", CinemaNekoContent)]
     slots = [
         f"{area} {start_times}"
         for area, content_class in candidates
