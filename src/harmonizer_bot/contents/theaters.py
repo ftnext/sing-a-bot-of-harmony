@@ -382,6 +382,18 @@ class CinemaChupkiContent(Content, ScheduleBuildableMixin):
     SCHEDULES = DateToSlotsSchedules(
         [
             DateToSlotsSchedule(
+                ScreenDate(2022, 12, 1), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 2), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 3), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 4), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
                 ScreenDate(2022, 12, 5), [ScreenStartTime(17, 0)]
             ),
             DateToSlotsSchedule(
@@ -398,6 +410,51 @@ class CinemaChupkiContent(Content, ScheduleBuildableMixin):
             ),
             DateToSlotsSchedule(
                 ScreenDate(2022, 12, 11), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 12), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 13), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 15), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 16), [ScreenStartTime(17, 0)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 18), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 19), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 20), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 22), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 23), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 24), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 25), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 26), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 27), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 29), [ScreenStartTime(19, 10)]
+            ),
+            DateToSlotsSchedule(
+                ScreenDate(2022, 12, 30), [ScreenStartTime(19, 10)]
             ),
         ]
     )
