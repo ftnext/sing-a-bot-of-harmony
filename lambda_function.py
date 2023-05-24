@@ -65,6 +65,11 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
+    announcements = [
+        "https://twitter.com/ainouta_movie/status/1659017208746450945",
+        "https://twitter.com/gashimacinema/status/1648979187099897856",
+        "https://twitter.com/yoshiura_rikka/status/1659051174929256448",
+    ]
 
     on_the_screen_day_count = MorningGreetingContent.AINOUTA_XDAY_COUNT(today)
     disk_and_stream_count = MorningGreetingContent.DISK_XDAY_COUNT(today)
@@ -77,7 +82,7 @@ Blu-ray&DVD発売中📀
 見放題配信&佐渡での上映まであと{june_counter(today)}日！
 
 今日も、元気で、頑張るぞっ、おーっ
-{random.choice(greetings)}"""
+{random.choice(announcements)}"""
     return text
 
 
