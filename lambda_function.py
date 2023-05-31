@@ -65,24 +65,18 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
-    announcements = [
-        "https://twitter.com/ainouta_movie/status/1659017208746450945",
-        "https://twitter.com/gashimacinema/status/1648979187099897856",
-        "https://twitter.com/yoshiura_rikka/status/1659051174929256448",
-    ]
 
     on_the_screen_day_count = MorningGreetingContent.AINOUTA_XDAY_COUNT(today)
     disk_and_stream_count = MorningGreetingContent.DISK_XDAY_COUNT(today)
-    june_counter = DayCountDown(date(2023, 6, 1), include=False)
 
     text = f"""\
 {today:%Y/%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{on_the_screen_day_count}日目、
 Blu-ray&DVD発売中📀
-また各所で配信中です（発売&配信開始から{disk_and_stream_count}日目）。
-見放題配信&佐渡での上映まであと{june_counter(today)}日！
+また各所で配信中（見放題あり！）です（発売&配信開始から{disk_and_stream_count}日目）。
+6月は佐渡で上映中！
 
 今日も、元気で、頑張るぞっ、おーっ
-{random.choice(announcements)}"""
+{random.choice(greetings)}"""
     return text
 
 
