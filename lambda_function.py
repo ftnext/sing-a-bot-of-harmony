@@ -73,7 +73,6 @@ def generate_text(today: date, /, **kwargs) -> str:
 {today:%Y/%-m/%-d}は #アイの歌声を聴かせて 公開🎬から{on_the_screen_day_count}日目、
 Blu-ray&DVD発売中📀
 また各所で配信中（見放題あり！）です（発売&配信開始から{disk_and_stream_count}日目）。
-6月は佐渡で上映中！
 
 今日も、元気で、頑張るぞっ、おーっ
 {random.choice(greetings)}"""
