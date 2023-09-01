@@ -65,10 +65,6 @@ def generate_text(today: date, /, **kwargs) -> str:
         "https://twitter.com/ainouta_movie/status/1458570163771555840",
         "https://twitter.com/ainouta_movie/status/1458932549925978112",
     ]
-    announcements = [
-        "https://twitter.com/dre_pass/status/1692461335131689123",
-        "https://twitter.com/dre_pass/status/1696092759885512905",
-    ]
 
     on_the_screen_day_count = MorningGreetingContent.AINOUTA_XDAY_COUNT(today)
     disk_and_stream_count = MorningGreetingContent.DISK_XDAY_COUNT(today)
@@ -78,8 +74,8 @@ def generate_text(today: date, /, **kwargs) -> str:
 Blu-ray&DVD発売中📀
 また各所で配信中（見放題あり！）です（発売&配信開始から{disk_and_stream_count}日目）。
 
-週末は都内で上映！ 今日も、元気で、頑張るぞっ、おーっ
-{random.choice(announcements)}"""
+今日も、元気で、頑張るぞっ、おーっ
+{random.choice(greetings)}"""
     return text
 
 
